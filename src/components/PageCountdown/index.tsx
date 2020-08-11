@@ -26,14 +26,7 @@ const PageCountdown: React.FC<CountDownProps> = ({
   let interval: MutableRefObject<number | undefined> = useRef();
 
   useEffect(() => {
-    const localStorageItem = localStorage.getItem('@challenge:countdowndate');
-
-    if (!localStorageItem) {
-      localStorage.setItem('@challenge:countdowndate', JSON.stringify(date));
-      setLocalStorageDate(date);
-    } else {
-      setLocalStorageDate(JSON.parse(localStorageItem));
-    }
+    setLocalStorageDate(date);
 
     interval = (setInterval(() => {
       const now = new Date().getTime();

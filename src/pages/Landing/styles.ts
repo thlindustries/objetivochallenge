@@ -1,6 +1,10 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 import Button from '../../components/Button';
+
+interface PaddingProps {
+  isIos?: boolean;
+}
 
 export const LogoContent = styled.div`
   position: absolute;
@@ -63,7 +67,7 @@ export const ChallengeText = styled.p`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<PaddingProps>`
   display: flex;
   flex-direction: column;
 
@@ -74,6 +78,12 @@ export const Content = styled.div`
   @media (max-width: 700px) {
     margin-right: 0;
     padding-top: 18em;
+
+    ${(props) =>
+    props.isIos &&
+    css`
+        padding-top: 8em;
+      `}
   }
 `;
 
