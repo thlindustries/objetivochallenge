@@ -16,6 +16,9 @@ export const Container = styled.div`
     color: #fff;
     font-size: 24px;
   }
+
+  @media (max-width: 700px) {
+  }
 `;
 
 export const TimerSection = styled.section<CountDownProps>`
@@ -26,7 +29,7 @@ export const TimerSection = styled.section<CountDownProps>`
   background: rgba(0, 0, 0, 0.2);
 
   ${(props) =>
-    props.background == false &&
+    props.background === false &&
     css`
       background: none;
     `}
@@ -39,6 +42,11 @@ export const TimerSection = styled.section<CountDownProps>`
 
   span {
     margin-top: 38px;
+  }
+
+  @media (max-width: 700px) {
+    width: 400px;
+    height: 120px;
   }
 `;
 

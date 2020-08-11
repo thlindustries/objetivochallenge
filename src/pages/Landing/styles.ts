@@ -2,9 +2,30 @@ import styled, { keyframes } from 'styled-components';
 
 import Button from '../../components/Button';
 
+export const LogoContent = styled.div`
+  position: absolute;
+  padding: 24px;
+  top: 0;
+  left: 0;
+
+  @media (max-width: 700px) {
+    img {
+      width: 250px;
+      height: 50px;
+    }
+  }
+`;
+
+export const Logo = styled.img`
+  margin-right: auto;
+
+  opacity: 0.9;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 
   flex-direction: column;
 
@@ -12,6 +33,10 @@ export const Container = styled.div`
 
   height: 90vh;
   width: 90vw;
+
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const glow = keyframes`
@@ -38,25 +63,33 @@ export const ChallengeText = styled.p`
   }
 `;
 
-export const Logo = styled.img`
-  margin-right: auto;
-
-  opacity: 0.9;
-`;
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   padding-top: 6em;
 
   margin-right: 32em;
+
+  @media (max-width: 700px) {
+    margin-right: 0;
+    padding-top: 18em;
+  }
 `;
 
 export const CountButton = styled.div`
   background: rgba(159, 168, 224, 0.1);
   border-radius: 10px;
+
+  margin-bottom: 240px;
+
+  @media (max-width: 700px) {
+    background: rgba(0, 0, 0, 0.3);
+
+    width: 400px;
+    height: 300px;
+    margin-right: 20px;
+  }
 `;
 
 export const CountDownContainer = styled.div`
@@ -85,6 +118,11 @@ export const ButtonSubscribe = styled(Button)`
   small {
     font-size: 12px;
   }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
 `;
 
 export const TopText = styled.p`
@@ -93,4 +131,5 @@ export const TopText = styled.p`
   font-size: 18px;
 
   margin-right: auto;
+  margin-bottom: 10px;
 `;
