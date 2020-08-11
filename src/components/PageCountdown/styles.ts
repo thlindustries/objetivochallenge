@@ -45,7 +45,7 @@ export const TimerSection = styled.section<CountDownProps>`
   }
 
   @media (max-width: 700px) {
-    width: 400px;
+    width: 320px;
     height: 120px;
   }
 `;
@@ -65,6 +65,10 @@ export const NumberSection = styled.section`
     color: #fff;
 
     text-shadow: 0 0 10px #fff;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 14px;
   }
 `;
 

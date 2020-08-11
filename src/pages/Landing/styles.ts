@@ -86,8 +86,8 @@ export const CountButton = styled.div`
   @media (max-width: 700px) {
     background: rgba(0, 0, 0, 0.3);
 
-    width: 400px;
-    height: 300px;
+    width: 320px;
+    height: 260px;
     margin-right: 20px;
   }
 `;
@@ -100,8 +100,13 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 12px 32px;
 
   width: 100%;
+
+  @media (max-width: 700px) {
+    padding: 0 32px;
+  }
 `;
 
 export const ButtonSubscribe = styled(Button)`
@@ -122,6 +127,12 @@ export const ButtonSubscribe = styled(Button)`
   a {
     text-decoration: none;
     color: #fff;
+  }
+
+  @media (max-width: 700px) {
+    width: 120px;
+
+    font-size: 15px;
   }
 `;
 
