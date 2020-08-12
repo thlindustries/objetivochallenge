@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
   Container,
@@ -18,25 +18,15 @@ import Countdown from '../../components/PageCountdown';
 
 const Landing: React.FC = () => {
   const countDownDate = new Date('October 8, 2020').getTime();
-  const [systemios, setSystemios] = useState(false);
-
-  console.log(window.navigator.platform);
-  useEffect(() => {
-    if (window.navigator.platform === 'iPhone') {
-      setSystemios(true);
-    }
-  }, []);
 
   return (
     <Container>
       <LogoContent>
         <Logo src={objLogo} alt="objlogo"></Logo>
       </LogoContent>
-      <Content isIos={systemios}>
+      <Content>
         <ChallengeText>
-          Challenge do Colégio
-{' '}
-          <strong>objetivo</strong>
+          Challenge do Colégio <strong>objetivo</strong>
         </ChallengeText>
         <TopText>As inscrições terminam em:</TopText>
 

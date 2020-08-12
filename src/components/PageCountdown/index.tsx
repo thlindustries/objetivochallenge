@@ -23,12 +23,17 @@ const PageCountdown: React.FC<CountDownProps> = ({
   const [timerSeconds, setSeconds] = useState('00');
   const [localStorageDate, setLocalStorageDate] = useState(0);
 
-  let interval: MutableRefObject<number | undefined> = useRef();
+  interface UserefProps {
+    interval: Array<{
+      current: number;
+    }>;
+  }
+  const interval: UserefProps | MutableRefObject<number | undefined> = useRef();
 
   useEffect(() => {
     setLocalStorageDate(date);
 
-    interval = (setInterval(() => {
+    interval.current = setInterval(() => {
       const now = new Date().getTime();
       const distance = localStorageDate - now;
 
@@ -50,12 +55,12 @@ const PageCountdown: React.FC<CountDownProps> = ({
       } else {
         clearInterval(interval.current);
       }
-    }, 1000) as unknown) as MutableRefObject<number | undefined>;
+    }, 1000);
 
     return () => {
       clearInterval(interval.current);
     };
-  }, [localStorageDate]);
+  }, [date, localStorageDate]);
 
   return (
     <Container>

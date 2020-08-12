@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import rocketBg from '../assets/img/bewng.png';
+import rocketBg from '../assets/img/bgfiltered.png';
 
 export default createGlobalStyle`
 
