@@ -18,6 +18,8 @@ export const LogoContent = styled.div`
 
 export const Logo = styled.img`
   margin-right: auto;
+  height: 100px;
+  width: 350px;
 
   opacity: 0.9;
 `;
@@ -40,7 +42,7 @@ export const Container = styled.div`
 `;
 
 const glow = keyframes`
-  from{text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+  from{text-shadow: 0 0 10px rgba(255,255,255,0.8); }
   to{text-shadow: 0 0 20px rgba(76, 114, 161,0.9);}
 `;
 
@@ -55,7 +57,7 @@ export const ChallengeText = styled.p`
   margin-bottom: 1em;
 
   strong {
-    color: #0f7cff;
+    color: #fff;
 
     text-shadow: 0 0 10px #4c72a1;
 

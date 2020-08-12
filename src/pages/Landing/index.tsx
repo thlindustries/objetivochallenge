@@ -13,7 +13,7 @@ import {
   LogoContent,
 } from './styles';
 
-import objLogo from '../../assets/img/objlogo.png';
+import objLogo from '../../assets/img/objetivologo.png';
 import Countdown from '../../components/PageCountdown';
 
 const Landing: React.FC = () => {
