@@ -22,7 +22,7 @@ export const Logo = styled.img`
   width: 186;
   height: 35px;
 
-  opacity: 0.9;
+  opacity: 1;
 `;
 
 export const Container = styled.div`
