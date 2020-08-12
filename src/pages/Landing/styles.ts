@@ -10,16 +10,17 @@ export const LogoContent = styled.div`
 
   @media (max-width: 700px) {
     img {
-      width: 250px;
-      height: 50px;
+      width: 186;
+      height: 35px;
     }
   }
 `;
 
 export const Logo = styled.img`
   margin-right: auto;
-  height: 100px;
-  width: 350px;
+
+  width: 186;
+  height: 35px;
 
   opacity: 0.9;
 `;
@@ -129,11 +130,16 @@ export const ButtonSubscribe = styled(Button)`
 
   small {
     font-size: 12px;
+    margin-left: 8px;
   }
 
   a {
     text-decoration: none;
     color: #fff;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 
   @media (max-width: 700px) {

@@ -13,7 +13,7 @@ import {
   LogoContent,
 } from './styles';
 
-import objLogo from '../../assets/img/objetivologo.png';
+import objLogo from '../../assets/img/logotry.png';
 import Countdown from '../../components/PageCountdown';
 
 const Landing: React.FC = () => {
@@ -26,7 +26,7 @@ const Landing: React.FC = () => {
       </LogoContent>
       <Content>
         <ChallengeText>
-          Challenge do Colégio <strong>objetivo</strong>
+          Challenge do Colégio <strong>Objetivo</strong>
         </ChallengeText>
         <TopText>As inscrições terminam em:</TopText>
 
@@ -35,14 +35,11 @@ const Landing: React.FC = () => {
             <Countdown background={false} date={countDownDate} />
           </CountDownContainer>
           <ButtonsContainer>
-            <ButtonSubscribe>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
-                Inscrever-se
-              </a>
-            </ButtonSubscribe>
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
+              <ButtonSubscribe type="submit">Inscrever-se</ButtonSubscribe>
+            </form>
             <ButtonSubscribe enabled={false}>
-              Jogar
-              <small>(em breve)</small>
+              Jogar <small> (em breve)</small>
             </ButtonSubscribe>
           </ButtonsContainer>
         </CountButton>
