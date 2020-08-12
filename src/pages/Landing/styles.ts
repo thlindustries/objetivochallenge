@@ -33,7 +33,7 @@ export const Container = styled.div`
 
   flex-direction: column;
 
-  padding: 20px;
+  padding-top: 80px;
 
   height: 90vh;
   width: 90vw;
@@ -70,14 +70,12 @@ export const ChallengeText = styled.p`
 export const Content = styled.div<PaddingProps>`
   display: flex;
   flex-direction: column;
-
-  padding-top: 6em;
+  justify-content: center;
 
   margin-right: 32em;
 
   @media (max-width: 700px) {
     margin-right: 0;
-    padding-top: 18em;
 
     ${(props) =>
     props.isIos &&
