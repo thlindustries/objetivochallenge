@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Container,
@@ -38,9 +39,11 @@ const Landing: React.FC = () => {
             <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
               <ButtonSubscribe type="submit">Inscrever-se</ButtonSubscribe>
             </form>
-            <ButtonSubscribe enabled={false}>
-              Jogar <small> (em breve)</small>
-            </ButtonSubscribe>
+            <Link to="/gamestart">
+              <ButtonSubscribe>
+                Jogar <small> (em breve)</small>
+              </ButtonSubscribe>
+            </Link>
           </ButtonsContainer>
         </CountButton>
       </Content>

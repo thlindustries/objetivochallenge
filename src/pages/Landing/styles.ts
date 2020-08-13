@@ -112,6 +112,10 @@ export const ButtonsContainer = styled.div`
 
   width: 100%;
 
+  a {
+    text-decoration: none;
+  }
+
   @media (max-width: 700px) {
     padding: 0 32px;
   }
