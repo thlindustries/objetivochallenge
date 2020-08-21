@@ -21,7 +21,7 @@ export const TContainer = styled.div`
 
   padding: 18px;
 
-  background: rgba(0, 0, 0, 0.3);
+  /* background: rgba(0, 0, 0, 0.3); */
 
   animation: ${loadFromTransparent} 1.4s;
 `;

@@ -1,15 +1,18 @@
 import React from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
+import { useAuth } from '../../hooks/auth';
+
 import { Container, LogoutButton } from './styles';
 
 import Header from '../../components/Header';
 
 const Questionary: React.FC = () => {
+  const { signOut, user } = useAuth();
   return (
     <>
       <Header>
-        <LogoutButton>
+        <LogoutButton onClick={signOut}>
           <FiLogOut size={20} />
           Sair
         </LogoutButton>

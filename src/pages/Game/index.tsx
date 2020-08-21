@@ -107,7 +107,7 @@ const Game: React.FC = () => {
       <Header />
       <TContainer>
         <PageWrapper>
-          {card === 'login' ? (
+          {card !== 'login' ? (
             <CircleContent title="Logo do projeto" load={change}>
               <Content>
                 Divirta-se junto com sua equipe solucionando o desafio do

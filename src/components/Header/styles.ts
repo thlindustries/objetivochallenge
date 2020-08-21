@@ -19,8 +19,6 @@ export const LogoContent = styled.div`
   width: 100%;
   height: 100px;
 
-  /* border: solid 1px #000; */
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,8 +33,6 @@ export const LogoOptions = styled.div`
   p {
     margin-right: 48px;
     color: #fff;
-
-    border-bottom: 1px solid #bdbdbd;
 
     transition: color 0.4s;
 
