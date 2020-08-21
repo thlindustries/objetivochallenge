@@ -1,4 +1,11 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import {
+  glow,
+  loadFromLeft,
+  loadLogo,
+  buttonBounce,
+  smallButtonBounce,
+} from './animations';
 
 import Button from '../../components/Button';
 
@@ -7,6 +14,8 @@ export const LogoContent = styled.div`
   padding: 24px;
   top: 0;
   left: 0;
+
+  animation: ${loadLogo} 2.2s;
 
   @media (max-width: 700px) {
     img {
@@ -19,7 +28,6 @@ export const LogoContent = styled.div`
 export const Logo = styled.img`
   margin-right: auto;
 
-  width: 186;
   height: 35px;
 
   opacity: 1;
@@ -40,11 +48,6 @@ export const Container = styled.div`
   @media (max-width: 700px) {
     padding: 0;
   }
-`;
-
-const glow = keyframes`
-  from{text-shadow: 0 0 10px rgba(255,255,255,0.8); }
-  to{text-shadow: 0 0 20px rgba(76, 114, 161,0.9);}
 `;
 
 export const ChallengeText = styled.p`
@@ -73,13 +76,9 @@ export const Content = styled.div`
   padding-top: 40px;
 
   margin-right: 32em;
+  animation: ${loadFromLeft} 1.5s;
 
   @media (max-width: 700px) {
-    margin-right: 0;
-    padding-top: 240px;
-  }
-
-  @media (max-height: 700px) {
     margin-right: 0;
     padding-top: 240px;
   }
@@ -132,6 +131,8 @@ export const ButtonSubscribe = styled(Button)`
 
   text-shadow: 0 0 10px;
 
+  animation: ${buttonBounce} 1.2s;
+
   small {
     font-size: 12px;
     margin-left: 8px;
@@ -150,6 +151,8 @@ export const ButtonSubscribe = styled(Button)`
     width: 120px;
 
     font-size: 15px;
+
+    animation: ${smallButtonBounce} 1.5s;
   }
 `;
 

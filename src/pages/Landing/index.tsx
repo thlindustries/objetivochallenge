@@ -20,6 +20,9 @@ import Countdown from '../../components/PageCountdown';
 const Landing: React.FC = () => {
   const countDownDate = new Date('October 8, 2020').getTime();
 
+  const [, , , page] = window.location.href.split('/');
+  console.log(page);
+
   return (
     <Container>
       <LogoContent>
