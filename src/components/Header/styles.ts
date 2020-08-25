@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import { loadLogo } from './animations';
 
 export const Container = styled.div`
   background: rgba(0, 0, 0, 0.3);
@@ -13,6 +14,8 @@ export const Container = styled.div`
   top: 0;
 
   padding: 0 128px;
+
+  /* animation: ${loadLogo} 1.4s; */
 `;
 
 export const LogoContent = styled.div`
@@ -29,6 +32,10 @@ export const LogoOptions = styled.div`
   flex-direction: row;
 
   margin-left: auto;
+
+  a {
+    text-decoration: none;
+  }
 
   p {
     margin-right: 48px;

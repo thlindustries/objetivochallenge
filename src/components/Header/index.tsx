@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { Container, Logo, LogoContent, LogoOptions } from './styles';
 
 import objLogo from '../../assets/img/logotry.png';
@@ -10,8 +11,13 @@ const Header: React.FC = ({ children }) => {
       <LogoContent>
         <Logo src={objLogo} alt="objlogo"></Logo>
         <LogoOptions>
-          <p>Home</p>
-          <p>Regulamento</p>
+          <Link to="/">
+            <p>Home</p>
+          </Link>
+
+          <Link to="/regulamento">
+            <p>Regulamento</p>
+          </Link>
           {children}
         </LogoOptions>
       </LogoContent>

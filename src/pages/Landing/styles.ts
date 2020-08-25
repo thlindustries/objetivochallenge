@@ -8,30 +8,31 @@ import {
 } from './animations';
 
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 
-export const LogoContent = styled.div`
-  position: absolute;
-  padding: 24px;
-  top: 0;
-  left: 0;
+// export const LogoContent = styled.div`
+//   position: absolute;
+//   padding: 24px;
+//   top: 0;
+//   left: 0;
 
-  animation: ${loadLogo} 2.2s;
+//   animation: ${loadLogo} 2.2s;
 
-  @media (max-width: 700px) {
-    img {
-      width: 186;
-      height: 35px;
-    }
-  }
-`;
+//   @media (max-width: 700px) {
+//     img {
+//       width: 186;
+//       height: 35px;
+//     }
+//   }
+// `;
 
-export const Logo = styled.img`
-  margin-right: auto;
+// export const Logo = styled.img`
+//   margin-right: auto;
 
-  height: 35px;
+//   height: 35px;
 
-  opacity: 1;
-`;
+//   opacity: 1;
+// `;
 
 export const Container = styled.div`
   display: flex;
@@ -163,4 +164,8 @@ export const TopText = styled.p`
 
   margin-right: auto;
   margin-bottom: 10px;
+`;
+
+export const HeaderA = styled(Header)`
+  animation: ${loadLogo} 1.5s !important;
 `;
