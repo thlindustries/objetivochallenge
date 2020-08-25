@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { loadFromLeft } from './animations';
 
+export const PageRegulamento = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -11,6 +16,8 @@ export const Container = styled.div`
   width: 90vw;
 
   padding: 64px;
+
+  margin-left: %;
 
   font-family: 'Poppins';
 `;
@@ -26,6 +33,13 @@ export const Card = styled.div`
   border-radius: 14px;
 
   animation: ${loadFromLeft} 1.5s;
+
+  transition: background-color 0.4s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: default;
+  }
 `;
 
 export const Title = styled.p`

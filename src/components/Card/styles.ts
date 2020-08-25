@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
-
-import Button from '../Button';
 
 export const Container = styled.div`
   width: 500px;

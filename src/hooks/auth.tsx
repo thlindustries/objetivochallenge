@@ -3,10 +3,12 @@ import Axios from 'axios';
 // import api from '../services/api';
 
 interface User {
-  id: string;
-  avatar_url: string;
-  nome: string;
-  email: string;
+  UserId: string;
+  UserTeamId: string;
+  UserName: string;
+  UserEmail: string;
+  TeamCurrentQuestionId: string;
+  TeamName: string;
 }
 
 interface AuthContextData {
@@ -18,7 +20,7 @@ interface AuthContextData {
 }
 
 interface Login {
-  team: string;
+  email: string;
   password: string;
 }
 
@@ -57,20 +59,27 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as UserLoginData;
   });
 
-  const signIn = useCallback(async ({ team, password }) => {
+  const signIn = useCallback(async ({ email, password }) => {
     const response = await Axios.post(
       'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/login',
       {
-        UserEmail: team,
+        UserEmail: email,
         UserPassword: password,
       },
     );
 
     // const { user, token } = response.data;
-    const { user } = response.data;
+    const { user, team } = response.data;
 
     // localStorage.setItem('@Challenge:token', token);
-    localStorage.setItem('@Challenge:user', JSON.stringify(user));
+    Object.assign(user, {
+      TeamCurrentQuestionId: team.TeamCurrentQuestionId,
+      TeamName: team.TeamName,
+    });
+
+    if (user !== undefined) {
+      localStorage.setItem('@Challenge:user', JSON.stringify(user));
+    }
 
     // Axios.defaults.headers.authorization = `Bearer ${token}`;
 

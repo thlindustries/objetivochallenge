@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { FiLogIn, FiLock, FiUser } from 'react-icons/fi';
+import React, { useState, useCallback, useRef } from 'react';
+import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
-import Axios from 'axios';
+import ReactLoading from 'react-loading';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -10,6 +10,7 @@ import { FormHandles } from '@unform/core';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import {
+  PageGame,
   TContainer,
   CircleContent,
   Content,
@@ -19,15 +20,8 @@ import {
   StyledInput,
 } from './styles';
 
-import Header from '../../components/Header';
-
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
-
-interface Question {
-  QuestionTitle: string;
-  QuestionAnswer: string;
-}
 
 interface DataFormInfo {
   teamName: string;
@@ -35,26 +29,17 @@ interface DataFormInfo {
 }
 
 const Game: React.FC = () => {
-  const [question, setQuestion] = useState<Question>({
-    QuestionAnswer: '',
-    QuestionTitle: '',
-  });
   const [card, setCard] = useState('');
   const [change, setChange] = useState(false);
+  const [logging, setLogging] = useState(false);
+  const [isLogging, setIsLogging] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const history = useHistory();
   const { addToast } = useToast();
   const { signIn } = useAuth();
 
   const formRef = useRef<FormHandles>(null);
-
-  useEffect(() => {
-    Axios.get<Question>(
-      'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getquestionbyid?QuestionId=1',
-    ).then((response) => {
-      setQuestion(response.data);
-    });
-  }, []);
 
   const loadLoginCard = useCallback(() => {
     setCard('login');
@@ -63,6 +48,8 @@ const Game: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: DataFormInfo) => {
+      setIsLogging(true);
+      setIsEnabled(false);
       try {
         formRef.current?.setErrors({});
 
@@ -78,14 +65,19 @@ const Game: React.FC = () => {
         });
 
         await signIn({
-          team: data.teamName,
+          email: data.teamName,
           password: data.password,
         });
 
-        console.log('aqui');
+        setLogging(true);
+        setIsLogging(false);
+        setIsEnabled(true);
 
         history.push('/questionary');
       } catch (err) {
+        setIsLogging(false);
+        console.log(logging);
+        setIsEnabled(true);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
@@ -99,12 +91,12 @@ const Game: React.FC = () => {
         });
       }
     },
-    [addToast, history, signIn],
+    [addToast, history, logging, signIn],
   );
 
   return (
-    <>
-      <Header />
+    <PageGame>
+      {/* <Header /> */}
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (
@@ -113,9 +105,7 @@ const Game: React.FC = () => {
                 Divirta-se junto com sua equipe solucionando o desafio do
                 colégio objetivo
               </Content>
-              {/* <Link to="/questionary"> */}
               <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
-              {/* </Link> */}
             </CircleContent>
           ) : (
               <CircleContent title="Logo do projeto" load={change}>
@@ -133,7 +123,9 @@ const Game: React.FC = () => {
                       type="password"
                       placeholder="senha"
                     />
-                    <StyledButton type="submit">Entrar</StyledButton>
+                    <StyledButton enabled={isEnabled} type="submit">
+                      {isLogging ? <ReactLoading /> : 'Entrar'}
+                    </StyledButton>
                     <Link to="forgot-password">Esqueci minha senha</Link>
                   </Form>
                 </FormContainer>
@@ -141,7 +133,7 @@ const Game: React.FC = () => {
             )}
         </PageWrapper>
       </TContainer>
-    </>
+    </PageGame>
   );
 };
 
