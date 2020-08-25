@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   padding: 64px;
 
-  margin-left: 4%;
+  margin-left: %;
 
   font-family: 'Poppins';
 `;
@@ -33,6 +33,13 @@ export const Card = styled.div`
   border-radius: 14px;
 
   animation: ${loadFromLeft} 1.5s;
+
+  transition: background-color 0.4s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: default;
+  }
 `;
 
 export const Title = styled.p`
