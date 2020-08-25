@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import rocketBg from '../assets/img/bgfiltered.png';
-import pureBlue from '../assets/img/mainframe.png';
+// import pureBlue from '../assets/img/mainframe.png';
 
 export default createGlobalStyle`
 

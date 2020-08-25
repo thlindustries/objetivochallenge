@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-import { loadFromTransparent, bringFromLeft, sendToLeft } from './animations';
+import { loadFromTransparent, bringFromLeft } from './animations';
 
 import Button from '../../components/Button';
 import Card from '../../components/Card';

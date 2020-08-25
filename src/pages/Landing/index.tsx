@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
 
 import {
   PageLanding,
@@ -19,11 +19,15 @@ import Countdown from '../../components/PageCountdown';
 const Landing: React.FC = () => {
   const countDownDate = new Date('October 8, 2020').getTime();
 
-  const [, , , page] = window.location.href.split('/');
+  const [tab, setTab] = useState('');
+
+  useEffect(() => {
+    setTab('home');
+  }, []);
 
   return (
     <PageLanding>
-      <HeaderA />
+      <HeaderA selectedTab={tab} setTab={() => setTab} />
       <Container>
         <Content>
           <ChallengeText>

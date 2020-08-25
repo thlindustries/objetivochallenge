@@ -6,9 +6,9 @@ import { FormHandles } from '@unform/core';
 
 import Axios from 'axios';
 import { useAuth } from '../../hooks/auth';
-import { useToast } from '../../hooks/toast';
+// import { useToast } from '../../hooks/toast';
 
-import getValidationErrors from '../../utils/getValidationErrors';
+// import getValidationErrors from '../../utils/getValidationErrors';
 
 import {
   Container,
@@ -22,8 +22,8 @@ import {
   AnswerInput,
   Hint,
   Question,
-  QuestionContent,
-  QuestionContentItem,
+  // QuestionContent,
+  // QuestionContentItem,
   QuestionContainer,
   RankContainer,
   VideoCards,
@@ -60,7 +60,6 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getquestionbyid?QuestionId=${user.TeamCurrentQuestionId}&UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
-      console.log(response.data);
     });
   }, [user.TeamCurrentQuestionId, user.UserId, user.UserTeamId]);
 

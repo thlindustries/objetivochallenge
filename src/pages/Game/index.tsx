@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { FiLogIn, FiLock, FiUser } from 'react-icons/fi';
+import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 import ReactLoading from 'react-loading';
@@ -19,8 +19,6 @@ import {
   FormContainer,
   StyledInput,
 } from './styles';
-
-import Header from '../../components/Header';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -78,6 +76,7 @@ const Game: React.FC = () => {
         history.push('/questionary');
       } catch (err) {
         setIsLogging(false);
+        console.log(logging);
         setIsEnabled(true);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -92,12 +91,12 @@ const Game: React.FC = () => {
         });
       }
     },
-    [addToast, history, signIn],
+    [addToast, history, logging, signIn],
   );
 
   return (
     <PageGame>
-      <Header />
+      {/* <Header /> */}
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (

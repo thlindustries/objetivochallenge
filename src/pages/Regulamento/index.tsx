@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   PageRegulamento,
@@ -13,13 +13,19 @@ import Header from '../../components/Header';
 import Json from './regulamento.json';
 
 const Regulamento: React.FC = () => {
+  const [tab, setTab] = useState('');
+
+  useEffect(() => {
+    setTab('regulamento');
+  }, []);
+
   return (
     <PageRegulamento>
-      <Header />
+      <Header selectedTab={tab} />
       <Container>
         {Json.regulamento.map((item) => {
           return (
-            <Card>
+            <Card key={item.title}>
               <Title>{item.title}</Title>
               <Content>{item.content}</Content>
               <SubContent>
