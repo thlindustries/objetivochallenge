@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import { Container, LogoutButton } from './styles';
 
@@ -9,6 +10,11 @@ import Header from '../../components/Header';
 
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
+  const { addToast } = useToast();
+
+  useEffect(() => {
+    addToast({ title: 'teste', description: 'blablabla', type: 'success' });
+  }, [addToast]);
   return (
     <>
       <Header>

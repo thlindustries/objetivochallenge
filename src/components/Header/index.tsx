@@ -11,7 +11,7 @@ const Header: React.FC = ({ children }) => {
         <Logo src={objLogo} alt="objlogo"></Logo>
         <LogoOptions>
           <p>Home</p>
-          <p>Sobre o game</p>
+          <p>Regulamento</p>
           {children}
         </LogoOptions>
       </LogoContent>
