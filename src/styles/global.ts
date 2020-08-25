@@ -5,7 +5,7 @@ import pureBlue from '../assets/img/mainframe.png';
 export default createGlobalStyle`
 
   * {
-    margin:0px;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     outline: 0;
@@ -34,7 +34,8 @@ export default createGlobalStyle`
 
   html,body{
     height: 100%;
-    margin:0px;
+    margin: 0px;
   }
+
 
 `;

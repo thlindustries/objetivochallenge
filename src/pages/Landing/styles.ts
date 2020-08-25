@@ -10,41 +10,22 @@ import {
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 
-// export const LogoContent = styled.div`
-//   position: absolute;
-//   padding: 24px;
-//   top: 0;
-//   left: 0;
+export const PageLanding = styled.div`
+  width: 100vw;
+  height: 100vh;
 
-//   animation: ${loadLogo} 2.2s;
-
-//   @media (max-width: 700px) {
-//     img {
-//       width: 186;
-//       height: 35px;
-//     }
-//   }
-// `;
-
-// export const Logo = styled.img`
-//   margin-right: auto;
-
-//   height: 35px;
-
-//   opacity: 1;
-// `;
+  /* display: flex;
+  flex-direction: column; */
+`;
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 
   flex-direction: column;
 
-  padding-top: 80px;
-
-  height: 90vh;
-  width: 90vw;
+  /* height: 90vh;
+  width: 90vw; */
 
   @media (max-width: 700px) {
     padding: 0;
@@ -74,9 +55,13 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 40px;
 
-  margin-right: 32em;
+  width: 800px;
+
+  margin-top: 6%;
+
+  margin-left: 6%;
+
   animation: ${loadFromLeft} 1.5s;
 
   @media (max-width: 700px) {
@@ -86,10 +71,14 @@ export const Content = styled.div`
 `;
 
 export const CountButton = styled.div`
-  background: rgba(159, 168, 224, 0.1);
+  /* background: rgba(18, 102, 203, 0.5); */
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px #000;
   border-radius: 10px;
 
   margin-bottom: 240px;
+
+  padding: 20px 0;
 
   @media (max-width: 700px) {
     background: rgba(0, 0, 0, 0.3);
@@ -101,15 +90,15 @@ export const CountButton = styled.div`
 `;
 
 export const CountDownContainer = styled.div`
-  margin-bottom: 64px;
+  margin-bottom: 40px;
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12px 32px;
-
+  /* justify-content: space-between; */
+  /* padding: 0 12px 32px; */
+  justify-content: center;
   width: 100%;
 
   a {
@@ -133,6 +122,11 @@ export const ButtonSubscribe = styled(Button)`
   text-shadow: 0 0 10px;
 
   animation: ${buttonBounce} 1.2s;
+
+  margin-left: 50px;
+  margin-right: 50px;
+
+  margin-bottom: 20px;
 
   small {
     font-size: 12px;

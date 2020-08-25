@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { loadFromLeft } from './animations';
 
+export const PageRegulamento = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -11,6 +16,8 @@ export const Container = styled.div`
   width: 90vw;
 
   padding: 64px;
+
+  margin-left: 4%;
 
   font-family: 'Poppins';
 `;

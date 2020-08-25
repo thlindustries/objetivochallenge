@@ -11,6 +11,11 @@ interface Test {
   load?: boolean;
 }
 
+export const PageGame = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
 export const TContainer = styled.div`
   width: 100vw;
   height: 87.9vh;
@@ -91,6 +96,10 @@ export const Content = styled.p`
 `;
 
 export const StyledButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 4em;
 
   background: #fb7c1f;

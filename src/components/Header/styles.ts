@@ -1,19 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 import { loadLogo } from './animations';
 
-export const Container = styled.div`
-  background: rgba(0, 0, 0, 0.3);
+interface HeaderProps {
+  tab?: string;
+}
 
-  width: 100vw;
-  height: 100px;
+export const Container = styled.header`
+  background: rgba(0, 0, 0, 0.4);
+
+  width: 100%;
 
   border-radius: 0 0 10px 10px;
-  position: absolute;
-
-  top: 0;
+  box-sizing: border-box;
 
   padding: 0 128px;
+
+  display: flex;
+
+
 
   /* animation: ${loadLogo} 1.4s; */
 `;
@@ -51,6 +56,22 @@ export const LogoOptions = styled.div`
       color: ${shade(0.4, '#bdbdbd')};
     }
   }
+`;
+
+export const HomeOption = styled.p<HeaderProps>`
+  ${(props) =>
+    props.tab === 'home' &&
+    css`
+      border-bottom: 1px solid #fff;
+    `}
+`;
+
+export const RegulationOption = styled.p<HeaderProps>`
+  ${(props) =>
+    props.tab === 'regulamento' &&
+    css`
+      border-bottom: 1px solid #fff;
+    `}
 `;
 
 export const Logo = styled.img`

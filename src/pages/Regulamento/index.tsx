@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  PageRegulamento,
   Container,
   Card,
   Content,
@@ -12,12 +13,10 @@ import Header from '../../components/Header';
 import Json from './regulamento.json';
 
 const Regulamento: React.FC = () => {
-  console.log(Json);
-
   return (
-    <>
+    <PageRegulamento>
+      <Header />
       <Container>
-        <Header />
         {Json.regulamento.map((item) => {
           return (
             <Card>
@@ -32,7 +31,7 @@ const Regulamento: React.FC = () => {
           );
         })}
       </Container>
-    </>
+    </PageRegulamento>
   );
 };
 
