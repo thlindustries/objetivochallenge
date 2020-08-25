@@ -21,6 +21,7 @@ export const Container = styled.button<ContainerProps>`
 
   &:hover {
     background: ${shade(0.4, '#FB7C1F')};
+    cursor: pointer;
   }
 
   ${(props) =>

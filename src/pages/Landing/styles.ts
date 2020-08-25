@@ -1,29 +1,38 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import {
+  glow,
+  loadFromLeft,
+  loadLogo,
+  buttonBounce,
+  smallButtonBounce,
+} from './animations';
 
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 
-export const LogoContent = styled.div`
-  position: absolute;
-  padding: 24px;
-  top: 0;
-  left: 0;
+// export const LogoContent = styled.div`
+//   position: absolute;
+//   padding: 24px;
+//   top: 0;
+//   left: 0;
 
-  @media (max-width: 700px) {
-    img {
-      width: 186;
-      height: 35px;
-    }
-  }
-`;
+//   animation: ${loadLogo} 2.2s;
 
-export const Logo = styled.img`
-  margin-right: auto;
+//   @media (max-width: 700px) {
+//     img {
+//       width: 186;
+//       height: 35px;
+//     }
+//   }
+// `;
 
-  width: 186;
-  height: 35px;
+// export const Logo = styled.img`
+//   margin-right: auto;
 
-  opacity: 1;
-`;
+//   height: 35px;
+
+//   opacity: 1;
+// `;
 
 export const Container = styled.div`
   display: flex;
@@ -40,11 +49,6 @@ export const Container = styled.div`
   @media (max-width: 700px) {
     padding: 0;
   }
-`;
-
-const glow = keyframes`
-  from{text-shadow: 0 0 10px rgba(255,255,255,0.8); }
-  to{text-shadow: 0 0 20px rgba(76, 114, 161,0.9);}
 `;
 
 export const ChallengeText = styled.p`
@@ -73,13 +77,9 @@ export const Content = styled.div`
   padding-top: 40px;
 
   margin-right: 32em;
+  animation: ${loadFromLeft} 1.5s;
 
   @media (max-width: 700px) {
-    margin-right: 0;
-    padding-top: 240px;
-  }
-
-  @media (max-height: 700px) {
     margin-right: 0;
     padding-top: 240px;
   }
@@ -112,6 +112,10 @@ export const ButtonsContainer = styled.div`
 
   width: 100%;
 
+  a {
+    text-decoration: none;
+  }
+
   @media (max-width: 700px) {
     padding: 0 32px;
   }
@@ -127,6 +131,8 @@ export const ButtonSubscribe = styled(Button)`
   font-size: 24px;
 
   text-shadow: 0 0 10px;
+
+  animation: ${buttonBounce} 1.2s;
 
   small {
     font-size: 12px;
@@ -146,6 +152,8 @@ export const ButtonSubscribe = styled(Button)`
     width: 120px;
 
     font-size: 15px;
+
+    animation: ${smallButtonBounce} 1.5s;
   }
 `;
 
@@ -156,4 +164,8 @@ export const TopText = styled.p`
 
   margin-right: auto;
   margin-bottom: 10px;
+`;
+
+export const HeaderA = styled(Header)`
+  animation: ${loadLogo} 1.5s !important;
 `;
