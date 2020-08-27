@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   padding: 64px;
 
-  margin-left: %;
+  margin-left: 4%;
 
   font-family: 'Poppins';
 `;

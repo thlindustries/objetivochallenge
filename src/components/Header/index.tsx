@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
         <LogoOptions>
           <Link
             onClick={() => {
-              setTab ? setTab('home') : console.log('oi');
+              setTab && setTab('home');
             }}
             to="/"
           >
@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({
 
           <Link
             onClick={() => {
-              setTab ? setTab('regulamento') : console.log('oi');
+              setTab && setTab('regulamento');
             }}
             to="/regulamento"
           >

@@ -56,7 +56,7 @@ export const Container = styled.div<ContainerProps>`
       color: #666360;
     }
 
-  border: solid 1px #000;
+  /* border: solid 1px #000; */
   margin-right: 40px;
 
   }
@@ -69,7 +69,7 @@ export const Container = styled.div<ContainerProps>`
 export const Error = styled(Tooltip)`
   height: 20px;
   /* margin-left: 16px; */
-  border: solid 1px #000;
+  /* border: solid 1px #000; */
 
   svg {
     margin-right: 0px;

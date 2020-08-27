@@ -20,6 +20,8 @@ import {
   StyledInput,
 } from './styles';
 
+import Header from '../../components/Header';
+
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
@@ -96,7 +98,7 @@ const Game: React.FC = () => {
 
   return (
     <PageGame>
-      {/* <Header /> */}
+      <Header />
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (

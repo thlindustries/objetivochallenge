@@ -12,6 +12,11 @@ import {
 import Header from '../../components/Header';
 import Json from './regulamento.json';
 
+interface SubItem {
+  text: string;
+  id: number;
+}
+
 const Regulamento: React.FC = () => {
   const [tab, setTab] = useState('');
 
@@ -29,8 +34,8 @@ const Regulamento: React.FC = () => {
               <Title>{item.title}</Title>
               <Content>{item.content}</Content>
               <SubContent>
-                {item.subcontents.map((subitem) => {
-                  return <SubContentItem>{subitem.text}</SubContentItem>;
+                {item.subcontents.map(({ id, text }: SubItem) => {
+                  return <SubContentItem key={id}>{text}</SubContentItem>;
                 })}
               </SubContent>
             </Card>

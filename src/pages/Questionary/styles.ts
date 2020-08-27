@@ -1,8 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+
+import { loadFromTransparent } from './animations';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Tooltip from '../../components/Tooltip';
+
+interface TooltipProps {
+  type?: string;
+}
 
 export const PageContent = styled.div`
   width: 100vw;
@@ -12,7 +19,9 @@ export const PageContent = styled.div`
   flex-direction: column;
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  animation: ${loadFromTransparent} 1.2s;
+`;
 
 export const FirstRowContainer = styled.div`
   display: flex;
@@ -50,27 +59,99 @@ export const QuestionContainer = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(251, 124, 31, 0.9);
   border-radius: 12px;
   box-shadow: 0 0 10px #000;
 
   width: 75%;
 
-  padding: 40px;
+  padding: 14px;
+`;
+
+export const QuestionOverlay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 12px;
+  /* background: rgba(176, 176, 176, 1); */
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px #000;
+
+  padding: 32px;
 `;
 
 export const Question = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   font-family: 'Poppins';
   font-size: 32px;
-  color: #fff;
+  font-weight: bold;
+  color: #000;
 
   width: 80%;
 
   margin-bottom: auto;
+
+  border: solid 1px blue;
+`;
+
+export const QuestionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  border: solid 1px red;
+
+  width: 100%;
+
+  p {
+    width: 900px;
+  }
+`;
+
+export const LoadingQuestion = styled.div`
+  svg {
+    margin-top: 24%;
+  }
+  p {
+    margin-left: 18px;
+  }
+`;
+
+export const HintButton = styled.div`
+  margin-right: 4%;
+
+  color: #ffe700;
+  transition: color 0.4s;
+
+  &:hover {
+    color: #fffcdb;
+
+    cursor: pointer;
+  }
+`;
+
+export const PassButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 2%;
+  /* width: auto; */
+
+  color: #c53030;
+
+  transition: color 0.4s;
+
+  &:hover {
+    color: #fddede;
+
+    cursor: pointer;
+  }
 `;
 
 export const QuestionContent = styled.div`
@@ -80,7 +161,8 @@ export const QuestionContent = styled.div`
 
   padding: 18px;
 
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
 `;
 
 export const QuestionContentItem = styled.div`
@@ -101,6 +183,32 @@ export const FormContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+
+  > p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    margin-right: 4%;
+    svg {
+      color: #eb171e;
+      transition: color 0.4s;
+    }
+
+    transition: color 0.4s;
+
+    &:hover {
+      cursor: pointer;
+      color: #fddede;
+
+      svg {
+        color: #fddede;
+      }
+    }
+  }
 `;
 
 export const AnswerInput = styled(Input)``;
@@ -126,7 +234,7 @@ export const Hint = styled.p`
   margin-right: 8em;
   margin-top: 8px;
 
-  color: #fff;
+  color: #000;
 
   strong {
     color: #eb171e;
@@ -200,4 +308,15 @@ export const Chat = styled.div`
   background: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
   box-shadow: 0 0 10px #000;
+`;
+
+export const StyledTooltip = styled(Tooltip) <TooltipProps>`
+  span {
+    ${(props) =>
+    props.type === 'hint' &&
+    css`
+        background: #0088ff;
+        color: #fff;
+      `}
+  }
 `;
