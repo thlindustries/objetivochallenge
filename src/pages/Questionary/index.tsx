@@ -59,15 +59,12 @@ interface Question {
 }
 
 interface NextQuestion {
-  nextQuestion: {
-    QuestionId: string;
-    QuestionTitle: string;
-    QuestionAnswer: string;
-    QuestionHints: string;
-    QuestionUrl: string;
-    QuestionType: string;
-    QuestionAnswerCharacterCounter: string;
-  };
+  nextQuestion: Question;
+}
+
+interface AnswerQuestion {
+  isCorrect: boolean;
+  nextQuestion: Question;
 }
 
 interface DataFormInfo {
@@ -112,11 +109,6 @@ const Questionary: React.FC = () => {
 
   const handlePassQuestion = useCallback(() => {
     setIsPassing(true);
-    addToast({
-      title: 'Pulou',
-      description: 'Pulou questão',
-      type: 'error',
-    });
 
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
@@ -124,13 +116,17 @@ const Questionary: React.FC = () => {
     ).then((response) => {
       setIsPassing(false);
       setQuestion(response.data.nextQuestion);
+      addToast({
+        title: 'Pulou',
+        description: 'Pulou questão',
+        type: 'info',
+      });
       // console.log(response.data.nextQuestion);
     });
-  }, [addToast, question.QuestionId, user.UserId, user.UserTeamId]);
+  }, [addToast, question, user.UserId, user.UserTeamId]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
-      setIsAnswering(true);
       try {
         formRef.current?.setErrors({});
 
@@ -143,8 +139,8 @@ const Questionary: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-
-        Axios.post(
+        setIsAnswering(true);
+        Axios.post<AnswerQuestion>(
           'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/answerquestion',
           {
             UserId: user.UserId,
@@ -153,19 +149,21 @@ const Questionary: React.FC = () => {
             QuestionAnswer: data.answer,
           },
         ).then((response) => {
-          // console.log(response.data);
-          response.data.isCorrect
-            ? addToast({
+          if (response.data.isCorrect) {
+            addToast({
               title: 'Boa!',
               description: 'Resposta correta',
               type: 'success',
-            })
-            : addToast({
+            });
+            formRef.current?.clearField('answer');
+            setQuestion(response.data.nextQuestion);
+          } else {
+            addToast({
               title: 'Erro',
               description: 'Resposta incorreta',
               type: 'error',
             });
-          setQuestion(response.data.nextQuestion);
+          }
           setIsAnswering(false);
         });
       } catch (err) {
@@ -176,7 +174,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [addToast, question.QuestionId, user.UserId, user.UserTeamId],
+    [addToast, question, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {
@@ -216,7 +214,7 @@ const Questionary: React.FC = () => {
                   )}
                   {question.QuestionTitle !== '' && !passing ? (
                     <>
-                      <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
+                      <p>{`${question.QuestionId}- ${question.QuestionHints}`}</p>
                       <PassButton onClick={handlePassQuestion}>
                         <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
                           <FiCornerUpRight size={40} />
