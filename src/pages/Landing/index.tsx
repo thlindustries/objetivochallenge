@@ -28,6 +28,7 @@ const Landing: React.FC = () => {
 
   return (
     <PageLanding>
+      <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <HeaderA selectedTab={tab} setTab={() => setTab} />
       <Container>
         <Content>

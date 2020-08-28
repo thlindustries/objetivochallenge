@@ -27,6 +27,7 @@ const Regulamento: React.FC = () => {
   return (
     <PageRegulamento>
       <Header selectedTab={tab} />
+      <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <Container>
         {Json.regulamento.map((item) => {
           return (

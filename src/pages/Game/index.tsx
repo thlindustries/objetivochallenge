@@ -99,6 +99,7 @@ const Game: React.FC = () => {
   return (
     <PageGame>
       <Header />
+      <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (

@@ -10,6 +10,8 @@ import {
   RegulationOption,
 } from './styles';
 
+import { useAuth } from '../../hooks/auth';
+
 import objLogo from '../../assets/img/logotry.png';
 
 interface HeaderProps {
@@ -22,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   setTab,
   children,
 }) => {
+  const { user } = useAuth();
   // const handleChangeTab = useCallback((selectedTab: string) => {
   //   setTab(selectedTab);
   //   console.log(selectedTab);
@@ -40,15 +43,16 @@ const Header: React.FC<HeaderProps> = ({
           >
             <HomeOption tab={selectedTab}>Home</HomeOption>
           </Link>
-
-          <Link
-            onClick={() => {
-              setTab && setTab('regulamento');
-            }}
-            to="/regulamento"
-          >
-            <RegulationOption tab={selectedTab}>Regulamento</RegulationOption>
-          </Link>
+          {!user && (
+            <Link
+              onClick={() => {
+                setTab && setTab('regulamento');
+              }}
+              to="/regulamento"
+            >
+              <RegulationOption tab={selectedTab}>Regulamento</RegulationOption>
+            </Link>
+          )}
           {children}
         </LogoOptions>
       </LogoContent>
