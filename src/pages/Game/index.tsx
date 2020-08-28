@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
@@ -95,6 +95,15 @@ const Game: React.FC = () => {
     },
     [addToast, history, logging, signIn],
   );
+
+  useEffect(() => {
+    const script = document.createElement('script');
+
+    script.src = '//code.jivosite.com/widget/AIh2Mhazzn';
+    script.async = true;
+
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <PageGame>

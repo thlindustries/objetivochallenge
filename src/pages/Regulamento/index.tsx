@@ -22,12 +22,18 @@ const Regulamento: React.FC = () => {
 
   useEffect(() => {
     setTab('regulamento');
+
+    const script = document.createElement('script');
+
+    script.src = '//code.jivosite.com/widget/AIh2Mhazzn';
+    script.async = true;
+
+    document.body.appendChild(script);
   }, []);
 
   return (
     <PageRegulamento>
       <Header selectedTab={tab} />
-      <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <Container>
         {Json.regulamento.map((item) => {
           return (

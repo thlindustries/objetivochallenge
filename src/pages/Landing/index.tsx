@@ -24,11 +24,17 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     setTab('home');
+
+    const script = document.createElement('script');
+
+    script.src = '//code.jivosite.com/widget/AIh2Mhazzn';
+    script.async = true;
+
+    document.body.appendChild(script);
   }, []);
 
   return (
     <PageLanding>
-      <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <HeaderA selectedTab={tab} setTab={() => setTab} />
       <Container>
         <Content>
