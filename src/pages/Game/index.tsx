@@ -103,6 +103,9 @@ const Game: React.FC = () => {
     script.async = true;
 
     document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   return (
