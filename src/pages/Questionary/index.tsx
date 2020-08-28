@@ -46,6 +46,7 @@ import {
 } from './styles';
 
 import Header from '../../components/Header';
+import Alert from '../../components/Alert';
 
 interface Question {
   QuestionId: string;
@@ -71,6 +72,8 @@ interface DataFormInfo {
 
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
+  const [passing, setIsPassing] = useState(false);
+  const [reportError, setReportError] = useState(true);
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -85,7 +88,8 @@ const Questionary: React.FC = () => {
 
   useEffect(() => {
     Axios.get<Question>(
-      `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getquestionbyid?QuestionId=${user.TeamCurrentQuestionId}&UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
+      // `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getquestionbyid?QuestionId=${user.TeamCurrentQuestionId}&UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
+      `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
       // console.log(response.data);
@@ -101,6 +105,7 @@ const Questionary: React.FC = () => {
   }, [addToast]);
 
   const handlePassQuestion = useCallback(() => {
+    setIsPassing(true);
     addToast({
       title: 'Pulou',
       description: 'Pulou questão',
@@ -109,8 +114,12 @@ const Questionary: React.FC = () => {
 
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
+      // '/aksdasd',
     ).then((response) => {
+      console.log('then nextquestion');
+      setIsPassing(false);
       setQuestion(response.data.nextQuestion);
+      console.log(response.data.nextQuestion);
     });
   }, [addToast, question.QuestionId, user.UserId, user.UserTeamId]);
 
@@ -147,8 +156,13 @@ const Questionary: React.FC = () => {
     [addToast],
   );
 
+  const handleReportError = useCallback(() => {
+    setReportError(!reportError);
+  }, [reportError]);
+
   return (
     <PageContent>
+      {reportError && <Alert show={reportError} errFunc={handleReportError} />}
       <Header>
         <LogoutButton onClick={signOut}>
           <FiLogOut size={20} />
@@ -161,14 +175,14 @@ const Questionary: React.FC = () => {
             <QuestionOverlay>
               <Question>
                 <QuestionHeader>
-                  <HintButton onClick={handleShowHint}>
-                    {question.QuestionHints !== '' && (
+                  {question.QuestionHints !== ' ' && !passing && (
+                    <HintButton onClick={handleShowHint}>
                       <StyledTooltip type="hint" title={question.QuestionHints}>
                         <FaLightbulb size={40} />
                       </StyledTooltip>
-                    )}
-                  </HintButton>
-                  {question.QuestionTitle !== '' ? (
+                    </HintButton>
+                  )}
+                  {question.QuestionTitle !== '' && !passing ? (
                     <>
                       <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
                       <PassButton onClick={handlePassQuestion}>
@@ -201,7 +215,7 @@ const Questionary: React.FC = () => {
               <Answer>
                 <Form ref={formRef} onSubmit={handleAnswer}>
                   <FormContent>
-                    <p>
+                    <p onClick={handleReportError}>
                       <FiAlertTriangle size={40} />
                       Reportar um erro
                     </p>
@@ -209,7 +223,7 @@ const Questionary: React.FC = () => {
                       name="answer"
                       placeholder="Digite a resposta aqui"
                       containerStyle={{
-                        width: 800,
+                        width: 700,
                       }}
                     />
                     <AnswerButton type="submit">

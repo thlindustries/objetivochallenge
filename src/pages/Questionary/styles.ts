@@ -298,6 +298,12 @@ export const VideoCard = styled.div`
   & + div {
     margin-left: 18px;
   }
+
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: scaleY(1.09);
+  }
 `;
 
 export const Chat = styled.div`
