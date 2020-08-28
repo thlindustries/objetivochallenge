@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-import { loadFromTransparent } from './animations';
+import { loadFromTransparent, loadFromDownAndTransparent } from './animations';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -20,7 +20,7 @@ export const PageContent = styled.div`
 `;
 
 export const Container = styled.div`
-  animation: ${loadFromTransparent} 1.2s;
+  animation: ${loadFromDownAndTransparent} 1.2s;
 `;
 
 export const FirstRowContainer = styled.div`
@@ -112,6 +112,7 @@ export const QuestionHeader = styled.div`
 
   p {
     width: 900px;
+    animation: ${loadFromTransparent} 1.2s;
   }
 `;
 

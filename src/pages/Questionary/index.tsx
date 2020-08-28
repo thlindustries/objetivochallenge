@@ -114,14 +114,15 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
       // '/aksdasd',
     ).then((response) => {
-      setIsPassing(false);
-      setQuestion(response.data.nextQuestion);
-      addToast({
-        title: 'Pulou',
-        description: 'Pulou questão',
-        type: 'info',
-      });
-      // console.log(response.data.nextQuestion);
+      if (response.data.nextQuestion.QuestionId) {
+        setIsPassing(false);
+        setQuestion(response.data.nextQuestion);
+        addToast({
+          title: 'Pulou',
+          description: 'Pulou questão',
+          type: 'info',
+        });
+      }
     });
   }, [addToast, question, user.UserId, user.UserTeamId]);
 
@@ -214,7 +215,7 @@ const Questionary: React.FC = () => {
                   )}
                   {question.QuestionTitle !== '' && !passing ? (
                     <>
-                      <p>{`${question.QuestionId}- ${question.QuestionHints}`}</p>
+                      <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
                       <PassButton onClick={handlePassQuestion}>
                         <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
                           <FiCornerUpRight size={40} />
