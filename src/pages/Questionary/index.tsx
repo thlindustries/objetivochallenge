@@ -112,7 +112,6 @@ const Questionary: React.FC = () => {
 
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
-      // '/aksdasd',
     ).then((response) => {
       if (response.data.nextQuestion.QuestionId) {
         setIsPassing(false);

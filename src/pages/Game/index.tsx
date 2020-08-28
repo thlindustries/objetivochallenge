@@ -116,7 +116,7 @@ const Game: React.FC = () => {
                     <StyledInput
                       name="teamName"
                       icon={FiUser}
-                      placeholder="Nome da equipe"
+                      placeholder="E-mail"
                       style={{ width: 300 }}
                     />
                     <StyledInput
