@@ -53,6 +53,8 @@ interface Question {
   QuestionTitle: string;
   QuestionAnswer: string;
   QuestionHints: string;
+  QuestionUrl: string;
+  QuestionType: string;
   QuestionAnswerCharacterCounter: string;
 }
 
@@ -62,6 +64,8 @@ interface NextQuestion {
     QuestionTitle: string;
     QuestionAnswer: string;
     QuestionHints: string;
+    QuestionUrl: string;
+    QuestionType: string;
     QuestionAnswerCharacterCounter: string;
   };
 }
@@ -73,7 +77,8 @@ interface DataFormInfo {
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const [passing, setIsPassing] = useState(false);
-  const [reportError, setReportError] = useState(true);
+  const [answering, setIsAnswering] = useState(false);
+  const [reportError, setReportError] = useState(false);
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -82,13 +87,14 @@ const Questionary: React.FC = () => {
     QuestionTitle: '',
     QuestionHints: '',
     QuestionAnswerCharacterCounter: '',
+    QuestionUrl: '',
+    QuestionType: '',
   });
 
   const formRef = useRef<FormHandles>(null);
 
   useEffect(() => {
     Axios.get<Question>(
-      // `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getquestionbyid?QuestionId=${user.TeamCurrentQuestionId}&UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
@@ -116,15 +122,15 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
       // '/aksdasd',
     ).then((response) => {
-      console.log('then nextquestion');
       setIsPassing(false);
       setQuestion(response.data.nextQuestion);
-      console.log(response.data.nextQuestion);
+      // console.log(response.data.nextQuestion);
     });
   }, [addToast, question.QuestionId, user.UserId, user.UserTeamId]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
+      setIsAnswering(true);
       try {
         formRef.current?.setErrors({});
 
@@ -138,12 +144,29 @@ const Questionary: React.FC = () => {
           abortEarly: false,
         });
 
-        console.log(data);
-
-        addToast({
-          title: 'Respondeu',
-          description: 'Respondeu a questão',
-          type: 'success',
+        Axios.post(
+          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/answerquestion',
+          {
+            UserId: user.UserId,
+            TeamId: user.UserTeamId,
+            QuestionId: question.QuestionId,
+            QuestionAnswer: data.answer,
+          },
+        ).then((response) => {
+          // console.log(response.data);
+          response.data.isCorrect
+            ? addToast({
+              title: 'Boa!',
+              description: 'Resposta correta',
+              type: 'success',
+            })
+            : addToast({
+              title: 'Erro',
+              description: 'Resposta incorreta',
+              type: 'error',
+            });
+          setQuestion(response.data.nextQuestion);
+          setIsAnswering(false);
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -153,7 +176,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [addToast],
+    [addToast, question.QuestionId, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {
@@ -162,7 +185,16 @@ const Questionary: React.FC = () => {
 
   return (
     <PageContent>
-      {reportError && <Alert show={reportError} errFunc={handleReportError} />}
+      {reportError && (
+        <Alert
+          QuestionId={question.QuestionId}
+          title="Reportar erro"
+          buttonTitle="Enviar"
+          placeholder="Digite o que está acontecendo aqui"
+          show={reportError}
+          errFunc={handleReportError}
+        />
+      )}
       <Header>
         <LogoutButton onClick={signOut}>
           <FiLogOut size={20} />
@@ -207,31 +239,37 @@ const Questionary: React.FC = () => {
                     )}
                 </QuestionHeader>
                 <QuestionContent>
-                  <QuestionContentItem>- Audio</QuestionContentItem>
+                  <QuestionContentItem>
+                    {question.QuestionUrl}
+                  </QuestionContentItem>
                   <QuestionContentItem>- Vídeo</QuestionContentItem>
                   <QuestionContentItem>- Arquivo</QuestionContentItem>
                 </QuestionContent>
               </Question>
-              <Answer>
-                <Form ref={formRef} onSubmit={handleAnswer}>
-                  <FormContent>
-                    <p onClick={handleReportError}>
-                      <FiAlertTriangle size={40} />
-                      Reportar um erro
-                    </p>
-                    <AnswerInput
-                      name="answer"
-                      placeholder="Digite a resposta aqui"
-                      containerStyle={{
-                        width: 700,
-                      }}
-                    />
-                    <AnswerButton type="submit">
-                      <FiPlay size={20} />
-                    </AnswerButton>
-                  </FormContent>
-                </Form>
-              </Answer>
+              {!answering ? (
+                <Answer>
+                  <Form ref={formRef} onSubmit={handleAnswer}>
+                    <FormContent>
+                      <p onClick={handleReportError}>
+                        <FiAlertTriangle size={40} />
+                        Reportar um erro
+                      </p>
+                      <AnswerInput
+                        name="answer"
+                        placeholder="Digite a resposta aqui"
+                        containerStyle={{
+                          width: 700,
+                        }}
+                      />
+                      <AnswerButton type="submit">
+                        <FiPlay size={20} />
+                      </AnswerButton>
+                    </FormContent>
+                  </Form>
+                </Answer>
+              ) : (
+                  <ReactLoading color="#000" type="balls" />
+                )}
               <Hint>
                 <strong>Dica: </strong>{' '}
                 {`a resposta tem ${question.QuestionAnswerCharacterCounter} caracteres`}
