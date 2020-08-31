@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import { Form } from '@unform/web';
@@ -37,7 +37,6 @@ const Game: React.FC = () => {
   const [isLogging, setIsLogging] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
 
-  const history = useHistory();
   const { addToast } = useToast();
   const { signIn } = useAuth();
 
