@@ -34,8 +34,7 @@ import {
   LoadingQuestion,
   HintButton,
   PassButton,
-  QuestionContent,
-  QuestionContentItem,
+  QuestionContentContainer,
   QuestionContainer,
   QuestionOverlay,
   RankContainer,
@@ -47,6 +46,7 @@ import {
 
 import Header from '../../components/Header';
 import Alert from '../../components/Alert';
+import QuestionContent from '../../components/QuestionContent';
 
 interface Question {
   QuestionId: string;
@@ -214,7 +214,9 @@ const Questionary: React.FC = () => {
                   )}
                   {question.QuestionTitle !== '' && !passing ? (
                     <>
-                      <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
+                      <p>
+                        {`${question.QuestionId}- ${question.QuestionTitle}`}
+                      </p>
                       <PassButton onClick={handlePassQuestion}>
                         <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
                           <FiCornerUpRight size={40} />
@@ -236,13 +238,14 @@ const Questionary: React.FC = () => {
                       </LoadingQuestion>
                     )}
                 </QuestionHeader>
-                <QuestionContent>
-                  <QuestionContentItem>
-                    {question.QuestionUrl}
-                  </QuestionContentItem>
-                  <QuestionContentItem>- Vídeo</QuestionContentItem>
-                  <QuestionContentItem>- Arquivo</QuestionContentItem>
-                </QuestionContent>
+                <QuestionContentContainer>
+                  {question.QuestionType !== ' ' && (
+                    <QuestionContent
+                      type={question.QuestionType}
+                      url={question.QuestionUrl}
+                    />
+                  )}
+                </QuestionContentContainer>
               </Question>
               {!answering ? (
                 <Answer>

@@ -74,13 +74,16 @@ export const QuestionOverlay = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  overflow: hidden;
+
   width: 100%;
   height: 100%;
 
   border-radius: 12px;
-  /* background: rgba(176, 176, 176, 1); */
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 10px #000;
+
+  border: solid 4px aquamarine;
 
   padding: 32px;
 `;
@@ -91,12 +94,15 @@ export const Question = styled.div`
   justify-content: center;
   align-items: center;
 
+  overflow: hidden;
+
   font-family: 'Poppins';
   font-size: 32px;
   font-weight: bold;
   color: #000;
 
-  width: 80%;
+  width: 100%;
+  height: 90%;
 
   margin-bottom: auto;
 
@@ -106,12 +112,16 @@ export const Question = styled.div`
 export const QuestionHeader = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: solid 1px red;
 
   width: 100%;
+  margin-bottom: auto;
 
   p {
-    width: 900px;
+    width: 80%;
+
+    border: solid 1px green;
     animation: ${loadFromTransparent} 1.2s;
   }
 `;
@@ -142,7 +152,6 @@ export const PassButton = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 2%;
-  /* width: auto; */
 
   color: #c53030;
 
@@ -155,19 +164,19 @@ export const PassButton = styled.div`
   }
 `;
 
-export const QuestionContent = styled.div`
-  width: 80%;
+export const QuestionContentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  /* height: 300px; */
 
-  margin-top: 40px;
+  /* margin-top: 40px; */
 
-  padding: 18px;
+  padding: 12px;
 
   background: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
-`;
-
-export const QuestionContentItem = styled.div`
-  font-size: 18px;
 `;
 
 export const Answer = styled.div`

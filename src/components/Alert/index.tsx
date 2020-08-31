@@ -48,21 +48,25 @@ const Alert: React.FC<AlertProps> = ({
 
   const handleSubmit = useCallback(
     (data: DataFormInfo) => {
-      setIsSending(true);
-      Axios.post(
-        'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/reporterrorquestion',
-        {
-          UserId: user.UserId,
-          TeamId: user.UserTeamId,
-          QuestionId,
-          ReportErrorQuestion: data.error,
-        },
-      ).then((response) => {
-        console.log(response.data);
+      if (data.error !== '') {
+        setIsSending(true);
+        Axios.post(
+          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/reporterrorquestion',
+          {
+            UserId: user.UserId,
+            TeamId: user.UserTeamId,
+            QuestionId,
+            ReportErrorQuestion: data.error,
+          },
+        ).then((response) => {
+          console.log(response.data);
 
-        setIsSending(false);
-        errFunc && errFunc();
-      });
+          setIsSending(false);
+          errFunc && errFunc();
+        });
+      } else {
+        alert('Preencha o campo com alguma informação');
+      }
     },
     [QuestionId, errFunc, user.UserId, user.UserTeamId],
   );
