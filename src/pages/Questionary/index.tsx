@@ -95,7 +95,7 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     });
   }, [user.TeamCurrentQuestionId, user.UserId, user.UserTeamId]);
 
