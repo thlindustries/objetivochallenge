@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import ReactAudioPlayer from 'react-audio-player';
-import { Container, StyledVimeo } from './styles';
+import { Container, StyledVimeo, ImageContainer } from './styles';
 
 interface ContentProps {
   type?: string;
@@ -9,7 +9,7 @@ interface ContentProps {
 }
 
 const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
-  const [winWidth, setWinWidth] = useState(0);
+  // const [winWidth, setWinWidth] = useState(0);
 
   const showCurrentTime = useCallback((info: any) => {
     // console.log('Video pausado');
@@ -27,15 +27,15 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
     // console.log(info);
   }, []);
 
-  useEffect(() => {
-    const width = window.innerWidth;
+  // useEffect(() => {
+  //   const width = window.innerWidth;
 
-    if (width < 700) {
-      setWinWidth(200);
-    } else {
-      setWinWidth(400);
-    }
-  }, []);
+  //   if (width < 700) {
+  //     setWinWidth(200);
+  //   } else {
+  //     setWinWidth(400);
+  //   }
+  // }, []);
 
   return (
     <Container>
@@ -62,6 +62,7 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
       {type === 'file' && (
         <p>{`Aqui vai o link para download do arquivo url: ${url}`}</p>
       )}
+      {type === 'image' && <ImageContainer imageUrl={url}></ImageContainer>}
     </Container>
   );
 };
