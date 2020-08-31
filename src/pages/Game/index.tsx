@@ -75,7 +75,8 @@ const Game: React.FC = () => {
         setIsLogging(false);
         setIsEnabled(true);
 
-        history.push('/questionary');
+        // history.push('/questionary');
+        window.location.href = '/questionary';
       } catch (err) {
         setIsLogging(false);
         console.log(logging);
@@ -93,7 +94,7 @@ const Game: React.FC = () => {
         });
       }
     },
-    [addToast, history, logging, signIn],
+    [addToast, logging, signIn],
   );
 
   useEffect(() => {
