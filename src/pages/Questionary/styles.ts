@@ -300,8 +300,8 @@ export const VideoCards = styled.div`
 `;
 
 export const VideoCard = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 20%;
+  height: 98%;
 
   background: rgba(0, 0, 0, 0.4);
   border-radius: 12px;

@@ -52,11 +52,7 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
       )}
       {type === 'audio' && (
         <>
-          <ReactAudioPlayer
-            src="https://audiochicoteste.s3-sa-east-1.amazonaws.com/audios/Lil+Nas+X+-+Old+Town+Road+(adamsteve+Remix).mp3"
-            controls
-            volume={0.5}
-          />
+          <ReactAudioPlayer src={url} controls volume={0.5} />
         </>
       )}
       {type === 'file' && (
