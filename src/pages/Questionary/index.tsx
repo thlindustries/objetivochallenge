@@ -26,6 +26,7 @@ import {
   PageContent,
   Answer,
   FormContent,
+  ReportErrorButton,
   AnswerButton,
   AnswerInput,
   Hint,
@@ -108,6 +109,9 @@ const Questionary: React.FC = () => {
   }, [addToast]);
 
   const handlePassQuestion = useCallback(() => {
+    if (!window.confirm('Você deseja mesmo fazer isso?')) {
+      return;
+    }
     setIsPassing(true);
 
     Axios.get<NextQuestion>(
@@ -251,10 +255,10 @@ const Questionary: React.FC = () => {
                 <Answer>
                   <Form ref={formRef} onSubmit={handleAnswer}>
                     <FormContent>
-                      <p onClick={handleReportError}>
+                      <ReportErrorButton onClick={handleReportError}>
                         <FiAlertTriangle size={40} />
                         Reportar um erro
-                      </p>
+                      </ReportErrorButton>
                       <AnswerInput
                         name="answer"
                         placeholder="Digite a resposta aqui"

@@ -74,7 +74,7 @@ export const QuestionOverlay = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 
   width: 100%;
   height: 100%;
@@ -94,7 +94,7 @@ export const Question = styled.div`
   justify-content: center;
   align-items: center;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 
   font-family: 'Poppins';
   font-size: 32px;
@@ -114,6 +114,8 @@ export const QuestionHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   border: solid 1px red;
+
+  padding: 0 32px;
 
   width: 100%;
   margin-bottom: auto;
@@ -194,29 +196,29 @@ export const FormContent = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
 
-  > p {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+export const ReportErrorButton = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    text-align: center;
-    margin-right: 4%;
-    svg {
-      color: #eb171e;
-      transition: color 0.4s;
-    }
-
+  text-align: center;
+  margin-right: 4%;
+  svg {
+    color: #eb171e;
     transition: color 0.4s;
+  }
 
-    &:hover {
-      cursor: pointer;
+  transition: color 0.4s;
+
+  &:hover {
+    cursor: pointer;
+    color: #fddede;
+
+    svg {
       color: #fddede;
-
-      svg {
-        color: #fddede;
-      }
     }
   }
 `;
