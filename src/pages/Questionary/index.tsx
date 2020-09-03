@@ -47,6 +47,7 @@ import {
 
 import Header from '../../components/Header';
 import Alert from '../../components/Alert';
+import Confirm from '../../components/Confirm';
 import QuestionContent from '../../components/QuestionContent';
 
 interface Question {
@@ -75,6 +76,7 @@ interface DataFormInfo {
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const [passing, setIsPassing] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const [answering, setIsAnswering] = useState(false);
   const [reportError, setReportError] = useState(false);
 
@@ -96,7 +98,6 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
-      // console.log(response.data);
     });
   }, [user.TeamCurrentQuestionId, user.UserId, user.UserTeamId]);
 
@@ -109,16 +110,13 @@ const Questionary: React.FC = () => {
   }, [addToast]);
 
   const handlePassQuestion = useCallback(() => {
-    if (!window.confirm('Você deseja mesmo fazer isso?')) {
-      return;
-    }
-    setIsPassing(true);
-
+    setConfirm(!confirm);
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
       if (response.data.nextQuestion.QuestionId) {
         setIsPassing(false);
+        setConfirm(!confirm);
         setQuestion(response.data.nextQuestion);
         addToast({
           title: 'Pulou',
@@ -127,7 +125,7 @@ const Questionary: React.FC = () => {
         });
       }
     });
-  }, [addToast, question, user.UserId, user.UserTeamId]);
+  }, [addToast, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
@@ -185,6 +183,15 @@ const Questionary: React.FC = () => {
     setReportError(!reportError);
   }, [reportError]);
 
+  const handleConfirm = useCallback(() => {
+    setConfirm(!confirm);
+  }, [confirm]);
+
+  const handleYesButton = useCallback(() => {
+    setIsPassing(!passing);
+    handlePassQuestion();
+  }, [handlePassQuestion, passing]);
+
   return (
     <PageContent>
       {reportError && (
@@ -197,6 +204,15 @@ const Questionary: React.FC = () => {
           errFunc={handleReportError}
         />
       )}
+      {confirm && (
+        <Confirm
+          title="Deseja mesmo pular a questão?"
+          closeFunc={handleConfirm}
+          show={confirm}
+          pass={handleYesButton}
+        />
+      )}
+
       <Header>
         <LogoutButton onClick={signOut}>
           <FiLogOut size={20} />
@@ -221,7 +237,7 @@ const Questionary: React.FC = () => {
                       <p>
                         {`${question.QuestionId}- ${question.QuestionTitle}`}
                       </p>
-                      <PassButton onClick={handlePassQuestion}>
+                      <PassButton onClick={handleConfirm}>
                         <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
                           <FiCornerUpRight size={40} />
                           <h5>Pular</h5>
@@ -242,7 +258,7 @@ const Questionary: React.FC = () => {
                       </LoadingQuestion>
                     )}
                 </QuestionHeader>
-                {question.QuestionType !== 'Normal' && (
+                {question.QuestionType !== 'normal' && !answering && !passing && (
                   <QuestionContentContainer>
                     <QuestionContent
                       type={question.QuestionType}
@@ -251,34 +267,36 @@ const Questionary: React.FC = () => {
                   </QuestionContentContainer>
                 )}
               </Question>
-              {!answering ? (
-                <Answer>
-                  <Form ref={formRef} onSubmit={handleAnswer}>
-                    <FormContent>
-                      <ReportErrorButton onClick={handleReportError}>
-                        <FiAlertTriangle size={40} />
-                        Reportar um erro
-                      </ReportErrorButton>
-                      <AnswerInput
-                        name="answer"
-                        placeholder="Digite a resposta aqui"
-                        containerStyle={{
-                          width: 700,
-                        }}
-                      />
-                      <AnswerButton type="submit">
-                        <FiPlay size={20} />
-                      </AnswerButton>
-                    </FormContent>
-                  </Form>
-                </Answer>
+              {!answering && !passing ? (
+                <>
+                  <Answer>
+                    <Form ref={formRef} onSubmit={handleAnswer}>
+                      <FormContent>
+                        <ReportErrorButton onClick={handleReportError}>
+                          <FiAlertTriangle size={40} />
+                          Reportar um erro
+                        </ReportErrorButton>
+                        <AnswerInput
+                          name="answer"
+                          placeholder="Digite a resposta aqui"
+                          containerStyle={{
+                            width: 700,
+                          }}
+                        />
+                        <AnswerButton type="submit">
+                          <FiPlay size={20} />
+                        </AnswerButton>
+                      </FormContent>
+                    </Form>
+                  </Answer>
+                  <Hint>
+                    <strong>Dica: </strong>{' '}
+                    {`a resposta tem ${question.QuestionAnswerCharacterCounter} caracteres`}
+                  </Hint>
+                </>
               ) : (
                   <ReactLoading color="#000" type="balls" />
                 )}
-              <Hint>
-                <strong>Dica: </strong>{' '}
-                {`a resposta tem ${question.QuestionAnswerCharacterCounter} caracteres`}
-              </Hint>
             </QuestionOverlay>
           </QuestionContainer>
           <RankContainer>
@@ -287,6 +305,7 @@ const Questionary: React.FC = () => {
         </FirstRowContainer>
         <SecondRowContainer>
           <VideoCards>
+            <VideoCard></VideoCard>
             <VideoCard></VideoCard>
             <VideoCard></VideoCard>
             <VideoCard></VideoCard>

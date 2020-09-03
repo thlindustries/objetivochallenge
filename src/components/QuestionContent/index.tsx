@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 
 import ReactAudioPlayer from 'react-audio-player';
+import { FiDownload } from 'react-icons/fi';
 import { Container, StyledVimeo, ImageContainer } from './styles';
 
 interface ContentProps {
@@ -9,40 +10,21 @@ interface ContentProps {
 }
 
 const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
-  // const [winWidth, setWinWidth] = useState(0);
+  const showCurrentTime = useCallback((info: any) => { }, []);
 
-  const showCurrentTime = useCallback((info: any) => {
-    // console.log('Video pausado');
-    // console.log(info);
-  }, []);
+  const handleEndVideo = useCallback((info: any) => { }, []);
 
-  const handleEndVideo = useCallback((info: any) => {
-    // console.log('Video terminado');
-    // console.log(info);
-  }, []);
+  const handleProgressVideo = useCallback((info: any) => { }, []);
 
-  const handleProgressVideo = useCallback((info: any) => {
-    // console.log('Video rodando');
-    // console.log(`largura da tela: ${winWidth}`);
-    // console.log(info);
-  }, []);
-
-  // useEffect(() => {
-  //   const width = window.innerWidth;
-
-  //   if (width < 700) {
-  //     setWinWidth(200);
-  //   } else {
-  //     setWinWidth(400);
-  //   }
-  // }, []);
+  const handleOpenImage = useCallback(() => {
+    window.open(`${url}`);
+  }, [url]);
 
   return (
     <Container>
       {type === 'video' && (
         <StyledVimeo
           video={url || ' '}
-          height={400}
           width={400}
           onPause={(info) => showCurrentTime(info)}
           onEnd={(info) => handleEndVideo(info)}
@@ -56,9 +38,14 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
         </>
       )}
       {type === 'file' && (
-        <p>{`Aqui vai o link para download do arquivo url: ${url}`}</p>
+        <a rel="noopener noreferrer" target="_blank" href={`https://${url}`}>
+          <FiDownload size={30} />
+          Baixar o arquivo
+        </a>
       )}
-      {type === 'image' && <ImageContainer imageUrl={url}></ImageContainer>}
+      {type === 'image' && (
+        <ImageContainer onClick={handleOpenImage} imageUrl={url} />
+      )}
     </Container>
   );
 };

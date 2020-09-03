@@ -1,10 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import ReactLoading from 'react-loading';
+import { Form } from '@unform/web';
 import { FiXCircle } from 'react-icons/fi';
+import ReactLoading from 'react-loading';
 import Axios from 'axios';
+
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import {
   Container,
@@ -28,6 +30,7 @@ interface AlertProps {
   errFunc?(): void;
   show?: boolean;
   QuestionId?: string;
+  type?: string;
 }
 
 interface DataFormInfo {
@@ -41,17 +44,19 @@ const Alert: React.FC<AlertProps> = ({
   title = 'Título padrão',
   buttonTitle = 'Botão padrão',
   QuestionId,
+  type = 'alert',
 }) => {
   const formRef = useRef<FormHandles>(null);
   const [sending, setIsSending] = useState(false);
   const { user } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     (data: DataFormInfo) => {
       if (data.error !== '') {
         setIsSending(true);
         Axios.post(
-          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/reporterrorquestion',
+          'httasdasps://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/reporterrorquestion',
           {
             UserId: user.UserId,
             TeamId: user.UserTeamId,
@@ -62,13 +67,18 @@ const Alert: React.FC<AlertProps> = ({
           console.log(response.data);
 
           setIsSending(false);
+          addToast({
+            title: 'Feito!',
+            description: 'Erro reportado com sucesso',
+            type: 'success',
+          });
           errFunc && errFunc();
         });
       } else {
         alert('Preencha o campo com alguma informação');
       }
     },
-    [QuestionId, errFunc, user.UserId, user.UserTeamId],
+    [QuestionId, addToast, errFunc, user.UserId, user.UserTeamId],
   );
 
   return (
@@ -97,7 +107,9 @@ const Alert: React.FC<AlertProps> = ({
 
                 <Description>
                   <Form ref={formRef} onSubmit={handleSubmit}>
-                    <Textarea placeholder={placeholder} name="error"></Textarea>
+                    {type !== 'confirm' && (
+                      <Textarea placeholder={placeholder} name="error"></Textarea>
+                    )}
                     <StyledButton type="submit">{buttonTitle}</StyledButton>
                   </Form>
                 </Description>

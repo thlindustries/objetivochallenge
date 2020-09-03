@@ -35,20 +35,20 @@ export const FirstRowContainer = styled.div`
 export const LogoutButton = styled.p`
   display: flex;
   align-items: center;
-  color: #eb171e !important;
+  color: #fff !important;
 
   svg {
     margin-right: 8px;
-    color: #eb171e;
+    color: #fff;
 
     transition: color 0.3s;
   }
 
   &:hover {
     cursor: pointer;
-    color: ${shade(0.4, '#eb171e')} !important;
+    color: ${shade(0.4, '#fff')} !important;
     svg {
-      color: ${shade(0.4, '#eb171e')} !important;
+      color: ${shade(0.4, '#fff')} !important;
     }
   }
 `;
