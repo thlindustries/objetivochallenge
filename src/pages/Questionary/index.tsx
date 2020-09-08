@@ -49,6 +49,7 @@ import Header from '../../components/Header';
 import Alert from '../../components/Alert';
 import Confirm from '../../components/Confirm';
 import QuestionContent from '../../components/QuestionContent';
+import Ranking from '../../components/Ranking';
 
 interface Question {
   QuestionId: string;
@@ -79,6 +80,9 @@ const Questionary: React.FC = () => {
   const [confirm, setConfirm] = useState(false);
   const [answering, setIsAnswering] = useState(false);
   const [reportError, setReportError] = useState(false);
+  const [wsResponse, setWsResponse] = useState('');
+
+  const ENDPOINT = 'wss://admv564mu8.execute-api.sa-east-1.amazonaws.com/prod';
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -92,14 +96,84 @@ const Questionary: React.FC = () => {
   });
 
   const formRef = useRef<FormHandles>(null);
+  const sWs = useRef<WebSocket | undefined>();
 
-  useEffect(() => {
+  const getRanking = useCallback(() => {
+    // console.log('TeamRanking');
+    sWs.current?.send(
+      JSON.stringify({
+        action: 'onMessage',
+        type: 'ranking',
+      }),
+    );
+  }, []);
+
+  const ping = useCallback(() => {
+    // console.log('ping');
+    sWs.current?.send(
+      JSON.stringify({
+        action: 'onMessage',
+        type: 'ping',
+      }),
+    );
+  }, []);
+
+  const getCurrentQuestionByTeamId = useCallback(async () => {
     Axios.get<Question>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
     });
-  }, [user.TeamCurrentQuestionId, user.UserId, user.UserTeamId]);
+  }, [user.UserId, user.UserTeamId]);
+
+  useEffect(() => {
+    sWs.current = new WebSocket(ENDPOINT);
+    sWs.current.onopen = (event) => {
+      sWs.current?.send(
+        JSON.stringify({
+          action: 'onMessage',
+          type: 'updateconnectionid',
+          userId: user.UserId,
+          teamId: user.UserTeamId,
+        }),
+      );
+      setInterval(() => {
+        if (sWs.current !== undefined) {
+          ping();
+        }
+        // console.log('mandou o ping');
+      }, 30000);
+
+      if (sWs.current !== undefined) {
+        getRanking();
+        sWs.current.onmessage = (e) => {
+          // console.log(e.data);
+          if (e.data.includes('TeamPoints')) {
+            setWsResponse(e.data);
+          }
+          if (e.data.includes('updatecurrentquestion')) {
+            getRanking();
+            getCurrentQuestionByTeamId();
+            addToast({
+              title: 'Alerta',
+              description: 'Sua equipe pulou ou acertou a questão',
+              type: 'success',
+            });
+          }
+        };
+      }
+    };
+
+    getCurrentQuestionByTeamId();
+  }, [
+    addToast,
+    getCurrentQuestionByTeamId,
+    getRanking,
+    ping,
+    user.TeamCurrentQuestionId,
+    user.UserId,
+    user.UserTeamId,
+  ]);
 
   const handleShowHint = useCallback(() => {
     addToast({
@@ -123,6 +197,14 @@ const Questionary: React.FC = () => {
           description: 'Pulou questão',
           type: 'info',
         });
+        sWs.current?.send(
+          JSON.stringify({
+            action: 'onMessage',
+            type: 'updatecurrentquestion',
+            userId: user.UserId,
+            teamId: user.UserTeamId,
+          }),
+        );
       }
     });
   }, [addToast, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
@@ -159,6 +241,15 @@ const Questionary: React.FC = () => {
             });
             formRef.current?.clearField('answer');
             setQuestion(response.data.nextQuestion);
+
+            sWs.current?.send(
+              JSON.stringify({
+                action: 'onMessage',
+                type: 'updatecurrentquestion',
+                userId: user.UserId,
+                teamId: user.UserTeamId,
+              }),
+            );
           } else {
             addToast({
               title: 'Erro',
@@ -176,7 +267,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [addToast, question, user.UserId, user.UserTeamId],
+    [addToast, question.QuestionId, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {
@@ -300,7 +391,15 @@ const Questionary: React.FC = () => {
             </QuestionOverlay>
           </QuestionContainer>
           <RankContainer>
-            <p>Ranking</p>
+            <Ranking
+              content={
+                wsResponse !== '' &&
+                wsResponse !== 'pong' &&
+                JSON.parse(wsResponse)
+              }
+            >
+              <br />
+            </Ranking>
           </RankContainer>
         </FirstRowContainer>
         <SecondRowContainer>

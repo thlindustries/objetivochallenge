@@ -35,23 +35,28 @@ const Header: React.FC<HeaderProps> = ({
       <LogoContent>
         <Logo src={objLogo} alt="objlogo"></Logo>
         <LogoOptions>
-          <Link
-            onClick={() => {
-              setTab && setTab('home');
-            }}
-            to="/"
-          >
-            <HomeOption tab={selectedTab}>Home</HomeOption>
-          </Link>
+          {user && <HomeOption tab={selectedTab}>{user.UserName}</HomeOption>}
           {!user && (
-            <Link
-              onClick={() => {
-                setTab && setTab('regulamento');
-              }}
-              to="/regulamento"
-            >
-              <RegulationOption tab={selectedTab}>Regulamento</RegulationOption>
-            </Link>
+            <>
+              <Link
+                onClick={() => {
+                  setTab && setTab('home');
+                }}
+                to="/"
+              >
+                <HomeOption tab={selectedTab}>Home</HomeOption>
+              </Link>
+              <Link
+                onClick={() => {
+                  setTab && setTab('regulamento');
+                }}
+                to="/regulamento"
+              >
+                <RegulationOption tab={selectedTab}>
+                  Regulamento
+                </RegulationOption>
+              </Link>
+            </>
           )}
           {children}
         </LogoOptions>

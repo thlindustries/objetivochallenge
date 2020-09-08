@@ -65,7 +65,7 @@ export const QuestionContainer = styled.div`
 
   width: 75%;
 
-  padding: 14px;
+  padding: 12px;
 `;
 
 export const QuestionOverlay = styled.div`
@@ -255,7 +255,8 @@ export const Hint = styled.p`
 
 export const RankContainer = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   font-family: 'Poppins';
   color: #fff;
@@ -264,7 +265,7 @@ export const RankContainer = styled.div`
     font-size: 32px;
   }
 
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(251, 124, 31, 0.9);
   border-radius: 12px;
   box-shadow: 0 0 10px #000;
 
@@ -272,7 +273,7 @@ export const RankContainer = styled.div`
 
   margin-left: 3%;
 
-  padding: 32px;
+  padding: 12px;
 `;
 
 export const SecondRowContainer = styled.div`

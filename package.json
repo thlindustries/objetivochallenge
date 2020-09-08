@@ -27,6 +27,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
+    "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "uuid": "^8.3.0",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@types/react-audio-player": "^0.11.0",
+    "@types/socket.io-client": "^1.4.33",
     "@types/uuid": "^8.3.0",
     "@types/yup": "^0.29.6",
     "@typescript-eslint/eslint-plugin": "^3.8.0",

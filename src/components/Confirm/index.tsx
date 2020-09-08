@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FiXCircle } from 'react-icons/fi';
 
 import {
@@ -31,6 +31,23 @@ const Confirm: React.FC<ConfirmProps> = ({
   const handleCancelButton = useCallback(() => {
     closeFunc && closeFunc();
   }, [closeFunc]);
+
+  useEffect(() => {
+    // const socket = socketIOClient(ENDPOINT);
+    // const socket = new WebSocket(ENDPOINT);
+    // socket.onopen = (res) => {
+    //   console.log(res);
+    //   socket.send("{'action' : 'onMessage' , 'type':'ping'}");
+    //   socket.send("{'action' : 'onMessage' , 'type':'ping'}");
+    // };
+    // socket.onmessage = (res) => {
+    //   console.log(res.data);
+    // };
+    // console.log(socket);
+    // socket.on('FromAPI', (data: any) => {
+    //   setResponse(data);
+    // });
+  }, []);
 
   return (
     <Container show={show}>
