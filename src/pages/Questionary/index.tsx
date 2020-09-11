@@ -14,6 +14,7 @@ import { FormHandles } from '@unform/core';
 
 import Axios from 'axios';
 import { useAuth } from '../../hooks/auth';
+import { useChat, Message } from '../../hooks/chat';
 import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -41,7 +42,7 @@ import {
   RankContainer,
   VideoCards,
   VideoCard,
-  Chat,
+  ChatContainer,
   StyledTooltip,
 } from './styles';
 
@@ -50,6 +51,7 @@ import Alert from '../../components/Alert';
 import Confirm from '../../components/Confirm';
 import QuestionContent from '../../components/QuestionContent';
 import Ranking from '../../components/Ranking';
+import Chat from '../../components/Chat';
 
 interface Question {
   QuestionId: string;
@@ -76,10 +78,13 @@ interface DataFormInfo {
 
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
+  const { addMessage } = useChat();
+
   const [passing, setIsPassing] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [answering, setIsAnswering] = useState(false);
   const [reportError, setReportError] = useState(false);
+
   const [wsResponse, setWsResponse] = useState('');
 
   const ENDPOINT = 'wss://admv564mu8.execute-api.sa-east-1.amazonaws.com/prod';
@@ -96,27 +101,42 @@ const Questionary: React.FC = () => {
   });
 
   const formRef = useRef<FormHandles>(null);
-  const sWs = useRef<WebSocket | undefined>();
+  const sWs = useRef<WebSocket>();
 
   const getRanking = useCallback(() => {
-    // console.log('TeamRanking');
     sWs.current?.send(
       JSON.stringify({
         action: 'onMessage',
         type: 'ranking',
       }),
     );
-  }, []);
+  }, [sWs]);
 
   const ping = useCallback(() => {
-    // console.log('ping');
     sWs.current?.send(
       JSON.stringify({
         action: 'onMessage',
         type: 'ping',
       }),
     );
-  }, []);
+  }, [sWs]);
+
+  const sendMessage = useCallback(
+    (userName: string, teamId: string, message: string) => {
+      if (userName !== '' && teamId !== '' && message !== '') {
+        sWs.current?.send(
+          JSON.stringify({
+            action: 'onMessage',
+            type: 'chat',
+            teamId,
+            userName,
+            message,
+          }),
+        );
+      }
+    },
+    [sWs],
+  );
 
   const getCurrentQuestionByTeamId = useCallback(async () => {
     Axios.get<Question>(
@@ -138,16 +158,14 @@ const Questionary: React.FC = () => {
         }),
       );
       setInterval(() => {
-        if (sWs.current !== undefined) {
+        if (sWs !== undefined) {
           ping();
         }
-        // console.log('mandou o ping');
       }, 30000);
 
       if (sWs.current !== undefined) {
         getRanking();
         sWs.current.onmessage = (e) => {
-          // console.log(e.data);
           if (e.data.includes('TeamPoints')) {
             setWsResponse(e.data);
           }
@@ -160,16 +178,26 @@ const Questionary: React.FC = () => {
               type: 'success',
             });
           }
+          if (e.data.includes('message')) {
+            const recievedMessage: Message = JSON.parse(e.data);
+            addMessage(recievedMessage.message, recievedMessage.userName);
+          }
         };
       }
     };
 
     getCurrentQuestionByTeamId();
+
+    return () => {
+      sWs.current?.close();
+    };
   }, [
+    addMessage,
     addToast,
     getCurrentQuestionByTeamId,
     getRanking,
     ping,
+    sWs,
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,
@@ -207,7 +235,14 @@ const Questionary: React.FC = () => {
         );
       }
     });
-  }, [addToast, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
+  }, [
+    addToast,
+    confirm,
+    question.QuestionId,
+    sWs,
+    user.UserId,
+    user.UserTeamId,
+  ]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
@@ -267,7 +302,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [addToast, question.QuestionId, user.UserId, user.UserTeamId],
+    [addToast, question.QuestionId, sWs, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {
@@ -411,7 +446,9 @@ const Questionary: React.FC = () => {
             <VideoCard></VideoCard>
             <VideoCard></VideoCard>
           </VideoCards>
-          <Chat></Chat>
+          <ChatContainer>
+            <Chat sendMessage={sendMessage} wsConnection={sWs.current} />
+          </ChatContainer>
         </SecondRowContainer>
       </Container>
     </PageContent>

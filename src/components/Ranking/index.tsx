@@ -19,13 +19,11 @@ const Ranking: React.FC<RankingProps> = ({ children, content }) => {
   const { user } = useAuth();
 
   const [list, setList] = useState<Ranking[]>([]);
-  const [team, setTeam] = useState('');
 
   useEffect(() => {
     if (content !== false) {
       setList(content);
     }
-    setTeam(user.TeamName);
     // console.log(user.TeamName);
   }, [content, user]);
 

@@ -319,14 +319,16 @@ export const VideoCard = styled.div`
   }
 `;
 
-export const Chat = styled.div`
+export const ChatContainer = styled.div`
   width: 25%;
 
   margin-left: 3%;
 
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(251, 124, 31, 0.9);
   border-radius: 12px;
   box-shadow: 0 0 10px #000;
+
+  padding: 12px;
 `;
 
 export const StyledTooltip = styled(Tooltip) <TooltipProps>`
