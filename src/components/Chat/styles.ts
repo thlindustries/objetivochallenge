@@ -26,7 +26,7 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
 
-  border: solid 2px red;
+  /* border: solid 2px red; */
 `;
 
 export const ChatTitle = styled.p`
