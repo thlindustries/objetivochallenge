@@ -111,7 +111,7 @@ export const QuestionPoints = styled.div`
   }
 
   strong {
-    font-size: 8px;
+    font-size: 10px;
     width: 100%;
   }
 `;
