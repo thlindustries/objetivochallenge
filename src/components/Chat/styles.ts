@@ -3,6 +3,7 @@ import { shade } from 'polished';
 
 interface MessageProps {
   isMe?: boolean;
+  last?: boolean;
 }
 
 export const Container = styled.div`
@@ -56,6 +57,12 @@ export const Message = styled.p<MessageProps>`
     props.isMe &&
     css`
       margin-left: auto;
+    `};
+
+  ${(props) =>
+    props.last &&
+    css`
+      color: aquamarine;
     `};
 `;
 

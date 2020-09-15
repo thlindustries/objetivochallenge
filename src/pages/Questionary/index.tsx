@@ -78,7 +78,7 @@ interface DataFormInfo {
 
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
-  const { addMessage } = useChat();
+  const { addMessage, clearMessages } = useChat();
 
   const [passing, setIsPassing] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -166,6 +166,7 @@ const Questionary: React.FC = () => {
       if (sWs.current !== undefined) {
         getRanking();
         sWs.current.onmessage = (e) => {
+          // console.log(e.data);
           if (e.data.includes('TeamPoints')) {
             setWsResponse(e.data);
           }
@@ -182,6 +183,9 @@ const Questionary: React.FC = () => {
             const recievedMessage: Message = JSON.parse(e.data);
             addMessage(recievedMessage.message, recievedMessage.userName);
           }
+          if (e.data.includes('refreshranking')) {
+            console.log('refresh foi chamado');
+          }
         };
       }
     };
@@ -190,10 +194,12 @@ const Questionary: React.FC = () => {
 
     return () => {
       sWs.current?.close();
+      // clearMessages();
     };
   }, [
     addMessage,
     addToast,
+    clearMessages,
     getCurrentQuestionByTeamId,
     getRanking,
     ping,
@@ -231,6 +237,12 @@ const Questionary: React.FC = () => {
             type: 'updatecurrentquestion',
             userId: user.UserId,
             teamId: user.UserTeamId,
+          }),
+        );
+        sWs.current?.send(
+          JSON.stringify({
+            action: 'onMessage',
+            type: 'refreshranking',
           }),
         );
       }
@@ -283,6 +295,12 @@ const Questionary: React.FC = () => {
                 type: 'updatecurrentquestion',
                 userId: user.UserId,
                 teamId: user.UserTeamId,
+              }),
+            );
+            sWs.current?.send(
+              JSON.stringify({
+                action: 'onMessage',
+                type: 'refreshranking',
               }),
             );
           } else {

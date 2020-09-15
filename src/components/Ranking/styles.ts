@@ -15,6 +15,8 @@ export const Container = styled.div`
 
   color: #000;
   font-family: 'Poppins';
+
+  overflow: scroll;
 `;
 
 export const Content = styled.div`
@@ -80,7 +82,6 @@ export const Item = styled.div<ItemProps>`
 
   h3 {
     margin-right: auto;
-    margin-left: 4%;
   }
 
   transition: transform 0.8s;
@@ -95,5 +96,22 @@ export const Item = styled.div<ItemProps>`
   &:hover {
     /* cursor: pointer; */
     transform: scaleY(1.09) scaleX(1.09);
+  }
+`;
+
+export const QuestionPoints = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: 4%;
+  justify-content: space-between;
+
+  h3 {
+    width: 100%;
+  }
+
+  strong {
+    font-size: 8px;
+    width: 100%;
   }
 `;

@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { FiPlay } from 'react-icons/fi';
@@ -29,11 +29,13 @@ interface ChatProps {
   sendMessage?(userName: string, teamId: string, message: string): void;
 }
 
-const Chat: React.FC<ChatProps> = ({ wsConnection, callBack, sendMessage }) => {
+const Chat: React.FC<ChatProps> = ({ wsConnection, sendMessage }) => {
   const { user } = useAuth();
-  const { messages, addMessage } = useChat();
+  const { messages, addMessage, clearMessages } = useChat();
 
   const formRef = useRef<FormHandles>(null);
+  const lastMessage = useRef<HTMLParagraphElement>(null);
+  const notLastMessage = useRef<HTMLParagraphElement>(null);
 
   const handleSubmit = useCallback(
     (inputRef: HTMLInputElement) => {
@@ -48,9 +50,26 @@ const Chat: React.FC<ChatProps> = ({ wsConnection, callBack, sendMessage }) => {
         }
         inputRef.value = '';
       }
+
+      if (lastMessage.current) {
+        console.log('ue');
+
+        lastMessage.current.scrollIntoView();
+      }
     },
     [addMessage, sendMessage, user.UserName, user.UserTeamId, wsConnection],
   );
+
+  useEffect(() => {
+    if (lastMessage.current) {
+      console.log('ue');
+
+      lastMessage.current.scrollIntoView();
+    }
+    return () => {
+      clearMessages();
+    };
+  }, [clearMessages]);
 
   return (
     <Container>
@@ -64,6 +83,11 @@ const Chat: React.FC<ChatProps> = ({ wsConnection, callBack, sendMessage }) => {
                 user.UserName !== undefined && (
                   <Message
                     isMe={user.UserName === message.userName}
+                    ref={
+                      index === messages.length - 1
+                        ? lastMessage
+                        : notLastMessage
+                    }
                     // eslint-disable-next-line react/no-array-index-key
                     key={`${user.UserName}-${index}`}
                   >
