@@ -52,8 +52,6 @@ const Chat: React.FC<ChatProps> = ({ wsConnection, sendMessage }) => {
       }
 
       if (lastMessage.current) {
-        console.log('ue');
-
         lastMessage.current.scrollIntoView();
       }
     },
