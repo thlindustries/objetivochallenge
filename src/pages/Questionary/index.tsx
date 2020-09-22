@@ -80,6 +80,7 @@ const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addMessage, clearMessages } = useChat();
 
+  const [caracterCounter, setCaracterCounter] = useState(0);
   const [passing, setIsPassing] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [answering, setIsAnswering] = useState(false);
@@ -143,6 +144,9 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
+      setCaracterCounter(
+        parseInt(response.data.QuestionAnswerCharacterCounter, 10),
+      );
     });
   }, [user.UserId, user.UserTeamId]);
 
@@ -166,7 +170,6 @@ const Questionary: React.FC = () => {
       if (sWs.current !== undefined) {
         getRanking();
         sWs.current.onmessage = (e) => {
-          // console.log(e.data);
           if (e.data.includes('TeamPoints')) {
             setWsResponse(e.data);
           }
@@ -336,6 +339,18 @@ const Questionary: React.FC = () => {
     handlePassQuestion();
   }, [handlePassQuestion, passing]);
 
+  const handleCaracterChange = useCallback(
+    (e) => {
+      const counter: String = e.target.value;
+      const questionCounter = parseInt(
+        question.QuestionAnswerCharacterCounter,
+        10,
+      );
+      setCaracterCounter(questionCounter - counter.length);
+    },
+    [question.QuestionAnswerCharacterCounter],
+  );
+
   return (
     <PageContent>
       {reportError && (
@@ -421,6 +436,7 @@ const Questionary: React.FC = () => {
                           Reportar um erro
                         </ReportErrorButton>
                         <AnswerInput
+                          onChange={(e) => handleCaracterChange(e)}
                           name="answer"
                           placeholder="Digite a resposta aqui"
                           containerStyle={{
@@ -436,6 +452,16 @@ const Questionary: React.FC = () => {
                   <Hint>
                     <strong>Dica: </strong>{' '}
                     {`a resposta tem ${question.QuestionAnswerCharacterCounter} caracteres`}
+                  </Hint>
+                  <Hint>
+                    {caracterCounter >= 0 && (
+                      <>
+                        Faltam <strong>{caracterCounter}</strong> caracteres
+                      </>
+                    )}
+                    {caracterCounter < 0 && (
+                      <strong>A resposta excedeu os caracteres</strong>
+                    )}
                   </Hint>
                 </>
               ) : (

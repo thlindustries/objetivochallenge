@@ -34,10 +34,10 @@ export const Container = styled.div<AlertProps>`
   ${(props) =>
     props.show
       ? css`
-          animation: ${loadFromOpacity} 1.2s;
+          animation: ${loadFromOpacity} 0.6s;
         `
       : css`
-          animation: ${hideFromOpacity} 1.2s;
+          animation: ${hideFromOpacity} 0.6s;
         `}
 
   top: 0;
