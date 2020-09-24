@@ -70,7 +70,7 @@ export const AlertContainer = styled.div`
 
   padding: 32px;
 
-  border-radius: 12px;
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.9);
   z-index: 100000;
 
@@ -85,8 +85,6 @@ export const AlertHeader = styled.div`
   width: 100%;
 
   margin-bottom: auto;
-
-  border: solid 1px red;
 `;
 
 export const Title = styled.h1`
@@ -97,8 +95,6 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.div`
-  border: solid 1px blue;
-
   margin-top: auto;
 `;
 
@@ -131,8 +127,6 @@ export const SendingContainer = styled.div`
 
   width: 100%;
   height: 100%;
-
-  border: solid 1px red;
 `;
 
 export const LoadingContainer = styled.div`
@@ -141,5 +135,4 @@ export const LoadingContainer = styled.div`
   justify-content: center;
 
   width: 100%;
-  border: solid 1px #000;
 `;

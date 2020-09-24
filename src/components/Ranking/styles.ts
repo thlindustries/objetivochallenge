@@ -10,17 +10,18 @@ export const Container = styled.div`
   height: 100%;
 
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 0 10px #000;
 
   color: #000;
   font-family: 'Poppins';
 
+  padding: 8px;
+
   overflow: scroll;
 `;
 
 export const Content = styled.div`
-  border: solid 1px #000;
   border-radius: 12px;
 
   width: 100%;
@@ -38,11 +39,17 @@ export const Header = styled.div`
   align-items: center;
   justify-content: center;
 
-  border: solid 4px red;
   border-radius: 12px;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  font-family: 'Kumbh Sans';
+  font-weight: 600;
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
+`;
 
 export const Body = styled.div`
   width: 100%;
@@ -50,10 +57,11 @@ export const Body = styled.div`
 
   display: flex;
   flex-direction: column;
-  border: solid 3px aquamarine;
   border-radius: 12px;
 
   padding: 8px;
+
+  box-shadow: 0 0 10px inset;
 `;
 
 export const Item = styled.div<ItemProps>`
@@ -90,12 +98,22 @@ export const Item = styled.div<ItemProps>`
     props.myTeam &&
     css`
       animation: ${EarnPoints} 1s;
-      border: solid 2px red;
+      border: solid 2px rgb(251, 124, 31);
     `};
 
   &:hover {
     /* cursor: pointer; */
     transform: scaleY(1.09) scaleX(1.09);
+  }
+
+  p {
+    text-shadow: 0 0 10px rgb(251, 124, 31);
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+
+    height: 20%;
   }
 `;
 
@@ -113,5 +131,15 @@ export const QuestionPoints = styled.div`
   strong {
     font-size: 10px;
     width: 100%;
+  }
+
+  @media (max-width: 700px) {
+    h3 {
+      font-size: 14px;
+    }
+
+    strong {
+      font-size: 12px;
+    }
   }
 `;

@@ -12,11 +12,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 
-  width: 400px;
-  height: 200px;
+  width: 70%;
+  height: 80%;
 
   a {
     display: flex;
@@ -39,16 +38,13 @@ export const Container = styled.div`
   }
 `;
 
-export const StyledVimeo = styled(Vimeo)`
-  border: solid 4px aqua;
-`;
+export const StyledVimeo = styled(Vimeo)``;
 
 export const ImageContainer = styled.div<ImageContainerProps>`
   display: flex;
   width: 100%;
   height: 100%;
 
-  border: solid 4px aqua;
   border-radius: 12px;
 
   background-image: url(${(props) => props.imageUrl});

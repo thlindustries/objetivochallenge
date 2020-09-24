@@ -32,7 +32,6 @@ const Ranking: React.FC<RankingProps> = ({ children, content }) => {
     if (content !== false) {
       setList(content);
     }
-    // console.log(user.TeamName);
   }, [content, user]);
 
   return (

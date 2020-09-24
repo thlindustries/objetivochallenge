@@ -10,6 +10,9 @@ import Tooltip from '../../components/Tooltip';
 interface TooltipProps {
   type?: string;
 }
+interface ChatProps {
+  enabled?: boolean;
+}
 
 export const PageContent = styled.div`
   width: 100vw;
@@ -29,7 +32,7 @@ export const FirstRowContainer = styled.div`
   padding: 16px;
 
   width: 100vw;
-  height: 60vh;
+  height: 80vh;
 `;
 
 export const LogoutButton = styled.p`
@@ -60,12 +63,12 @@ export const QuestionContainer = styled.div`
   flex-direction: column;
 
   background: rgba(251, 124, 31, 0.9);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
 
   width: 75%;
 
-  padding: 12px;
+  padding: 8px;
 `;
 
 export const QuestionOverlay = styled.div`
@@ -79,11 +82,9 @@ export const QuestionOverlay = styled.div`
   width: 100%;
   height: 100%;
 
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 10px #000;
-
-  border: solid 4px aquamarine;
 
   padding: 32px;
 `;
@@ -105,17 +106,14 @@ export const Question = styled.div`
   height: 90%;
 
   margin-bottom: auto;
-
-  border: solid 1px blue;
 `;
 
 export const QuestionHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: solid 1px red;
 
-  padding: 0 32px;
+  padding: 10px 32px;
 
   width: 100%;
   margin-bottom: auto;
@@ -123,8 +121,21 @@ export const QuestionHeader = styled.div`
   p {
     width: 80%;
 
-    border: solid 1px green;
     animation: ${loadFromTransparent} 1.2s;
+    font-family: 'Kumbh Sans';
+    font-weight: 500;
+
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+    padding: 0 12px;
+
+    p {
+      text-align: left;
+      font-size: 16px;
+    }
   }
 `;
 
@@ -170,25 +181,33 @@ export const QuestionContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: auto;
-  /* height: 300px; */
-
-  /* margin-top: 40px; */
+  width: 100%;
+  height: 100%;
 
   padding: 12px;
 
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.04);
   border-radius: 12px;
+  box-shadow: 0 0 10px inset;
+
+  @media (max-width: 700px) {
+    overflow: hidden;
+  }
 `;
 
 export const Answer = styled.div`
   display: flex;
   width: 80%;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2%;
 
-  border: solid 1px #000;
+  @media (max-width: 700px) {
+    width: 100%;
+
+    justify-content: space-around;
+  }
 `;
 
 export const FormContent = styled.div`
@@ -196,6 +215,10 @@ export const FormContent = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const ReportErrorButton = styled.p`
@@ -240,6 +263,11 @@ export const AnswerButton = styled(Button)`
       color: ${shade(0.4, '#fff')} !important;
     }
   }
+
+  @media (max-width: 700px) {
+    width: 60%;
+    margin: 0;
+  }
 `;
 
 export const Hint = styled.p`
@@ -250,6 +278,17 @@ export const Hint = styled.p`
 
   strong {
     color: #eb171e;
+  }
+
+  @media (max-width: 700px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin: 0;
   }
 `;
 
@@ -266,17 +305,17 @@ export const RankContainer = styled.div`
   }
 
   background: rgba(251, 124, 31, 0.9);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
 
   width: 25%;
 
   margin-left: 3%;
 
-  padding: 12px;
+  padding: 8px;
 `;
 
-export const SecondRowContainer = styled.div`
+export const SecondRowContainer = styled.div<ChatProps>`
   display: flex;
   flex-direction: row;
   padding: 16px;
@@ -285,6 +324,15 @@ export const SecondRowContainer = styled.div`
 
   width: 100vw;
   height: 25vh;
+
+  ${(props) =>
+    props.enabled
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
 `;
 
 export const VideoCards = styled.div`
@@ -325,7 +373,7 @@ export const ChatContainer = styled.div`
   margin-left: 3%;
 
   background: rgba(251, 124, 31, 0.9);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
 
   padding: 12px;
