@@ -246,6 +246,7 @@ const Questionary: React.FC = () => {
             type: 'refreshranking',
           }),
         );
+        setCaracterCounter(0);
       }
     });
   }, [confirm, question.QuestionId, sWs, user.UserId, user.UserTeamId]);
@@ -300,6 +301,7 @@ const Questionary: React.FC = () => {
             });
           }
           setIsAnswering(false);
+          setCaracterCounter(0);
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -389,18 +391,18 @@ const Questionary: React.FC = () => {
                       </PassButton>
                     </>
                   ) : (
-                    <LoadingQuestion
-                      style={{
-                        width: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginTop: '2%',
-                      }}
-                    >
-                      <ReactLoading type="spin" color="#d1d1d1" width={40} />
-                      <p>Carregando questão</p>
-                    </LoadingQuestion>
-                  )}
+                      <LoadingQuestion
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginTop: '2%',
+                        }}
+                      >
+                        <ReactLoading type="spin" color="#d1d1d1" width={40} />
+                        <p>Carregando questão</p>
+                      </LoadingQuestion>
+                    )}
                 </QuestionHeader>
                 {question.QuestionType !== 'normal' && !answering && !passing && (
                   <QuestionContentContainer>
@@ -434,10 +436,16 @@ const Questionary: React.FC = () => {
                       </FormContent>
                     </Form>
                     <Hint>
-                      {caracterCounter >= 0 && question.QuestionTitle !== '' && (
+                      {caracterCounter > 0 && question.QuestionTitle !== '' && (
                         <>
                           Faltam <strong>{caracterCounter}</strong> caracteres
                           em sua resposta
+                        </>
+                      )}
+                      {caracterCounter === 0 && question.QuestionTitle !== '' && (
+                        <>
+                          Falta <strong>{caracterCounter}</strong> caracter em
+                          sua resposta
                         </>
                       )}
                       {caracterCounter < 0 && (
@@ -447,8 +455,8 @@ const Questionary: React.FC = () => {
                   </Answer>
                 </>
               ) : (
-                <ReactLoading color="#000" type="balls" />
-              )}
+                  <ReactLoading color="#000" type="balls" />
+                )}
             </QuestionOverlay>
           </QuestionContainer>
           <RankContainer>

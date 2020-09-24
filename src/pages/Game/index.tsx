@@ -129,7 +129,7 @@ const Game: React.FC = () => {
                     <StyledInput
                       name="teamName"
                       icon={FiUser}
-                      placeholder="E-mail"
+                      placeholder="Usuário"
                       style={{ width: 300 }}
                     />
                     <StyledInput
