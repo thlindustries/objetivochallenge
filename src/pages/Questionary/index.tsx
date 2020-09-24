@@ -378,11 +378,10 @@ const Questionary: React.FC = () => {
                       </StyledTooltip>
                     </HintButton>
                   )}
+
+                  <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
                   {question.QuestionTitle !== '' && !passing ? (
                     <>
-                      <p>
-                        {`${question.QuestionId}- ${question.QuestionTitle}`}
-                      </p>
                       <PassButton onClick={handleConfirm}>
                         <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
                           <FiCornerUpRight size={40} />
