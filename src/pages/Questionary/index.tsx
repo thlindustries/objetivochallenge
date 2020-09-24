@@ -378,7 +378,6 @@ const Questionary: React.FC = () => {
                       </StyledTooltip>
                     </HintButton>
                   )}
-
                   <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
                   {question.QuestionTitle !== '' && !passing ? (
                     <>
@@ -390,20 +389,21 @@ const Questionary: React.FC = () => {
                       </PassButton>
                     </>
                   ) : (
-                      <LoadingQuestion
-                        style={{
-                          width: '100%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          marginTop: '2%',
-                        }}
-                      >
-                        <ReactLoading type="spin" color="#d1d1d1" width={40} />
-                        <p>Carregando questão</p>
-                      </LoadingQuestion>
+                      <PassButton>
+                        <LoadingQuestion
+                          style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginTop: '2%',
+                          }}
+                        >
+                          <ReactLoading type="spin" color="#d1d1d1" width={40} />
+                        </LoadingQuestion>
+                      </PassButton>
                     )}
                 </QuestionHeader>
-                {question.QuestionType !== 'normal' && !answering && !passing && (
+                {question.QuestionType !== 'normal' && (
                   <QuestionContentContainer>
                     <QuestionContent
                       type={question.QuestionType}
