@@ -26,8 +26,6 @@ export const TContainer = styled.div`
 
   padding: 18px;
 
-  /* background: rgba(0, 0, 0, 0.3); */
-
   animation: ${loadFromTransparent} 1.4s;
 `;
 
@@ -44,8 +42,6 @@ export const CircleContent = styled(Card) <Test>`
   position: relative;
 
   margin-left: 16em;
-
-  border: solid 1px #000;
 
   ${(props) =>
     props.load
@@ -68,8 +64,6 @@ export const FormContainer = styled.div`
 
   text-align: center;
 
-  /* animation: ${bringFromLeft} 1s; */
-
   a {
     font-family: 'Poppins';
     text-decoration: none;
@@ -77,7 +71,7 @@ export const FormContainer = styled.div`
 
     transition: color 0.3s;
 
-    &:hover{
+    &:hover {
       color: ${shade(0.4, '#fff')};
     }
   }
