@@ -61,7 +61,7 @@ export const Body = styled.div`
 
   padding: 8px;
 
-  box-shadow: 0 0 10px inset;
+  /* box-shadow: 0 0 10px inset; */
 `;
 
 export const Item = styled.div<ItemProps>`

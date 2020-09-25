@@ -117,6 +117,25 @@ const Questionary: React.FC = () => {
     );
   }, [sWs]);
 
+  const sendId = useCallback(() => {
+    sWs.current?.send(
+      JSON.stringify({
+        action: 'onMessage',
+        type: 'updateconnectionid',
+        userId: user.UserId,
+        teamId: user.UserTeamId,
+      }),
+    );
+  }, [user.UserId, user.UserTeamId]);
+
+  const reOpenConnection = useCallback(() => {
+    sWs.current = new WebSocket(ENDPOINT);
+    sWs.current.onopen = (event) => {
+      sendId();
+      ping();
+    };
+  }, [ping, sendId]);
+
   // const sendMessage = useCallback(
   //   (userName: string, teamId: string, message: string) => {
   //     if (userName !== '' && teamId !== '' && message !== '') {
@@ -148,14 +167,7 @@ const Questionary: React.FC = () => {
   useEffect(() => {
     sWs.current = new WebSocket(ENDPOINT);
     sWs.current.onopen = (event) => {
-      sWs.current?.send(
-        JSON.stringify({
-          action: 'onMessage',
-          type: 'updateconnectionid',
-          userId: user.UserId,
-          teamId: user.UserTeamId,
-        }),
-      );
+      sendId();
       setInterval(() => {
         if (sWs !== undefined) {
           ping();
@@ -164,6 +176,12 @@ const Questionary: React.FC = () => {
 
       if (sWs.current !== undefined) {
         getRanking();
+        if (sWs !== undefined) {
+          sWs.current.onerror = (err) => {
+            sWs.current?.close();
+            reOpenConnection();
+          };
+        }
         sWs.current.onmessage = (e) => {
           if (e.data.includes('TeamPoints')) {
             setWsResponse(e.data);
@@ -209,7 +227,9 @@ const Questionary: React.FC = () => {
     getCurrentQuestionByTeamId,
     getRanking,
     ping,
+    reOpenConnection,
     sWs,
+    sendId,
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,

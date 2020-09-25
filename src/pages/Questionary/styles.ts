@@ -32,7 +32,7 @@ export const FirstRowContainer = styled.div`
   padding: 16px;
 
   width: 100vw;
-  height: 80vh;
+  height: 88vh;
 `;
 
 export const LogoutButton = styled.p`
@@ -125,7 +125,7 @@ export const QuestionHeader = styled.div`
     font-family: 'Kumbh Sans';
     font-weight: 500;
 
-    text-align: center;
+    text-align: left;
   }
 
   @media (max-width: 700px) {
@@ -186,9 +186,9 @@ export const QuestionContentContainer = styled.div`
 
   padding: 12px;
 
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.01);
   border-radius: 12px;
-  box-shadow: 0 0 10px inset;
+  /* box-shadow: 0 0 10px inset; */
 
   @media (max-width: 700px) {
     overflow: hidden;
