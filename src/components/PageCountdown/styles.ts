@@ -2,6 +2,7 @@ import styled, { keyframes, css } from 'styled-components';
 
 interface CountDownProps {
   background: boolean;
+  from?: boolean;
 }
 
 export const Container = styled.div`
@@ -32,6 +33,21 @@ export const TimerSection = styled.section<CountDownProps>`
     props.background === false &&
     css`
       background: none;
+    `}
+
+  ${(props) =>
+    props.from &&
+    css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 80px;
+      width: 50%;
+
+      span {
+        margin-top: 0px !important;
+      }
     `}
 
   border-radius: 8px;

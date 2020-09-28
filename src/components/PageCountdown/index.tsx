@@ -9,12 +9,14 @@ import {
 } from './styles';
 
 interface CountDownProps {
-  date: number;
+  to: number;
+  from?: number;
   background?: boolean;
 }
 
 const PageCountdown: React.FC<CountDownProps> = ({
-  date,
+  to,
+  from,
   background = true,
 }) => {
   const [timerDays, setDays] = useState('00');
@@ -28,13 +30,14 @@ const PageCountdown: React.FC<CountDownProps> = ({
       current: number;
     }>;
   }
+
   const interval: UserefProps | MutableRefObject<number | undefined> = useRef();
 
   useEffect(() => {
-    setLocalStorageDate(date);
+    setLocalStorageDate(to);
 
     interval.current = setInterval(() => {
-      const now = new Date().getTime();
+      const now = from || new Date().getTime();
       const distance = localStorageDate - now;
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -60,40 +63,48 @@ const PageCountdown: React.FC<CountDownProps> = ({
     return () => {
       clearInterval(interval.current);
     };
-  }, [date, localStorageDate]);
+  }, [from, localStorageDate, to]);
 
   return (
     <Container>
-      <TimerSection background={background}>
+      <TimerSection from={!!from} background={background}>
         <NumberSection>
           <Number>{timerDays}</Number>
-          <p>
-            <small>Dias</small>
-          </p>
+          {!from && (
+            <p>
+              <small>Dias</small>
+            </p>
+          )}
         </NumberSection>
         <Divisor>:</Divisor>
 
         <NumberSection>
           <Number>{timerHours}</Number>
-          <p>
-            <small>Horas</small>
-          </p>
+          {!from && (
+            <p>
+              <small>Horas</small>
+            </p>
+          )}
         </NumberSection>
         <Divisor>:</Divisor>
 
         <NumberSection>
           <Number>{timerMinutes}</Number>
-          <p>
-            <small>Minutos</small>
-          </p>
+          {!from && (
+            <p>
+              <small>Minutos</small>
+            </p>
+          )}
         </NumberSection>
         <Divisor>:</Divisor>
 
         <NumberSection>
           <Number>{timerSeconds}</Number>
-          <p>
-            <small>Segundos</small>
-          </p>
+          {!from && (
+            <p>
+              <small>Segundos</small>
+            </p>
+          )}
         </NumberSection>
       </TimerSection>
     </Container>

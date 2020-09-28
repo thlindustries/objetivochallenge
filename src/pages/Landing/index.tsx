@@ -48,7 +48,7 @@ const Landing: React.FC = () => {
 
           <CountButton>
             <CountDownContainer>
-              <Countdown background={false} date={countDownDate} />
+              <Countdown background={false} to={countDownDate} />
             </CountDownContainer>
             <ButtonsContainer>
               <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">

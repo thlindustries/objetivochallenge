@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   Container,
   Logo,
+  StyledCountDown,
   LogoContent,
   LogoOptions,
   HomeOption,
@@ -25,6 +26,9 @@ const Header: React.FC<HeaderProps> = ({
   children,
 }) => {
   const { user } = useAuth();
+  const countDownFromDate = new Date(2020, 9, 10, 9, 0, 0, 0);
+  const countDownToDate = new Date(2020, 9, 11, 21, 0, 0, 0);
+
   // const handleChangeTab = useCallback((selectedTab: string) => {
   //   setTab(selectedTab);
   //   console.log(selectedTab);
@@ -34,6 +38,11 @@ const Header: React.FC<HeaderProps> = ({
     <Container>
       <LogoContent>
         <Logo src={objLogo} alt="objlogo"></Logo>
+        <StyledCountDown
+          background={false}
+          to={countDownToDate.getTime()}
+          from={countDownFromDate.getTime()}
+        />
         <LogoOptions>
           {user && <HomeOption tab={selectedTab}>{user.UserName}</HomeOption>}
           {!user && (

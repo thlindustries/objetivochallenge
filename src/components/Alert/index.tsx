@@ -56,7 +56,7 @@ const Alert: React.FC<AlertProps> = ({
       if (data.error !== '') {
         setIsSending(true);
         Axios.post(
-          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/reporterrorquestion',
+          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/reporterrorquestion',
           {
             UserId: user.UserId,
             TeamId: user.UserTeamId,

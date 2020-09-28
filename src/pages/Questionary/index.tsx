@@ -244,6 +244,7 @@ const Questionary: React.FC = () => {
   }, [addToast]);
 
   const handlePassQuestion = useCallback(() => {
+    setCaracterCounter(0);
     setConfirm(!confirm);
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
@@ -266,7 +267,6 @@ const Questionary: React.FC = () => {
             type: 'refreshranking',
           }),
         );
-        setCaracterCounter(0);
       }
     });
   }, [confirm, question.QuestionId, sWs, user.UserId, user.UserTeamId]);
@@ -285,7 +285,10 @@ const Questionary: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+
+        setCaracterCounter(0);
         setIsAnswering(true);
+
         Axios.post<AnswerQuestion>(
           'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/answerquestion',
           {
@@ -321,7 +324,6 @@ const Questionary: React.FC = () => {
             });
           }
           setIsAnswering(false);
-          setCaracterCounter(0);
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -455,18 +457,27 @@ const Questionary: React.FC = () => {
                       </FormContent>
                     </Form>
                     <Hint>
-                      {caracterCounter > 0 && question.QuestionTitle !== '' && (
+                      {caracterCounter > 1 && question.QuestionTitle !== '' && (
                         <>
                           Faltam <strong>{caracterCounter}</strong> caracteres
                           em sua resposta
                         </>
                       )}
-                      {caracterCounter === 0 && question.QuestionTitle !== '' && (
+
+                      {caracterCounter === 1 && (
                         <>
-                          Falta <strong>{caracterCounter}</strong> caracter em
+                          Falta <strong>{caracterCounter}</strong> caractere em
                           sua resposta
                         </>
                       )}
+
+                      {caracterCounter === 0 && (
+                        <>
+                          Falta <strong>{caracterCounter}</strong> caractere em
+                          sua resposta
+                        </>
+                      )}
+
                       {caracterCounter < 0 && (
                         <strong>Sua resposta excedeu os caracteres</strong>
                       )}

@@ -47,7 +47,7 @@ const Ranking: React.FC<RankingProps> = ({ children, content }) => {
               key={item.TeamName}
             >
               <QuestionPoints>
-                <h3>{`${index + 1}° ${item.TeamName}`}</h3>
+                <h3>{`${index + 1}° - ${item.TeamName}`}</h3>
                 <strong>{`Questão ${item.TeamCurrentQuestionId}`}</strong>
               </QuestionPoints>
               {user.TeamName === item.TeamName && (

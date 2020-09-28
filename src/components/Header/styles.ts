@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
-import { loadLogo } from './animations';
+
+import CountDown from '../PageCountdown';
 
 interface HeaderProps {
   tab?: string;
@@ -17,11 +18,9 @@ export const Container = styled.header`
   padding: 0 128px;
 
   display: flex;
-
-
-
-  /* animation: ${loadLogo} 1.4s; */
 `;
+
+export const StyledCountDown = styled(CountDown)``;
 
 export const LogoContent = styled.div`
   width: 100%;

@@ -81,7 +81,7 @@ export const Item = styled.div<ItemProps>`
 
   border-radius: 12px;
   box-shadow: 0 0 4px #000;
-  background: #e3e3e3;
+  background: #f6f6f6;
 
   img {
     width: 50px;
@@ -99,6 +99,7 @@ export const Item = styled.div<ItemProps>`
     css`
       animation: ${EarnPoints} 1s;
       border: solid 2px rgb(251, 124, 31);
+      background: #fff0d5;
     `};
 
   &:hover {
@@ -129,7 +130,7 @@ export const QuestionPoints = styled.div`
   }
 
   strong {
-    font-size: 10px;
+    font-size: 14px;
     width: 100%;
   }
 
