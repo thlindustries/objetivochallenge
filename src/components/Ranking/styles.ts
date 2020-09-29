@@ -19,6 +19,10 @@ export const Container = styled.div`
   padding: 8px;
 
   overflow: scroll;
+
+  @media (max-width: 700px) {
+    padding: 0px;
+  }
 `;
 
 export const Content = styled.div`
@@ -134,9 +138,17 @@ export const QuestionPoints = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 790px) {
     h3 {
       font-size: 14px;
+
+      white-space: nowrap;
+      width: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    h3:hover {
+      overflow: visible;
     }
 
     strong {

@@ -265,6 +265,7 @@ const Questionary: React.FC = () => {
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
       setCaracterCounter(0);
+      setRememberAnswer('');
       if (response.data.nextQuestion.QuestionId) {
         setIsPassing(false);
         setConfirm(!confirm);

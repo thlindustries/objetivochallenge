@@ -25,7 +25,6 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
       {type === 'video' && (
         <StyledVimeo
           video={url || ' '}
-          width={400}
           onPause={(info) => showCurrentTime(info)}
           onEnd={(info) => handleEndVideo(info)}
           onTimeUpdate={(info) => handleProgressVideo(info)}

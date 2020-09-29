@@ -125,7 +125,7 @@ export const QuestionHeader = styled.div`
     font-family: 'Kumbh Sans';
     font-weight: 500;
 
-    text-align: left;
+    text-align: justify;
   }
 
   @media (max-width: 700px) {
@@ -133,7 +133,7 @@ export const QuestionHeader = styled.div`
     padding: 0 12px;
 
     p {
-      text-align: left;
+      text-align: justify;
       font-size: 16px;
     }
   }
@@ -207,6 +207,8 @@ export const Answer = styled.div`
     width: 100%;
 
     justify-content: space-around;
+
+    font-size: 12px;
   }
 `;
 
