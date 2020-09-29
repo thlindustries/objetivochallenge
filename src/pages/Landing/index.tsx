@@ -60,7 +60,7 @@ const Landing: React.FC = () => {
               <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
                 <ButtonSubscribe type="submit">Inscrever-se</ButtonSubscribe>
               </form>
-              <ButtonSubscribe onClick={handleTest}>
+              <ButtonSubscribe enabled={!isLogging} onClick={handleTest}>
                 {isLogging ? <ReactLoading /> : 'Testar'}
               </ButtonSubscribe>
             </ButtonsContainer>
