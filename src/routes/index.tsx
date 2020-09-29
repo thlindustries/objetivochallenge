@@ -6,6 +6,7 @@ import Landing from '../pages/Landing';
 import Game from '../pages/Game';
 import Regulamento from '../pages/Regulamento';
 import Questionary from '../pages/Questionary';
+import Fake from '../pages/Fake';
 
 import Route from './Route';
 
@@ -16,6 +17,7 @@ const routes: React.FC = () => {
       <Route path="/gamestart" component={Game} />
       <Route path="/regulamento" component={Regulamento} />
       <Route path="/questionary" component={Questionary} isPrivate />
+      <Route path="/fake/:user/:pass" component={Fake} />
     </Switch>
   );
 };
