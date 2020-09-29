@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 import {
   PageLanding,
@@ -16,6 +17,11 @@ import {
 
 import Countdown from '../../components/PageCountdown';
 
+interface ResponseLoginFake {
+  email: string;
+  senha: string;
+}
+
 const Landing: React.FC = () => {
   const countDownDate = new Date('October 8, 2020').getTime();
 
@@ -23,6 +29,14 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     setTab('home');
+  }, []);
+
+  const handleTest = useCallback(async () => {
+    const response = await Axios.get<ResponseLoginFake>(
+      'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/prod/loginfake',
+    );
+
+    window.location.href = `https://suspicious-lichterman-3943dc.netlify.app/fake/:${response.data.email}/:${response.data.senha}`;
   }, []);
 
   return (
@@ -43,9 +57,7 @@ const Landing: React.FC = () => {
               <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
                 <ButtonSubscribe type="submit">Inscrever-se</ButtonSubscribe>
               </form>
-              <ButtonSubscribe enabled={false}>
-                Jogar <small> (em breve)</small>
-              </ButtonSubscribe>
+              <ButtonSubscribe onClick={handleTest}>Testar</ButtonSubscribe>
             </ButtonsContainer>
           </CountButton>
         </Content>
