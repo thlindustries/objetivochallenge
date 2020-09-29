@@ -75,6 +75,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@Challenge:user');
 
     setData({} as UserLoginData);
+
+    window.location.href = 'https://www.challengeobjetivo.com/';
   }, []);
 
   const updateUser = useCallback(

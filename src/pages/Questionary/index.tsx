@@ -47,6 +47,7 @@ import Alert from '../../components/Alert';
 import Confirm from '../../components/Confirm';
 import QuestionContent from '../../components/QuestionContent';
 import Ranking from '../../components/Ranking';
+import FinalComponent from '../../components/FinalComponent';
 
 interface Question {
   QuestionId: string;
@@ -76,6 +77,9 @@ const Questionary: React.FC = () => {
   const { addMessage, clearMessages } = useChat();
 
   const [caracterCounter, setCaracterCounter] = useState(0);
+  const [rememberAnswer, setRememberAnswer] = useState('');
+  const [verifyPing, setVerifyPing] = useState('pong');
+
   const [passing, setIsPassing] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [answering, setIsAnswering] = useState(false);
@@ -108,15 +112,6 @@ const Questionary: React.FC = () => {
     );
   }, [sWs]);
 
-  const ping = useCallback(() => {
-    sWs.current?.send(
-      JSON.stringify({
-        action: 'onMessage',
-        type: 'ping',
-      }),
-    );
-  }, [sWs]);
-
   const sendId = useCallback(() => {
     sWs.current?.send(
       JSON.stringify({
@@ -129,12 +124,28 @@ const Questionary: React.FC = () => {
   }, [user.UserId, user.UserTeamId]);
 
   const reOpenConnection = useCallback(() => {
+    console.log('reabriu a conexao');
     sWs.current = new WebSocket(ENDPOINT);
     sWs.current.onopen = (event) => {
       sendId();
-      ping();
     };
-  }, [ping, sendId]);
+  }, [sendId]);
+
+  const ping = useCallback(() => {
+    // console.log(`---->${verifyPing}`);
+    // if (verifyPing !== 'pong') {
+    //   reOpenConnection();
+    // } else {
+    //   setVerifyPing('');
+
+    // }
+    sWs.current?.send(
+      JSON.stringify({
+        action: 'onMessage',
+        type: 'ping',
+      }),
+    );
+  }, []);
 
   // const sendMessage = useCallback(
   //   (userName: string, teamId: string, message: string) => {
@@ -183,6 +194,10 @@ const Questionary: React.FC = () => {
           };
         }
         sWs.current.onmessage = (e) => {
+          if (e.data.includes('pong')) {
+            setVerifyPing(e.data);
+          }
+
           if (e.data.includes('TeamPoints')) {
             setWsResponse(e.data);
           }
@@ -233,6 +248,7 @@ const Questionary: React.FC = () => {
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,
+    verifyPing,
   ]);
 
   const handleShowHint = useCallback(() => {
@@ -244,11 +260,11 @@ const Questionary: React.FC = () => {
   }, [addToast]);
 
   const handlePassQuestion = useCallback(() => {
-    setCaracterCounter(0);
     setConfirm(!confirm);
     Axios.get<NextQuestion>(
       `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
+      setCaracterCounter(0);
       if (response.data.nextQuestion.QuestionId) {
         setIsPassing(false);
         setConfirm(!confirm);
@@ -286,7 +302,6 @@ const Questionary: React.FC = () => {
           abortEarly: false,
         });
 
-        setCaracterCounter(0);
         setIsAnswering(true);
 
         Axios.post<AnswerQuestion>(
@@ -299,6 +314,9 @@ const Questionary: React.FC = () => {
           },
         ).then((response) => {
           if (response.data.isCorrect) {
+            setCaracterCounter(0);
+            setRememberAnswer('');
+
             formRef.current?.clearField('answer');
             setQuestion(response.data.nextQuestion);
 
@@ -351,6 +369,7 @@ const Questionary: React.FC = () => {
 
   const handleCaracterChange = useCallback(
     (e) => {
+      setRememberAnswer(e.target.value);
       const counter: String = e.target.value;
       const questionCounter = parseInt(
         question.QuestionAnswerCharacterCounter,
@@ -388,119 +407,145 @@ const Questionary: React.FC = () => {
         </LogoutButton>
       </Header>
       <Container>
-        <FirstRowContainer>
-          <QuestionContainer>
-            <QuestionOverlay>
-              <Question>
-                <QuestionHeader>
-                  {question.QuestionHints !== ' ' && !passing && (
-                    <HintButton onClick={handleShowHint}>
-                      <StyledTooltip type="hint" title={question.QuestionHints}>
-                        <FaLightbulb size={40} />
-                      </StyledTooltip>
-                    </HintButton>
-                  )}
-                  <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
-                  {question.QuestionTitle !== '' && !passing ? (
-                    <>
-                      <PassButton onClick={handleConfirm}>
-                        <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
-                          <FiCornerUpRight size={40} />
-                          <h5>Pular</h5>
-                        </StyledTooltip>
-                      </PassButton>
-                    </>
-                  ) : (
-                      <PassButton>
-                        <LoadingQuestion
-                          style={{
-                            width: '100%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginTop: '2%',
-                          }}
+        {question.QuestionType !== 'final' && (
+          <FirstRowContainer>
+            <QuestionContainer>
+              <QuestionOverlay>
+                <Question>
+                  <QuestionHeader>
+                    {question.QuestionHints !== ' ' && !passing && (
+                      <HintButton onClick={handleShowHint}>
+                        <StyledTooltip
+                          type="hint"
+                          title={question.QuestionHints}
                         >
-                          <ReactLoading type="spin" color="#d1d1d1" width={40} />
-                        </LoadingQuestion>
-                      </PassButton>
+                          <FaLightbulb size={40} />
+                        </StyledTooltip>
+                      </HintButton>
                     )}
-                </QuestionHeader>
-                {question.QuestionType !== 'normal' && (
-                  <QuestionContentContainer>
-                    <QuestionContent
-                      type={question.QuestionType}
-                      url={question.QuestionUrl}
-                    />
-                  </QuestionContentContainer>
-                )}
-              </Question>
-              {!answering && !passing ? (
-                <>
-                  <Answer>
-                    <Form ref={formRef} onSubmit={handleAnswer}>
-                      <FormContent>
-                        <ReportErrorButton onClick={handleReportError}>
-                          <FiAlertTriangle size={40} />
-                          Reportar um erro
-                        </ReportErrorButton>
-                        <AnswerInput
-                          onChange={(e) => handleCaracterChange(e)}
-                          name="answer"
-                          placeholder="Digite a resposta aqui"
-                          containerStyle={{
-                            width: 700,
-                          }}
-                        />
-                        <AnswerButton type="submit">
-                          <FiPlay size={20} />
-                        </AnswerButton>
-                      </FormContent>
-                    </Form>
-                    <Hint>
-                      {caracterCounter > 1 && question.QuestionTitle !== '' && (
-                        <>
-                          Faltam <strong>{caracterCounter}</strong> caracteres
-                          em sua resposta
-                        </>
+                    <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
+                    {question.QuestionTitle !== '' && !passing ? (
+                      <>
+                        <PassButton onClick={handleConfirm}>
+                          <StyledTooltip title="Atenção: Ao pular a questão não tem mais como voltar !">
+                            <FiCornerUpRight size={40} />
+                            <h5>Pular</h5>
+                          </StyledTooltip>
+                        </PassButton>
+                      </>
+                    ) : (
+                        <PassButton>
+                          <LoadingQuestion
+                            style={{
+                              width: '100%',
+                              display: 'flex',
+                              alignItems: 'center',
+                              marginTop: '2%',
+                            }}
+                          >
+                            <ReactLoading
+                              type="spin"
+                              color="#d1d1d1"
+                              width={40}
+                            />
+                          </LoadingQuestion>
+                        </PassButton>
                       )}
+                  </QuestionHeader>
+                  {question.QuestionType !== 'normal' && (
+                    <QuestionContentContainer>
+                      <QuestionContent
+                        type={question.QuestionType}
+                        url={question.QuestionUrl}
+                      />
+                    </QuestionContentContainer>
+                  )}
+                </Question>
+                {!answering && !passing ? (
+                  <>
+                    <Answer>
+                      <Form ref={formRef} onSubmit={handleAnswer}>
+                        <FormContent>
+                          <ReportErrorButton onClick={handleReportError}>
+                            <FiAlertTriangle size={40} />
+                            Reportar um erro
+                          </ReportErrorButton>
+                          <AnswerInput
+                            onChange={(e) => handleCaracterChange(e)}
+                            name="answer"
+                            placeholder="Digite a resposta aqui"
+                            containerStyle={{
+                              width: 700,
+                            }}
+                            defaultValue={rememberAnswer}
+                          />
+                          <AnswerButton type="submit">
+                            <FiPlay size={20} />
+                          </AnswerButton>
+                        </FormContent>
+                      </Form>
+                      <Hint>
+                        {caracterCounter > 1 && question.QuestionTitle !== '' && (
+                          <>
+                            Faltam <strong>{caracterCounter}</strong> caracteres
+                            em sua resposta
+                          </>
+                        )}
 
-                      {caracterCounter === 1 && (
-                        <>
-                          Falta <strong>{caracterCounter}</strong> caractere em
-                          sua resposta
-                        </>
-                      )}
+                        {caracterCounter === 1 && (
+                          <>
+                            Falta <strong>{caracterCounter}</strong> caractere
+                            em sua resposta
+                          </>
+                        )}
 
-                      {caracterCounter === 0 && (
-                        <>
-                          Falta <strong>{caracterCounter}</strong> caractere em
-                          sua resposta
-                        </>
-                      )}
+                        {caracterCounter === 0 && (
+                          <>
+                            Falta <strong>{caracterCounter}</strong> caractere
+                            em sua resposta
+                          </>
+                        )}
 
-                      {caracterCounter < 0 && (
-                        <strong>Sua resposta excedeu os caracteres</strong>
-                      )}
-                    </Hint>
-                  </Answer>
-                </>
-              ) : (
-                  <ReactLoading color="#000" type="balls" />
-                )}
-            </QuestionOverlay>
-          </QuestionContainer>
-          <RankContainer>
-            <Ranking
-              content={
-                wsResponse !== '' &&
-                wsResponse !== 'pong' &&
-                JSON.parse(wsResponse)
-              }
-            >
-              <br />
-            </Ranking>
-          </RankContainer>
-        </FirstRowContainer>
+                        {caracterCounter < 0 && (
+                          <strong>Sua resposta excedeu os caracteres</strong>
+                        )}
+                      </Hint>
+                    </Answer>
+                  </>
+                ) : (
+                    <ReactLoading color="#000" type="balls" />
+                  )}
+              </QuestionOverlay>
+            </QuestionContainer>
+            <RankContainer>
+              <Ranking
+                content={
+                  wsResponse !== '' &&
+                  wsResponse !== 'pong' &&
+                  JSON.parse(wsResponse)
+                }
+              >
+                <br />
+              </Ranking>
+            </RankContainer>
+          </FirstRowContainer>
+        )}
+        {question.QuestionType === 'final' && (
+          <>
+            <FinalComponent text={question.QuestionTitle}>
+              <Ranking
+                content={
+                  wsResponse !== '' &&
+                  wsResponse !== 'pong' &&
+                  JSON.parse(wsResponse)
+                }
+              >
+                <br />
+              </Ranking>
+            </FinalComponent>
+          </>
+        )}
+
         {/* <SecondRowContainer enabled={false}>
           <VideoCards>
             <VideoCard></VideoCard>
