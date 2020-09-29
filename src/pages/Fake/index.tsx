@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useAuth } from '../../hooks/auth';
 
@@ -13,7 +13,9 @@ const Fake: React.FC = () => {
   const { signIn } = useAuth();
   const { user, pass } = useParams() as ReqParams;
 
-  signIn({ email: user, password: pass });
+  useEffect(() => {
+    signIn({ email: user, password: pass });
+  }, [pass, signIn, user]);
 
   return <div></div>;
 };
