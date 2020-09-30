@@ -87,7 +87,15 @@ const Questionary: React.FC = () => {
 
   const [wsResponse, setWsResponse] = useState('');
 
-  const ENDPOINT = 'wss://admv564mu8.execute-api.sa-east-1.amazonaws.com/dev';
+  const ENDPOINT_WS =
+    user.UserProfile === 'Fundamental'
+      ? (process.env.REACT_APP_FUND_WS as string)
+      : (process.env.REACT_APP_DEV_WS as string);
+
+  const ENDPOINT =
+    user.UserProfile === 'Fundamental'
+      ? (process.env.REACT_APP_FUND_API as string)
+      : (process.env.REACT_APP_DEV_API as string);
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -125,11 +133,11 @@ const Questionary: React.FC = () => {
 
   const reOpenConnection = useCallback(() => {
     console.log('reabriu a conexao');
-    sWs.current = new WebSocket(ENDPOINT);
+    sWs.current = new WebSocket(ENDPOINT_WS);
     sWs.current.onopen = (event) => {
       sendId();
     };
-  }, [sendId]);
+  }, [ENDPOINT_WS, sendId]);
 
   const ping = useCallback(() => {
     // console.log(`---->${verifyPing}`);
@@ -166,17 +174,17 @@ const Questionary: React.FC = () => {
 
   const getCurrentQuestionByTeamId = useCallback(async () => {
     Axios.get<Question>(
-      `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
+      `${ENDPOINT}/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       setQuestion(response.data);
       setCaracterCounter(
         parseInt(response.data.QuestionAnswerCharacterCounter, 10),
       );
     });
-  }, [user.UserId, user.UserTeamId]);
+  }, [ENDPOINT, user.UserId, user.UserTeamId]);
 
   useEffect(() => {
-    sWs.current = new WebSocket(ENDPOINT);
+    sWs.current = new WebSocket(ENDPOINT_WS);
     sWs.current.onopen = (event) => {
       sendId();
       setInterval(() => {
@@ -236,6 +244,7 @@ const Questionary: React.FC = () => {
       sWs.current?.close();
     };
   }, [
+    ENDPOINT_WS,
     addMessage,
     addToast,
     clearMessages,
@@ -262,7 +271,7 @@ const Questionary: React.FC = () => {
   const handlePassQuestion = useCallback(() => {
     setConfirm(!confirm);
     Axios.get<NextQuestion>(
-      `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
+      `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
       setCaracterCounter(0);
       setRememberAnswer('');
@@ -286,7 +295,7 @@ const Questionary: React.FC = () => {
         );
       }
     });
-  }, [confirm, question.QuestionId, sWs, user.UserId, user.UserTeamId]);
+  }, [ENDPOINT, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
@@ -305,15 +314,12 @@ const Questionary: React.FC = () => {
 
         setIsAnswering(true);
 
-        Axios.post<AnswerQuestion>(
-          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/answerquestion',
-          {
-            UserId: user.UserId,
-            TeamId: user.UserTeamId,
-            QuestionId: question.QuestionId,
-            QuestionAnswer: data.answer,
-          },
-        ).then((response) => {
+        Axios.post<AnswerQuestion>(`${ENDPOINT}/answerquestion`, {
+          UserId: user.UserId,
+          TeamId: user.UserTeamId,
+          QuestionId: question.QuestionId,
+          QuestionAnswer: data.answer,
+        }).then((response) => {
           if (response.data.isCorrect) {
             setCaracterCounter(0);
             setRememberAnswer('');
@@ -352,7 +358,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [addToast, question.QuestionId, sWs, user.UserId, user.UserTeamId],
+    [ENDPOINT, addToast, question.QuestionId, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {

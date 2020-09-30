@@ -16,7 +16,7 @@ interface CountDownProps {
 
 const PageCountdown: React.FC<CountDownProps> = ({
   to,
-  from,
+  from = 0 as number,
   background = true,
 }) => {
   const [timerDays, setDays] = useState('00');
@@ -67,7 +67,7 @@ const PageCountdown: React.FC<CountDownProps> = ({
 
   return (
     <Container>
-      <TimerSection from={!!from} background={background}>
+      <TimerSection from={from ? true : undefined} background={background}>
         <NumberSection>
           <Number>{timerDays}</Number>
           {!from && (
