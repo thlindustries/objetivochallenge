@@ -48,7 +48,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await Axios.post(
-      `${process.env.REACT_APP_DEV_API}/login`,
+      `https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/login`,
       {
         UserEmail: email,
         UserPassword: password,

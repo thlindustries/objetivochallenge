@@ -15,6 +15,7 @@ const Fake: React.FC = () => {
 
   useEffect(() => {
     signIn({ email: user, password: pass });
+    console.log(user, pass);
   }, [pass, signIn, user]);
 
   return <div></div>;
