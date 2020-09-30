@@ -48,7 +48,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await Axios.post(
-      `${process.env.REACT_APP_DEV_API}/login`,
+      `${process.env.REACT_APP_PROD_API}/login`,
       {
         UserEmail: email,
         UserPassword: password,

@@ -270,6 +270,10 @@ const Questionary: React.FC = () => {
 
   const handlePassQuestion = useCallback(() => {
     setConfirm(!confirm);
+    console.log(
+      `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
+    );
+    console.log(user.UserProfile);
     Axios.get<NextQuestion>(
       `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
@@ -295,10 +299,19 @@ const Questionary: React.FC = () => {
         );
       }
     });
-  }, [ENDPOINT, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
+  }, [
+    ENDPOINT,
+    confirm,
+    question.QuestionId,
+    user.UserId,
+    user.UserProfile,
+    user.UserTeamId,
+  ]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
+      console.log(`${ENDPOINT}/answerquestion`);
+      console.log(user.UserProfile);
       try {
         formRef.current?.setErrors({});
 
@@ -358,7 +371,14 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [ENDPOINT, addToast, question.QuestionId, user.UserId, user.UserTeamId],
+    [
+      ENDPOINT,
+      addToast,
+      question.QuestionId,
+      user.UserId,
+      user.UserProfile,
+      user.UserTeamId,
+    ],
   );
 
   const handleReportError = useCallback(() => {
