@@ -90,12 +90,12 @@ const Questionary: React.FC = () => {
   const ENDPOINT_WS =
     user.UserProfile === 'Fundamental'
       ? (process.env.REACT_APP_FUND_WS as string)
-      : (process.env.REACT_APP_DEV_WS as string);
+      : (process.env.REACT_APP_PROD_WS as string);
 
   const ENDPOINT =
     user.UserProfile === 'Fundamental'
       ? (process.env.REACT_APP_FUND_API as string)
-      : (process.env.REACT_APP_DEV_API as string);
+      : (process.env.REACT_APP_PROD_API as string);
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -184,6 +184,7 @@ const Questionary: React.FC = () => {
   }, [ENDPOINT, user.UserId, user.UserTeamId]);
 
   useEffect(() => {
+    console.log(ENDPOINT_WS);
     sWs.current = new WebSocket(ENDPOINT_WS);
     sWs.current.onopen = (event) => {
       sendId();
