@@ -77,7 +77,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     setData({} as UserLoginData);
 
-    window.location.href = 'https://www.challengeobjetivo.com/';
+    // window.location.href = 'https://www.challengeobjetivo.com/';
   }, []);
 
   const updateUser = useCallback(
