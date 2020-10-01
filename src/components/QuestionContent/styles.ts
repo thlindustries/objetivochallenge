@@ -50,7 +50,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
   background-image: url(${(props) => props.imageUrl});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 
   transition: transform 0.8s;
 
