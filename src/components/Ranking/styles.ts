@@ -138,7 +138,7 @@ export const QuestionPoints = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 790px) {
+  @media (max-width: 1100px) {
     h3 {
       font-size: 14px;
 
