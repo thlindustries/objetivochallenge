@@ -94,6 +94,15 @@ export const Item = styled.div<ItemProps>`
 
   h3 {
     margin-right: auto;
+
+    ${(props) =>
+    props.myTeam &&
+    css`
+        width: 150px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `}
   }
 
   transition: transform 0.8s;
