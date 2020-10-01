@@ -58,9 +58,8 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 300px;
-
-  margin-top: 4%;
+  width: auto;
+  margin-top: 12%;
 
   text-align: center;
 
@@ -94,7 +93,7 @@ export const StyledButton = styled(Button)`
   justify-content: center;
   align-items: center;
 
-  margin-top: 4em;
+  margin-top: 4%;
 
   background: #fb7c1f;
   color: #fff;
