@@ -60,7 +60,7 @@ export const FormContainer = styled.div`
 
   width: 300px;
 
-  margin-top: 6em;
+  margin-top: 4%;
 
   text-align: center;
 

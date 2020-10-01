@@ -185,6 +185,7 @@ const Questionary: React.FC = () => {
 
   useEffect(() => {
     console.log(ENDPOINT_WS);
+    console.log(user);
     sWs.current = new WebSocket(ENDPOINT_WS);
     sWs.current.onopen = (event) => {
       sendId();
@@ -255,6 +256,7 @@ const Questionary: React.FC = () => {
     reOpenConnection,
     sWs,
     sendId,
+    user,
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,

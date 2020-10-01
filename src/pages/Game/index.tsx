@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import chicoLogo from '../../assets/img/chicoLogo3.png';
 
 import {
   PageGame,
@@ -115,7 +115,11 @@ const Game: React.FC = () => {
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (
-            <CircleContent title="Logo do projeto" load={change}>
+            <CircleContent
+              title="Logo do projeto"
+              load={change}
+              logo={chicoLogo}
+            >
               <Content>
                 Divirta-se junto com sua equipe solucionando o desafio do
                 colégio objetivo
@@ -123,7 +127,11 @@ const Game: React.FC = () => {
               <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
             </CircleContent>
           ) : (
-              <CircleContent title="Logo do projeto" load={change}>
+              <CircleContent
+                title="Logo do projeto"
+                load={change}
+                logo={chicoLogo}
+              >
                 <FormContainer>
                   <Form ref={formRef} onSubmit={handleSubmit}>
                     <StyledInput
@@ -141,7 +149,7 @@ const Game: React.FC = () => {
                     <StyledButton enabled={isEnabled} type="submit">
                       {isLogging ? <ReactLoading /> : 'Entrar'}
                     </StyledButton>
-                    <Link to="forgot-password">Esqueci minha senha</Link>
+                    {/* <Link to="forgot-password">Esqueci minha senha</Link> */}
                   </Form>
                 </FormContainer>
               </CircleContent>
