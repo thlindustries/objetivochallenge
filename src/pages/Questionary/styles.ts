@@ -113,7 +113,7 @@ export const QuestionHeader = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px 32px;
+  padding: 10px 12px;
 
   width: 100%;
   margin-bottom: auto;
@@ -197,7 +197,7 @@ export const QuestionContentContainer = styled.div`
 
 export const Answer = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -206,7 +206,7 @@ export const Answer = styled.div`
   @media (max-width: 700px) {
     width: 100%;
 
-    justify-content: space-around;
+    justify-content: space-between;
 
     font-size: 12px;
   }
@@ -218,7 +218,9 @@ export const FormContent = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 700px) {
+  width: 100%;
+
+  @media (max-width: 930px) {
     flex-direction: column;
   }
 `;
@@ -248,7 +250,9 @@ export const ReportErrorButton = styled.p`
   }
 `;
 
-export const AnswerInput = styled(Input)``;
+export const AnswerInput = styled(Input)`
+  width: 400px;
+`;
 
 export const AnswerButton = styled(Button)`
   background: #05a746;
@@ -266,9 +270,9 @@ export const AnswerButton = styled(Button)`
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     width: 60%;
-    margin: 0;
+    margin-left: 0px;
   }
 `;
 
@@ -282,12 +286,11 @@ export const Hint = styled.p`
     color: #eb171e;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-
+    margin-right: 0;
     text-align: center;
 
     margin: 0;

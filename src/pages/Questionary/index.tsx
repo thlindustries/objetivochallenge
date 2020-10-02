@@ -184,8 +184,6 @@ const Questionary: React.FC = () => {
   }, [ENDPOINT, user.UserId, user.UserTeamId]);
 
   useEffect(() => {
-    console.log(ENDPOINT_WS);
-    console.log(user);
     sWs.current = new WebSocket(ENDPOINT_WS);
     sWs.current.onopen = (event) => {
       sendId();
@@ -273,10 +271,6 @@ const Questionary: React.FC = () => {
 
   const handlePassQuestion = useCallback(() => {
     setConfirm(!confirm);
-    console.log(
-      `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
-    );
-    console.log(user.UserProfile);
     Axios.get<NextQuestion>(
       `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
@@ -302,19 +296,10 @@ const Questionary: React.FC = () => {
         );
       }
     });
-  }, [
-    ENDPOINT,
-    confirm,
-    question.QuestionId,
-    user.UserId,
-    user.UserProfile,
-    user.UserTeamId,
-  ]);
+  }, [ENDPOINT, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
 
   const handleAnswer = useCallback(
     async (data: DataFormInfo) => {
-      console.log(`${ENDPOINT}/answerquestion`);
-      console.log(user.UserProfile);
       try {
         formRef.current?.setErrors({});
 
@@ -374,14 +359,7 @@ const Questionary: React.FC = () => {
         }
       }
     },
-    [
-      ENDPOINT,
-      addToast,
-      question.QuestionId,
-      user.UserId,
-      user.UserProfile,
-      user.UserTeamId,
-    ],
+    [ENDPOINT, addToast, question.QuestionId, user.UserId, user.UserTeamId],
   );
 
   const handleReportError = useCallback(() => {
@@ -494,7 +472,11 @@ const Questionary: React.FC = () => {
                 {!answering && !passing ? (
                   <>
                     <Answer>
-                      <Form ref={formRef} onSubmit={handleAnswer}>
+                      <Form
+                        style={{ width: '100%' }}
+                        ref={formRef}
+                        onSubmit={handleAnswer}
+                      >
                         <FormContent>
                           <ReportErrorButton onClick={handleReportError}>
                             <FiAlertTriangle size={40} />
@@ -504,9 +486,6 @@ const Questionary: React.FC = () => {
                             onChange={(e) => handleCaracterChange(e)}
                             name="answer"
                             placeholder="Digite a resposta aqui"
-                            containerStyle={{
-                              width: 700,
-                            }}
                             defaultValue={rememberAnswer}
                           />
                           <AnswerButton type="submit">

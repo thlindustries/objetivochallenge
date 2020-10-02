@@ -70,7 +70,7 @@ export const Body = styled.div`
 
 export const Item = styled.div<ItemProps>`
   width: 100%;
-  height: 15%;
+  height: 20%;
 
   display: flex;
   align-items: center;
@@ -123,6 +123,9 @@ export const Item = styled.div<ItemProps>`
   p {
     text-shadow: 0 0 10px rgb(251, 124, 31);
   }
+  @media (max-width: 1100px) {
+    height: 24%;
+  }
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -152,7 +155,7 @@ export const QuestionPoints = styled.div`
       font-size: 14px;
 
       white-space: nowrap;
-      width: 50px;
+      width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
     }
