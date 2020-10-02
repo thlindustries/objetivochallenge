@@ -86,7 +86,7 @@ export const QuestionOverlay = styled.div`
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 10px #000;
 
-  padding: 32px;
+  padding: 0 10px;
 `;
 
 export const Question = styled.div`
@@ -137,6 +137,10 @@ export const QuestionHeader = styled.div`
       font-size: 16px;
     }
   }
+
+  @media (max-height: 700px) {
+    font-size: 20px;
+  }
 `;
 
 export const LoadingQuestion = styled.div`
@@ -184,7 +188,7 @@ export const QuestionContentContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: 12px;
+  padding: 0 6px;
 
   background: rgba(0, 0, 0, 0.01);
   border-radius: 12px;
@@ -201,7 +205,7 @@ export const Answer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2%;
+  margin-bottom: 4%;
 
   @media (max-width: 700px) {
     width: 100%;
@@ -270,7 +274,7 @@ export const AnswerButton = styled(Button)`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
     width: 60%;
     margin-left: 0px;
   }
@@ -286,7 +290,7 @@ export const Hint = styled.p`
     color: #eb171e;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -385,6 +389,9 @@ export const ChatContainer = styled.div`
 `;
 
 export const StyledTooltip = styled(Tooltip) <TooltipProps>`
+  display: flex;
+  flex-direction: column;
+
   span {
     ${(props) =>
     props.type === 'hint' &&
@@ -392,5 +399,9 @@ export const StyledTooltip = styled(Tooltip) <TooltipProps>`
         background: #0088ff;
         color: #fff;
       `}
+  }
+
+  @media (max-height: 640px) {
+    flex-direction: row;
   }
 `;

@@ -98,7 +98,7 @@ export const Item = styled.div<ItemProps>`
     ${(props) =>
     props.myTeam &&
     css`
-        width: 150px !important;
+        width: 60% !important;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -132,6 +132,9 @@ export const Item = styled.div<ItemProps>`
 
     height: 20%;
   }
+  @media (max-height: 640px) {
+    height: 23%;
+  }
 `;
 
 export const QuestionPoints = styled.div`
@@ -141,8 +144,10 @@ export const QuestionPoints = styled.div`
   margin-left: 4%;
   justify-content: space-between;
 
+  width: 80%;
+
   h3 {
-    width: 100%;
+    width: 80%;
   }
 
   strong {
@@ -154,7 +159,6 @@ export const QuestionPoints = styled.div`
     h3 {
       font-size: 14px;
 
-      white-space: nowrap;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
