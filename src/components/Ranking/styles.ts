@@ -64,13 +64,11 @@ export const Body = styled.div`
   border-radius: 12px;
 
   padding: 8px;
-
-  /* box-shadow: 0 0 10px inset; */
 `;
 
 export const Item = styled.div<ItemProps>`
   width: 100%;
-  height: 20%;
+  height: 15%;
 
   display: flex;
   align-items: center;

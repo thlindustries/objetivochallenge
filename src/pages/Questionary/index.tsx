@@ -420,7 +420,7 @@ const Questionary: React.FC = () => {
             <QuestionContainer>
               <QuestionOverlay>
                 <Question>
-                  <QuestionHeader>
+                  <QuestionHeader normal={question.QuestionType === 'normal'}>
                     {question.QuestionHints !== ' ' && !passing && (
                       <HintButton onClick={handleShowHint}>
                         <StyledTooltip

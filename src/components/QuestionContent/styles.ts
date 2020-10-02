@@ -43,7 +43,7 @@ export const StyledVimeo = styled(Vimeo)``;
 export const ImageContainer = styled.div<ImageContainerProps>`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 80%;
 
   border-radius: 12px;
 

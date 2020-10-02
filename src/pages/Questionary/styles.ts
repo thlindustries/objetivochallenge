@@ -13,6 +13,9 @@ interface TooltipProps {
 interface ChatProps {
   enabled?: boolean;
 }
+interface QuestionHeaderProps {
+  normal?: boolean;
+}
 
 export const PageContent = styled.div`
   width: 100vw;
@@ -108,18 +111,27 @@ export const Question = styled.div`
   margin-bottom: auto;
 `;
 
-export const QuestionHeader = styled.div`
+export const QuestionHeader = styled.div<QuestionHeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px 12px;
+  padding: 10px 16px;
 
-  width: 100%;
+  width: 96%;
   margin-bottom: auto;
 
+  ${(props) =>
+    props.normal &&
+    css`
+      height: 40%;
+      p {
+        margin-top: 2%;
+      }
+    `}
+
   p {
-    width: 80%;
+    width: 94%;
 
     animation: ${loadFromTransparent} 1.2s;
     font-family: 'Kumbh Sans';
