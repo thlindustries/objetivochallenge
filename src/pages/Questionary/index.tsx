@@ -76,7 +76,7 @@ const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addMessage, clearMessages } = useChat();
 
-  const [caracterCounter, setCaracterCounter] = useState(0);
+  const [caracterCounter, setCaracterCounter] = useState(999);
   const [rememberAnswer, setRememberAnswer] = useState('');
   const [verifyPing, setVerifyPing] = useState('pong');
 
@@ -274,7 +274,7 @@ const Questionary: React.FC = () => {
     Axios.get<NextQuestion>(
       `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
-      setCaracterCounter(0);
+      setCaracterCounter(999);
       setRememberAnswer('');
       if (response.data.nextQuestion.QuestionId) {
         setIsPassing(false);
@@ -322,7 +322,7 @@ const Questionary: React.FC = () => {
           QuestionAnswer: data.answer,
         }).then((response) => {
           if (response.data.isCorrect) {
-            setCaracterCounter(0);
+            setCaracterCounter(999);
             setRememberAnswer('');
 
             formRef.current?.clearField('answer');
@@ -494,28 +494,30 @@ const Questionary: React.FC = () => {
                         </FormContent>
                       </Form>
                       <Hint>
-                        {caracterCounter > 1 && question.QuestionTitle !== '' && (
-                          <>
-                            Faltam <strong>{caracterCounter}</strong> caracteres
-                            em sua resposta
-                          </>
-                        )}
+                        {caracterCounter > 1 &&
+                          question.QuestionTitle !== '' &&
+                          caracterCounter < 999 && (
+                            <>
+                              Faltam <strong>{caracterCounter}</strong>{' '}
+                              caracteres em sua resposta
+                            </>
+                          )}
 
-                        {caracterCounter === 1 && (
-                          <>
-                            Falta <strong>{caracterCounter}</strong> caractere
-                            em sua resposta
-                          </>
-                        )}
-
-                        {caracterCounter === 0 && passing && (
+                        {caracterCounter === 1 && caracterCounter < 999 && (
                           <>
                             Falta <strong>{caracterCounter}</strong> caractere
                             em sua resposta
                           </>
                         )}
 
-                        {caracterCounter < 0 && (
+                        {caracterCounter === 0 && caracterCounter < 999 && (
+                          <>
+                            Falta <strong>{caracterCounter}</strong> caractere
+                            em sua resposta
+                          </>
+                        )}
+
+                        {caracterCounter < 0 && caracterCounter < 999 && (
                           <strong>Sua resposta excedeu os caracteres</strong>
                         )}
                       </Hint>
