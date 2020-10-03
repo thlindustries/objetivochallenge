@@ -508,7 +508,7 @@ const Questionary: React.FC = () => {
                           </>
                         )}
 
-                        {caracterCounter === 0 && (
+                        {caracterCounter === 0 && passing && (
                           <>
                             Falta <strong>{caracterCounter}</strong> caractere
                             em sua resposta

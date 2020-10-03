@@ -55,9 +55,7 @@ const Game: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          teamName: Yup.string()
-            .required('Nome do time obrigatório')
-            .email('Digite um nome de time válido'),
+          teamName: Yup.string().required('Nome do time obrigatório'),
           password: Yup.string().required('Senha obrigatória'),
         });
 
