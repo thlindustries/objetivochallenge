@@ -19,6 +19,7 @@ const EndGame: React.FC = () => {
           color: {
             value: '#2e2e2e',
           },
+          opacity: 0.4,
         },
         fpsLimit: 60,
         interactivity: {

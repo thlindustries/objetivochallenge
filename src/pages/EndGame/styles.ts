@@ -28,12 +28,13 @@ export const EndGameMessageContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  background: rgba(255, 255, 255, 0.8);
+  background: rgb(251, 124, 31);
 
   border-radius: 6px;
 
   width: 70%;
   height: 70%;
+  padding: 16px;
 
   margin-top: 2%;
 
@@ -76,6 +77,18 @@ export const EndGameMessageContainer = styled.div`
       }
     }
   }
+`;
+
+export const OrangeContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 1);
+  border-radius: 6px;
 `;
 
 export const StyledParticles = styled(Particles)`

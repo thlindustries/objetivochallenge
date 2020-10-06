@@ -438,7 +438,7 @@ const Questionary: React.FC = () => {
                     )}
                     <p style={{ whiteSpace: 'pre-line' }}>
                       {`${question.QuestionId}- `}
-                      {question.QuestionTitle.replace('<br/>', '\n')}
+                      {question.QuestionTitle.replaceAll('<br/>', '\n')}
                     </p>
                     {question.QuestionTitle !== '' && !passing ? (
                       <>
