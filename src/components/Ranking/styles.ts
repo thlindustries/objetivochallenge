@@ -96,7 +96,7 @@ export const Item = styled.div<ItemProps>`
     ${(props) =>
     props.myTeam &&
     css`
-        width: 60% !important;
+        width: 80% !important;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -145,7 +145,10 @@ export const QuestionPoints = styled.div`
   width: 80%;
 
   h3 {
-    width: 80%;
+    width: 80% !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   strong {

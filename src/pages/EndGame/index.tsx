@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../hooks/auth';
+import chicoLogo from '../../assets/img/chicoLogo3.png';
 
 import {
   Container,
@@ -20,9 +21,11 @@ const EndGame: React.FC = () => {
         </h1>
         <EndGameMessageContainer>
           <OrangeContainer>
+            <img src={chicoLogo} alt="" />
             <h2>
               Parabéns <strong>{user.UserName}</strong>
             </h2>
+
             <span>
               <p>
                 Agradecemos a todos do time <strong>{user.TeamName}</strong> por

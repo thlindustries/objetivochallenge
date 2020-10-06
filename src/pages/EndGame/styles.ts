@@ -21,6 +21,12 @@ export const Container = styled.div`
       color: rgb(251, 124, 31);
     }
   }
+
+  @media (max-width: 1100px) {
+    h1 {
+      font-size: 64px;
+    }
+  }
 `;
 
 export const EndGameMessageContainer = styled.div`
@@ -73,8 +79,14 @@ export const EndGameMessageContainer = styled.div`
       color: #666666;
 
       strong {
-        color: #fff;
+        color: #0055ff;
       }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    h2 {
+      font-size: 48px;
     }
   }
 `;
@@ -86,9 +98,23 @@ export const OrangeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   background: rgba(255, 255, 255, 1);
   border-radius: 6px;
+
+  img {
+    width: 30%;
+    margin-top: 4%;
+    margin-bottom: 2%;
+  }
+  @media (max-width: 1500px) {
+    span {
+      p {
+        font-size: 32px;
+      }
+    }
+  }
 `;
 
 export const StyledParticles = styled(Particles)`
