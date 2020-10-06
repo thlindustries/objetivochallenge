@@ -17,7 +17,9 @@ const FinalComponent: React.FC<FinalProps> = ({ children, text, endgame }) => {
     <Container>
       <MessageContainer>
         <MessageContent>
-          <p>{text?.replaceAll('<br/>', '\n')}</p>
+          <p style={{ whiteSpace: 'pre-line' }}>
+            {text?.replaceAll('<br/>', '\n')}
+          </p>
         </MessageContent>
       </MessageContainer>
       {!endgame && <RankContainer>{children && children}</RankContainer>}

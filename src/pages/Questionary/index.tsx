@@ -236,7 +236,7 @@ const Questionary: React.FC = () => {
             addToast({
               title: 'Alerta',
               description: 'Sua equipe pulou a questão',
-              type: 'success',
+              type: 'info',
             });
           }
         };

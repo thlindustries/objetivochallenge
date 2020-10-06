@@ -138,6 +138,8 @@ export const QuestionHeader = styled.div<QuestionHeaderProps>`
     font-weight: 500;
 
     text-align: justify;
+
+    margin-top: 3.6%;
   }
 
   @media (max-width: 700px) {
