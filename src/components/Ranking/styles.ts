@@ -113,6 +113,17 @@ export const Item = styled.div<ItemProps>`
       background: #fff0d5;
     `};
 
+  ${(props) =>
+    !props.myTeam &&
+    css`
+      h3 {
+        width: 98% !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    `}
+
   &:hover {
     /* cursor: pointer; */
     transform: scaleY(1.09) scaleX(1.09);
@@ -143,13 +154,6 @@ export const QuestionPoints = styled.div`
   justify-content: space-between;
 
   width: 80%;
-
-  h3 {
-    width: 80% !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   strong {
     font-size: 14px;

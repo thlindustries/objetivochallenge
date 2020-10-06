@@ -17,7 +17,7 @@ const FinalComponent: React.FC<FinalProps> = ({ children, text, endgame }) => {
     <Container>
       <MessageContainer>
         <MessageContent>
-          <p>{text}</p>
+          <p>{text?.replaceAll('<br/>', '\n')}</p>
         </MessageContent>
       </MessageContainer>
       {!endgame && <RankContainer>{children && children}</RankContainer>}
