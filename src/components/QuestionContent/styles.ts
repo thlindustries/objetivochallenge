@@ -56,7 +56,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 
   &:hover {
     cursor: pointer;
-    transform: scaleY(1.09) scaleX(1.09);
+    transform: scaleY(1.04) scaleX(1.04);
   }
 `;
 
