@@ -9,9 +9,10 @@ import {
 
 interface FinalProps {
   text?: string;
+  endgame?: boolean;
 }
 
-const FinalComponent: React.FC<FinalProps> = ({ children, text }) => {
+const FinalComponent: React.FC<FinalProps> = ({ children, text, endgame }) => {
   return (
     <Container>
       <MessageContainer>
@@ -19,7 +20,7 @@ const FinalComponent: React.FC<FinalProps> = ({ children, text }) => {
           <p>{text}</p>
         </MessageContent>
       </MessageContainer>
-      <RankContainer>{children && children}</RankContainer>
+      {!endgame && <RankContainer>{children && children}</RankContainer>}
     </Container>
   );
 };

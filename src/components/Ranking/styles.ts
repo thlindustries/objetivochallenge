@@ -157,7 +157,7 @@ export const QuestionPoints = styled.div`
     h3 {
       font-size: 14px;
 
-      width: 100%;
+      width: 70%;
       overflow: hidden;
       text-overflow: ellipsis;
     }

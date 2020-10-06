@@ -29,9 +29,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
+    "react-tsparticles": "^1.18.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2",
+    "typescript": "3.9.7",
     "uuid": "^8.3.0",
     "yup": "^0.29.3"
   },

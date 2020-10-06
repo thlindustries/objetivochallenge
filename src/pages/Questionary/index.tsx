@@ -176,7 +176,12 @@ const Questionary: React.FC = () => {
     Axios.get<Question>(
       `${ENDPOINT}/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
+      if (response.data.QuestionType === 'end') {
+        window.location.href = '/endgame';
+      }
+
       setQuestion(response.data);
+
       setCaracterCounter(
         parseInt(response.data.QuestionAnswerCharacterCounter, 10),
       );
@@ -431,7 +436,10 @@ const Questionary: React.FC = () => {
                         </StyledTooltip>
                       </HintButton>
                     )}
-                    <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
+                    <p style={{ whiteSpace: 'pre-line' }}>
+                      {`${question.QuestionId}- `}
+                      {question.QuestionTitle.replace('<br/>', '\n')}
+                    </p>
                     {question.QuestionTitle !== '' && !passing ? (
                       <>
                         <PassButton onClick={handleConfirm}>
