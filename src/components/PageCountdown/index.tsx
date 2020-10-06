@@ -68,44 +68,48 @@ const PageCountdown: React.FC<CountDownProps> = ({
   return (
     <Container>
       <TimerSection from={from ? true : undefined} background={background}>
-        <NumberSection>
-          <Number>{timerDays}</Number>
-          {!from && (
-            <p>
-              <small>Dias</small>
-            </p>
-          )}
-        </NumberSection>
-        <Divisor>:</Divisor>
+        {timerDays !== '00' && (
+          <>
+            <NumberSection>
+              <Number>{timerDays}</Number>
+              {!from && (
+                <p>
+                  <small>Dias</small>
+                </p>
+              )}
+            </NumberSection>
+            <Divisor>:</Divisor>
 
-        <NumberSection>
-          <Number>{timerHours}</Number>
-          {!from && (
-            <p>
-              <small>Horas</small>
-            </p>
-          )}
-        </NumberSection>
-        <Divisor>:</Divisor>
+            <NumberSection>
+              <Number>{timerHours}</Number>
+              {!from && (
+                <p>
+                  <small>Horas</small>
+                </p>
+              )}
+            </NumberSection>
+            <Divisor>:</Divisor>
 
-        <NumberSection>
-          <Number>{timerMinutes}</Number>
-          {!from && (
-            <p>
-              <small>Minutos</small>
-            </p>
-          )}
-        </NumberSection>
-        <Divisor>:</Divisor>
+            <NumberSection>
+              <Number>{timerMinutes}</Number>
+              {!from && (
+                <p>
+                  <small>Minutos</small>
+                </p>
+              )}
+            </NumberSection>
+            <Divisor>:</Divisor>
 
-        <NumberSection>
-          <Number>{timerSeconds}</Number>
-          {!from && (
-            <p>
-              <small>Segundos</small>
-            </p>
-          )}
-        </NumberSection>
+            <NumberSection>
+              <Number>{timerSeconds}</Number>
+              {!from && (
+                <p>
+                  <small>Segundos</small>
+                </p>
+              )}
+            </NumberSection>
+          </>
+        )}
       </TimerSection>
     </Container>
   );
