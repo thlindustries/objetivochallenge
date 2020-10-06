@@ -275,7 +275,8 @@ export const AnswerButton = styled(Button)`
 
   width: 20%;
 
-  margin-left: 3%;
+  margin-left: 2%;
+  margin-right: 3%;
   margin-top: 0;
 
   &:hover {
