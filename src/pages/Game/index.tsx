@@ -55,7 +55,7 @@ const Game: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          teamName: Yup.string().required('Nome do time obrigatório'),
+          teamName: Yup.string().required('Nome do usuário obrigatório'),
           password: Yup.string().required('Senha obrigatória'),
         });
 
@@ -76,7 +76,6 @@ const Game: React.FC = () => {
         window.location.href = '/questionary';
       } catch (err) {
         setIsLogging(false);
-        console.log(logging);
         setIsEnabled(true);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -91,7 +90,7 @@ const Game: React.FC = () => {
         });
       }
     },
-    [addToast, logging, signIn],
+    [addToast, signIn],
   );
 
   useEffect(() => {

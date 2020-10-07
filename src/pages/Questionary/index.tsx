@@ -139,15 +139,12 @@ const Questionary: React.FC = () => {
     };
   }, [ENDPOINT_WS, sendId]);
 
-  const ping = useCallback(() => {
-    // console.log(`---->${verifyPing}`);
-    // if (verifyPing !== 'pong') {
-    //   reOpenConnection();
-    // } else {
-    //   setVerifyPing('');
+  const validatePong = useCallback(() => {
+    console.log('terminou a função ping');
+  }, []);
 
-    // }
-    sWs.current?.send(
+  const ping = useCallback(async () => {
+    await sWs.current?.send(
       JSON.stringify({
         action: 'onMessage',
         type: 'ping',
@@ -202,42 +199,49 @@ const Questionary: React.FC = () => {
         getRanking();
         if (sWs !== undefined) {
           sWs.current.onerror = (err) => {
-            sWs.current?.close();
-            reOpenConnection();
+            // sWs.current?.close();
+            // reOpenConnection();
+            console.log('deu merda');
+            window.location.reload();
           };
         }
         sWs.current.onmessage = (e) => {
-          if (e.data.includes('pong')) {
-            setVerifyPing(e.data);
-          }
+          try {
+            if (e.data.includes('pong')) {
+              setVerifyPing(e.data);
+            }
 
-          if (e.data.includes('TeamPoints')) {
-            setWsResponse(e.data);
-          }
-          if (e.data === 'updatecurrentquestion') {
-            getRanking();
-            getCurrentQuestionByTeamId();
-            addToast({
-              title: 'Boa!',
-              description: 'Sua equipe acertou a resposta',
-              type: 'success',
-            });
-          }
-          if (e.data.includes('message')) {
-            const recievedMessage: Message = JSON.parse(e.data);
-            addMessage(recievedMessage.message, recievedMessage.userName);
-          }
-          if (e.data.includes('refreshranking')) {
-            console.log('refresh foi chamado');
-          }
-          if (e.data === 'updatecurrentquestionpassed') {
-            getRanking();
-            getCurrentQuestionByTeamId();
-            addToast({
-              title: 'Alerta',
-              description: 'Sua equipe pulou a questão',
-              type: 'info',
-            });
+            if (e.data.includes('TeamPoints')) {
+              setWsResponse(e.data);
+            }
+            if (e.data === 'updatecurrentquestion') {
+              getRanking();
+              getCurrentQuestionByTeamId();
+              addToast({
+                title: 'Boa!',
+                description: 'Sua equipe acertou a resposta',
+                type: 'success',
+              });
+            }
+            if (e.data.includes('message')) {
+              const recievedMessage: Message = JSON.parse(e.data);
+              addMessage(recievedMessage.message, recievedMessage.userName);
+            }
+            if (e.data.includes('refreshranking')) {
+              console.log('refresh foi chamado');
+            }
+            if (e.data === 'updatecurrentquestionpassed') {
+              getRanking();
+              getCurrentQuestionByTeamId();
+              addToast({
+                title: 'Alerta',
+                description: 'Sua equipe pulou a questão',
+                type: 'info',
+              });
+            }
+          } catch {
+            window.location.reload();
+            console.log('err');
           }
         };
       }
@@ -263,16 +267,17 @@ const Questionary: React.FC = () => {
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,
+    validatePong,
     verifyPing,
   ]);
 
   const handleShowHint = useCallback(() => {
     addToast({
       title: 'Dica',
-      description: 'Esta é uma dica',
+      description: question.QuestionHints,
       type: 'success',
     });
-  }, [addToast]);
+  }, [addToast, question.QuestionHints]);
 
   const handlePassQuestion = useCallback(() => {
     setConfirm(!confirm);
