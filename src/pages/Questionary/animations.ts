@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components';
 
-export const loadFromTransparent = keyframes`
+export const loadFromDownAndTransparent = keyframes`
   from{
     opacity: 0;
     transform: translateY(150px);
@@ -8,5 +8,14 @@ export const loadFromTransparent = keyframes`
   to{
     opacity: 1;
     transform: translateY(0px);
+  }
+`;
+
+export const loadFromTransparent = keyframes`
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
   }
 `;

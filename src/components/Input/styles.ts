@@ -64,6 +64,10 @@ export const Container = styled.div<ContainerProps>`
   svg {
     margin-right: 16px;
   }
+
+  @media (max-width: 900px) {
+    width: 300px !important;
+  }
 `;
 
 export const Error = styled(Tooltip)`

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-import { loadFromTransparent } from './animations';
+import { loadFromTransparent, loadFromDownAndTransparent } from './animations';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -9,6 +9,12 @@ import Tooltip from '../../components/Tooltip';
 
 interface TooltipProps {
   type?: string;
+}
+interface ChatProps {
+  enabled?: boolean;
+}
+interface QuestionHeaderProps {
+  normal?: boolean;
 }
 
 export const PageContent = styled.div`
@@ -20,7 +26,7 @@ export const PageContent = styled.div`
 `;
 
 export const Container = styled.div`
-  animation: ${loadFromTransparent} 1.2s;
+  animation: ${loadFromDownAndTransparent} 1.2s;
 `;
 
 export const FirstRowContainer = styled.div`
@@ -29,26 +35,26 @@ export const FirstRowContainer = styled.div`
   padding: 16px;
 
   width: 100vw;
-  height: 60vh;
+  height: 88vh;
 `;
 
 export const LogoutButton = styled.p`
   display: flex;
   align-items: center;
-  color: #eb171e !important;
+  color: #fff !important;
 
   svg {
     margin-right: 8px;
-    color: #eb171e;
+    color: #fff;
 
     transition: color 0.3s;
   }
 
   &:hover {
     cursor: pointer;
-    color: ${shade(0.4, '#eb171e')} !important;
+    color: ${shade(0.4, '#fff')} !important;
     svg {
-      color: ${shade(0.4, '#eb171e')} !important;
+      color: ${shade(0.4, '#fff')} !important;
     }
   }
 `;
@@ -60,12 +66,12 @@ export const QuestionContainer = styled.div`
   flex-direction: column;
 
   background: rgba(251, 124, 31, 0.9);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
 
   width: 75%;
 
-  padding: 14px;
+  padding: 8px;
 `;
 
 export const QuestionOverlay = styled.div`
@@ -74,15 +80,16 @@ export const QuestionOverlay = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  /* overflow: hidden; */
+
   width: 100%;
   height: 100%;
 
-  border-radius: 12px;
-  /* background: rgba(176, 176, 176, 1); */
+  border-radius: 8px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 10px #000;
 
-  padding: 32px;
+  padding: 0 10px;
 `;
 
 export const Question = styled.div`
@@ -91,27 +98,62 @@ export const Question = styled.div`
   justify-content: center;
   align-items: center;
 
+  /* overflow: hidden; */
+
   font-family: 'Poppins';
   font-size: 32px;
   font-weight: bold;
   color: #000;
 
-  width: 80%;
+  width: 100%;
+  height: 90%;
 
   margin-bottom: auto;
-
-  border: solid 1px blue;
 `;
 
-export const QuestionHeader = styled.div`
+export const QuestionHeader = styled.div<QuestionHeaderProps>`
   display: flex;
   align-items: center;
-  border: solid 1px red;
+  justify-content: space-between;
 
-  width: 100%;
+  padding: 10px 16px;
+
+  width: 96%;
+  margin-bottom: auto;
+
+  ${(props) =>
+    props.normal &&
+    css`
+      height: 40%;
+      p {
+        margin-top: 2%;
+      }
+    `}
 
   p {
-    width: 900px;
+    width: 94%;
+
+    animation: ${loadFromTransparent} 1.2s;
+    font-family: 'Kumbh Sans';
+    font-weight: 500;
+
+    text-align: justify;
+
+    margin-top: 3.6%;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+    padding: 0 12px;
+
+    p {
+      text-align: justify;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-height: 700px) {
+    font-size: 20px;
   }
 `;
 
@@ -140,8 +182,7 @@ export const HintButton = styled.div`
 export const PassButton = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2%;
-  /* width: auto; */
+  margin-left: 4%;
 
   color: #c53030;
 
@@ -154,29 +195,39 @@ export const PassButton = styled.div`
   }
 `;
 
-export const QuestionContent = styled.div`
-  width: 80%;
+export const QuestionContentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 
-  margin-top: 40px;
+  padding: 0 6px;
 
-  padding: 18px;
-
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.01);
   border-radius: 12px;
-`;
+  /* box-shadow: 0 0 10px inset; */
 
-export const QuestionContentItem = styled.div`
-  font-size: 18px;
+  @media (max-width: 700px) {
+    overflow: hidden;
+  }
 `;
 
 export const Answer = styled.div`
   display: flex;
-  width: 80%;
-  flex-direction: row;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 4%;
 
-  border: solid 1px #000;
+  @media (max-width: 700px) {
+    width: 100%;
+
+    justify-content: space-between;
+
+    font-size: 12px;
+  }
 `;
 
 export const FormContent = styled.div`
@@ -185,40 +236,51 @@ export const FormContent = styled.div`
   justify-content: center;
   align-items: center;
 
-  > p {
-    display: flex;
+  width: 100%;
+
+  @media (max-width: 930px) {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
+`;
 
-    text-align: center;
-    margin-right: 4%;
-    svg {
-      color: #eb171e;
-      transition: color 0.4s;
-    }
+export const ReportErrorButton = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  text-align: center;
+  margin-right: 2%;
+  margin-left: 2%;
+
+  svg {
+    color: #eb171e;
     transition: color 0.4s;
+  }
 
-    &:hover {
-      cursor: pointer;
+  transition: color 0.4s;
+
+  &:hover {
+    cursor: pointer;
+    color: #fddede;
+
+    svg {
       color: #fddede;
-
-      svg {
-        color: #fddede;
-      }
     }
   }
 `;
 
-export const AnswerInput = styled(Input)``;
+export const AnswerInput = styled(Input)`
+  width: 400px;
+`;
 
 export const AnswerButton = styled(Button)`
   background: #05a746;
 
   width: 20%;
 
-  margin-left: 6%;
+  margin-left: 2%;
+  margin-right: 3%;
   margin-top: 0;
 
   &:hover {
@@ -227,6 +289,11 @@ export const AnswerButton = styled(Button)`
     svg {
       color: ${shade(0.4, '#fff')} !important;
     }
+  }
+
+  @media (max-width: 930px) {
+    width: 60%;
+    margin-left: 0px;
   }
 `;
 
@@ -239,11 +306,22 @@ export const Hint = styled.p`
   strong {
     color: #eb171e;
   }
+
+  @media (max-width: 930px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    text-align: center;
+
+    margin: 0;
+  }
 `;
 
 export const RankContainer = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   font-family: 'Poppins';
   color: #fff;
@@ -252,18 +330,18 @@ export const RankContainer = styled.div`
     font-size: 32px;
   }
 
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
+  background: rgba(251, 124, 31, 0.9);
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
 
   width: 25%;
 
   margin-left: 3%;
 
-  padding: 32px;
+  padding: 8px;
 `;
 
-export const SecondRowContainer = styled.div`
+export const SecondRowContainer = styled.div<ChatProps>`
   display: flex;
   flex-direction: row;
   padding: 16px;
@@ -272,6 +350,15 @@ export const SecondRowContainer = styled.div`
 
   width: 100vw;
   height: 25vh;
+
+  ${(props) =>
+    props.enabled
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
 `;
 
 export const VideoCards = styled.div`
@@ -288,8 +375,8 @@ export const VideoCards = styled.div`
 `;
 
 export const VideoCard = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 20%;
+  height: 98%;
 
   background: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
@@ -298,19 +385,30 @@ export const VideoCard = styled.div`
   & + div {
     margin-left: 18px;
   }
+
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: scaleY(1.09);
+  }
 `;
 
-export const Chat = styled.div`
+export const ChatContainer = styled.div`
   width: 25%;
 
   margin-left: 3%;
 
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
+  background: rgba(251, 124, 31, 0.9);
+  border-radius: 6px;
   box-shadow: 0 0 10px #000;
+
+  padding: 12px;
 `;
 
 export const StyledTooltip = styled(Tooltip) <TooltipProps>`
+  display: flex;
+  flex-direction: column;
+
   span {
     ${(props) =>
     props.type === 'hint' &&
@@ -318,5 +416,9 @@ export const StyledTooltip = styled(Tooltip) <TooltipProps>`
         background: #0088ff;
         color: #fff;
       `}
+  }
+
+  @media (max-height: 640px) {
+    flex-direction: row;
   }
 `;

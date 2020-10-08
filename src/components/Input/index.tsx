@@ -15,12 +15,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
   containerStyle?: object;
+  callback?(inputRef: HTMLInputElement): void;
 }
 
 const Input: React.FC<InputProps> = ({
   name,
   containerStyle = {},
   icon: Icon,
+  callback,
   ...rest
 }) => {
   const inputReference = useRef<HTMLInputElement>(null);
@@ -38,6 +40,19 @@ const Input: React.FC<InputProps> = ({
     setFocus(true);
   }, []);
 
+  const handleInputEnter = useCallback(
+    (event) => {
+      if (event.key === 'Enter') {
+        if (inputReference.current !== undefined) {
+          callback &&
+            inputReference.current &&
+            callback(inputReference.current);
+        }
+      }
+    },
+    [callback],
+  );
+
   /**
    *  O defaultValue é uma prop passada la no Form chamada initialValue
    * pode ser passada assim:
@@ -50,7 +65,9 @@ const Input: React.FC<InputProps> = ({
       ref: inputReference.current,
       path: 'value',
     });
-  }, [fieldName, registerField]);
+
+    inputReference.current?.addEventListener('keypress', handleInputEnter);
+  }, [fieldName, handleInputEnter, registerField]);
 
   return (
     <Container

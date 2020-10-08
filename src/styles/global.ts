@@ -1,8 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import rocketBg from '../assets/img/bgfiltered.png';
-// import pureBlue from '../assets/img/mainframe.png';
+import pricedown from '../assets/fonts/Pricedown.ttf';
 
 export default createGlobalStyle`
+  @font-face {
+    font-family: Pricedown;
+    src: url(${pricedown});
+  }
 
   * {
     margin: 0;

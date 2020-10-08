@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 // import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
+import { Link } from 'react-router-dom';
 import {
   PageLanding,
   HeaderA,
@@ -31,6 +32,16 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     setTab('home');
+
+    const script = document.createElement('script');
+
+    script.src = '//code.jivosite.com/widget/AIh2Mhazzn';
+    script.async = true;
+
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   const handleTest = useCallback(async () => {
@@ -54,15 +65,17 @@ const Landing: React.FC = () => {
 
           <CountButton>
             <CountDownContainer>
-              <Countdown background={false} date={countDownDate} />
+              <Countdown background={false} to={countDownDate} />
             </CountDownContainer>
             <ButtonsContainer>
               <form action="https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform">
                 <ButtonSubscribe type="submit">Inscrever-se</ButtonSubscribe>
               </form>
-              <ButtonSubscribe enabled={!isLogging} onClick={handleTest}>
-                {isLogging ? <ReactLoading /> : 'Testar'}
-              </ButtonSubscribe>
+              <Link to="/gamestart">
+                <ButtonSubscribe enabled>
+                  Jogar
+                </ButtonSubscribe>
+              </Link>
             </ButtonsContainer>
           </CountButton>
         </Content>

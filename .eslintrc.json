@@ -29,6 +29,8 @@
     "prettier"
   ],
   "rules": {
+    "no-restricted-globals": "off",
+    "@typescript-eslint/ban-types": "off",
     "react/no-unused-prop-types": "off",
     "no-unused-expressions": "off",
     "react/jsx-props-no-spreading": "off",
