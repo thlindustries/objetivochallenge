@@ -9,17 +9,20 @@ import {
 
 interface FinalProps {
   text?: string;
+  endgame?: boolean;
 }
 
-const FinalComponent: React.FC<FinalProps> = ({ children, text }) => {
+const FinalComponent: React.FC<FinalProps> = ({ children, text, endgame }) => {
   return (
     <Container>
       <MessageContainer>
         <MessageContent>
-          <p>{text}</p>
+          <p style={{ whiteSpace: 'pre-line' }}>
+            {text?.replaceAll('<br/>', '\n')}
+          </p>
         </MessageContent>
       </MessageContainer>
-      <RankContainer>{children && children}</RankContainer>
+      {!endgame && <RankContainer>{children && children}</RankContainer>}
     </Container>
   );
 };

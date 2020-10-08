@@ -8,8 +8,8 @@ interface ToastProps {
 
 const toastTypes = {
   info: css`
-    background: #ebf8ff;
-    color: #3712b7;
+    background: #ffd817;
+    color: #545454;
   `,
   success: css`
     background: #e6fffa;

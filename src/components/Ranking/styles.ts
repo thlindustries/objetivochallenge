@@ -64,13 +64,11 @@ export const Body = styled.div`
   border-radius: 12px;
 
   padding: 8px;
-
-  /* box-shadow: 0 0 10px inset; */
 `;
 
 export const Item = styled.div<ItemProps>`
   width: 100%;
-  height: 15%;
+  height: 12%;
 
   display: flex;
   align-items: center;
@@ -94,6 +92,15 @@ export const Item = styled.div<ItemProps>`
 
   h3 {
     margin-right: auto;
+
+    ${(props) =>
+    props.myTeam &&
+    css`
+        width: 80% !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `}
   }
 
   transition: transform 0.8s;
@@ -106,6 +113,17 @@ export const Item = styled.div<ItemProps>`
       background: #fff0d5;
     `};
 
+  ${(props) =>
+    !props.myTeam &&
+    css`
+      h3 {
+        width: 98% !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    `}
+
   &:hover {
     /* cursor: pointer; */
     transform: scaleY(1.09) scaleX(1.09);
@@ -114,11 +132,17 @@ export const Item = styled.div<ItemProps>`
   p {
     text-shadow: 0 0 10px rgb(251, 124, 31);
   }
+  @media (max-width: 1100px) {
+    height: 24%;
+  }
 
   @media (max-width: 700px) {
     flex-direction: column;
 
     height: 20%;
+  }
+  @media (max-height: 640px) {
+    height: 23%;
   }
 `;
 
@@ -129,21 +153,18 @@ export const QuestionPoints = styled.div`
   margin-left: 4%;
   justify-content: space-between;
 
-  h3 {
-    width: 100%;
-  }
+  width: 80%;
 
   strong {
     font-size: 14px;
     width: 100%;
   }
 
-  @media (max-width: 790px) {
+  @media (max-width: 1100px) {
     h3 {
       font-size: 14px;
 
-      white-space: nowrap;
-      width: 50px;
+      width: 70%;
       overflow: hidden;
       text-overflow: ellipsis;
     }

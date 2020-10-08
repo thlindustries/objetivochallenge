@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import { FaLightbulb } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
+import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
@@ -75,8 +76,9 @@ interface DataFormInfo {
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addMessage, clearMessages } = useChat();
+  const { push } = useHistory();
 
-  const [caracterCounter, setCaracterCounter] = useState(0);
+  const [caracterCounter, setCaracterCounter] = useState(999);
   const [rememberAnswer, setRememberAnswer] = useState('');
   const [verifyPing, setVerifyPing] = useState('pong');
 
@@ -90,12 +92,12 @@ const Questionary: React.FC = () => {
   const ENDPOINT_WS =
     user.UserProfile === 'Fundamental'
       ? (process.env.REACT_APP_FUND_WS as string)
-      : (process.env.REACT_APP_DEV_WS as string);
+      : (process.env.REACT_APP_PROD_WS as string);
 
   const ENDPOINT =
     user.UserProfile === 'Fundamental'
       ? (process.env.REACT_APP_FUND_API as string)
-      : (process.env.REACT_APP_DEV_API as string);
+      : (process.env.REACT_APP_PROD_API as string);
 
   const { addToast } = useToast();
   const [question, setQuestion] = useState<Question>({
@@ -139,15 +141,12 @@ const Questionary: React.FC = () => {
     };
   }, [ENDPOINT_WS, sendId]);
 
-  const ping = useCallback(() => {
-    // console.log(`---->${verifyPing}`);
-    // if (verifyPing !== 'pong') {
-    //   reOpenConnection();
-    // } else {
-    //   setVerifyPing('');
+  const validatePong = useCallback(() => {
+    console.log('terminou a função ping');
+  }, []);
 
-    // }
-    sWs.current?.send(
+  const ping = useCallback(async () => {
+    await sWs.current?.send(
       JSON.stringify({
         action: 'onMessage',
         type: 'ping',
@@ -176,12 +175,17 @@ const Questionary: React.FC = () => {
     Axios.get<Question>(
       `${ENDPOINT}/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
+      if (response.data.QuestionType === 'end') {
+        push('/endgame');
+      }
+
       setQuestion(response.data);
+
       setCaracterCounter(
         parseInt(response.data.QuestionAnswerCharacterCounter, 10),
       );
     });
-  }, [ENDPOINT, user.UserId, user.UserTeamId]);
+  }, [ENDPOINT, push, user.UserId, user.UserTeamId]);
 
   useEffect(() => {
     sWs.current = new WebSocket(ENDPOINT_WS);
@@ -197,42 +201,49 @@ const Questionary: React.FC = () => {
         getRanking();
         if (sWs !== undefined) {
           sWs.current.onerror = (err) => {
-            sWs.current?.close();
-            reOpenConnection();
+            // sWs.current?.close();
+            // reOpenConnection();
+            console.log('deu merda');
+            window.location.reload();
           };
         }
         sWs.current.onmessage = (e) => {
-          if (e.data.includes('pong')) {
-            setVerifyPing(e.data);
-          }
+          try {
+            if (e.data.includes('pong')) {
+              setVerifyPing(e.data);
+            }
 
-          if (e.data.includes('TeamPoints')) {
-            setWsResponse(e.data);
-          }
-          if (e.data === 'updatecurrentquestion') {
-            getRanking();
-            getCurrentQuestionByTeamId();
-            addToast({
-              title: 'Boa!',
-              description: 'Sua equipe acertou a resposta',
-              type: 'success',
-            });
-          }
-          if (e.data.includes('message')) {
-            const recievedMessage: Message = JSON.parse(e.data);
-            addMessage(recievedMessage.message, recievedMessage.userName);
-          }
-          if (e.data.includes('refreshranking')) {
-            console.log('refresh foi chamado');
-          }
-          if (e.data === 'updatecurrentquestionpassed') {
-            getRanking();
-            getCurrentQuestionByTeamId();
-            addToast({
-              title: 'Alerta',
-              description: 'Sua equipe pulou a questão',
-              type: 'success',
-            });
+            if (e.data.includes('TeamPoints')) {
+              setWsResponse(e.data);
+            }
+            if (e.data === 'updatecurrentquestion') {
+              getRanking();
+              getCurrentQuestionByTeamId();
+              addToast({
+                title: 'Boa!',
+                description: 'Sua equipe acertou a resposta',
+                type: 'success',
+              });
+            }
+            if (e.data.includes('message')) {
+              const recievedMessage: Message = JSON.parse(e.data);
+              addMessage(recievedMessage.message, recievedMessage.userName);
+            }
+            if (e.data.includes('refreshranking')) {
+              console.log('refresh foi chamado');
+            }
+            if (e.data === 'updatecurrentquestionpassed') {
+              getRanking();
+              getCurrentQuestionByTeamId();
+              addToast({
+                title: 'Alerta',
+                description: 'Sua equipe pulou a questão',
+                type: 'info',
+              });
+            }
+          } catch {
+            window.location.reload();
+            console.log('err');
           }
         };
       }
@@ -254,45 +265,51 @@ const Questionary: React.FC = () => {
     reOpenConnection,
     sWs,
     sendId,
+    user,
     user.TeamCurrentQuestionId,
     user.UserId,
     user.UserTeamId,
+    validatePong,
     verifyPing,
   ]);
 
   const handleShowHint = useCallback(() => {
     addToast({
       title: 'Dica',
-      description: 'Esta é uma dica',
+      description: question.QuestionHints,
       type: 'success',
     });
-  }, [addToast]);
+  }, [addToast, question.QuestionHints]);
 
   const handlePassQuestion = useCallback(() => {
     setConfirm(!confirm);
     Axios.get<NextQuestion>(
       `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
-      setCaracterCounter(0);
-      setRememberAnswer('');
-      if (response.data.nextQuestion.QuestionId) {
-        setIsPassing(false);
-        setConfirm(!confirm);
-        setQuestion(response.data.nextQuestion);
-        sWs.current?.send(
-          JSON.stringify({
-            action: 'onMessage',
-            type: 'updatecurrentquestionpassed',
-            userId: user.UserId,
-            teamId: user.UserTeamId,
-          }),
-        );
-        sWs.current?.send(
-          JSON.stringify({
-            action: 'onMessage',
-            type: 'refreshranking',
-          }),
-        );
+      try {
+        setCaracterCounter(999);
+        setRememberAnswer('');
+        if (response.data.nextQuestion.QuestionId) {
+          setIsPassing(false);
+          setConfirm(!confirm);
+          setQuestion(response.data.nextQuestion);
+          sWs.current?.send(
+            JSON.stringify({
+              action: 'onMessage',
+              type: 'updatecurrentquestionpassed',
+              userId: user.UserId,
+              teamId: user.UserTeamId,
+            }),
+          );
+          sWs.current?.send(
+            JSON.stringify({
+              action: 'onMessage',
+              type: 'refreshranking',
+            }),
+          );
+        }
+      } catch {
+        window.location.reload();
       }
     });
   }, [ENDPOINT, confirm, question.QuestionId, user.UserId, user.UserTeamId]);
@@ -321,7 +338,7 @@ const Questionary: React.FC = () => {
           QuestionAnswer: data.answer,
         }).then((response) => {
           if (response.data.isCorrect) {
-            setCaracterCounter(0);
+            setCaracterCounter(999);
             setRememberAnswer('');
 
             formRef.current?.clearField('answer');
@@ -419,7 +436,7 @@ const Questionary: React.FC = () => {
             <QuestionContainer>
               <QuestionOverlay>
                 <Question>
-                  <QuestionHeader>
+                  <QuestionHeader normal={question.QuestionType === 'normal'}>
                     {question.QuestionHints !== ' ' && !passing && (
                       <HintButton onClick={handleShowHint}>
                         <StyledTooltip
@@ -430,7 +447,10 @@ const Questionary: React.FC = () => {
                         </StyledTooltip>
                       </HintButton>
                     )}
-                    <p>{`${question.QuestionId}- ${question.QuestionTitle}`}</p>
+                    <p style={{ whiteSpace: 'pre-line' }}>
+                      {`${question.QuestionId}- `}
+                      {question.QuestionTitle.replaceAll('<br/>', '\n')}
+                    </p>
                     {question.QuestionTitle !== '' && !passing ? (
                       <>
                         <PassButton onClick={handleConfirm}>
@@ -471,7 +491,11 @@ const Questionary: React.FC = () => {
                 {!answering && !passing ? (
                   <>
                     <Answer>
-                      <Form ref={formRef} onSubmit={handleAnswer}>
+                      <Form
+                        style={{ width: '100%' }}
+                        ref={formRef}
+                        onSubmit={handleAnswer}
+                      >
                         <FormContent>
                           <ReportErrorButton onClick={handleReportError}>
                             <FiAlertTriangle size={40} />
@@ -481,9 +505,6 @@ const Questionary: React.FC = () => {
                             onChange={(e) => handleCaracterChange(e)}
                             name="answer"
                             placeholder="Digite a resposta aqui"
-                            containerStyle={{
-                              width: 700,
-                            }}
                             defaultValue={rememberAnswer}
                           />
                           <AnswerButton type="submit">
@@ -492,28 +513,30 @@ const Questionary: React.FC = () => {
                         </FormContent>
                       </Form>
                       <Hint>
-                        {caracterCounter > 1 && question.QuestionTitle !== '' && (
-                          <>
-                            Faltam <strong>{caracterCounter}</strong> caracteres
-                            em sua resposta
-                          </>
-                        )}
+                        {caracterCounter > 1 &&
+                          question.QuestionTitle !== '' &&
+                          caracterCounter < 999 && (
+                            <>
+                              Faltam <strong>{caracterCounter}</strong>{' '}
+                              caracteres em sua resposta
+                            </>
+                          )}
 
-                        {caracterCounter === 1 && (
-                          <>
-                            Falta <strong>{caracterCounter}</strong> caractere
-                            em sua resposta
-                          </>
-                        )}
-
-                        {caracterCounter === 0 && (
+                        {caracterCounter === 1 && caracterCounter < 999 && (
                           <>
                             Falta <strong>{caracterCounter}</strong> caractere
                             em sua resposta
                           </>
                         )}
 
-                        {caracterCounter < 0 && (
+                        {caracterCounter === 0 && caracterCounter < 999 && (
+                          <>
+                            Falta <strong>{caracterCounter}</strong> caractere
+                            em sua resposta
+                          </>
+                        )}
+
+                        {caracterCounter < 0 && caracterCounter < 999 && (
                           <strong>Sua resposta excedeu os caracteres</strong>
                         )}
                       </Hint>

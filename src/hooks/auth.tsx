@@ -48,7 +48,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await Axios.post(
-      `${process.env.REACT_APP_DEV_API}/login`,
+      `${process.env.REACT_APP_PROD_API}/login`,
       {
         UserEmail: email,
         UserPassword: password,
@@ -76,8 +76,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@Challenge:user');
 
     setData({} as UserLoginData);
-
-    window.location.href = 'https://www.challengeobjetivo.com/';
   }, []);
 
   const updateUser = useCallback(

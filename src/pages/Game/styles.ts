@@ -58,9 +58,8 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 300px;
-
-  margin-top: 6em;
+  width: auto;
+  margin-top: 12%;
 
   text-align: center;
 
@@ -89,12 +88,27 @@ export const Content = styled.p`
   color: #fff;
 `;
 
+export const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  a {
+    text-decoration: none;
+  }
+
+  @media (max-width: 700px) {
+    padding: 0 32px;
+  }
+`;
+
 export const StyledButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  margin-top: 4em;
+  /* margin-top: 4%; */
+  width: 40%;
 
   background: #fb7c1f;
   color: #fff;

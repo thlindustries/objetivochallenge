@@ -28,7 +28,11 @@ const QuestionContent: React.FC<ContentProps> = ({ type, url }) => {
           onPause={(info) => showCurrentTime(info)}
           onEnd={(info) => handleEndVideo(info)}
           onTimeUpdate={(info) => handleProgressVideo(info)}
-          start={120}
+          start={0}
+          style={{
+            width: '60%',
+          }}
+          responsive
         />
       )}
       {type === 'audio' && (

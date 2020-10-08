@@ -14,8 +14,8 @@ export const Container = styled.div`
 
   border-radius: 12px;
 
-  width: 70%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 
   a {
     display: flex;
@@ -42,21 +42,21 @@ export const StyledVimeo = styled(Vimeo)``;
 
 export const ImageContainer = styled.div<ImageContainerProps>`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
 
   border-radius: 12px;
 
   background-image: url(${(props) => props.imageUrl});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 
   transition: transform 0.8s;
 
   &:hover {
     cursor: pointer;
-    transform: scaleY(1.09) scaleX(1.09);
+    transform: scaleY(1.04) scaleX(1.04);
   }
 `;
 

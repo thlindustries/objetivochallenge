@@ -13,6 +13,9 @@ interface TooltipProps {
 interface ChatProps {
   enabled?: boolean;
 }
+interface QuestionHeaderProps {
+  normal?: boolean;
+}
 
 export const PageContent = styled.div`
   width: 100vw;
@@ -86,7 +89,7 @@ export const QuestionOverlay = styled.div`
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 10px #000;
 
-  padding: 32px;
+  padding: 0 10px;
 `;
 
 export const Question = styled.div`
@@ -108,24 +111,35 @@ export const Question = styled.div`
   margin-bottom: auto;
 `;
 
-export const QuestionHeader = styled.div`
+export const QuestionHeader = styled.div<QuestionHeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px 32px;
+  padding: 10px 16px;
 
-  width: 100%;
+  width: 96%;
   margin-bottom: auto;
 
+  ${(props) =>
+    props.normal &&
+    css`
+      height: 40%;
+      p {
+        margin-top: 2%;
+      }
+    `}
+
   p {
-    width: 80%;
+    width: 94%;
 
     animation: ${loadFromTransparent} 1.2s;
     font-family: 'Kumbh Sans';
     font-weight: 500;
 
     text-align: justify;
+
+    margin-top: 3.6%;
   }
 
   @media (max-width: 700px) {
@@ -136,6 +150,10 @@ export const QuestionHeader = styled.div`
       text-align: justify;
       font-size: 16px;
     }
+  }
+
+  @media (max-height: 700px) {
+    font-size: 20px;
   }
 `;
 
@@ -164,7 +182,7 @@ export const HintButton = styled.div`
 export const PassButton = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2%;
+  margin-left: 4%;
 
   color: #c53030;
 
@@ -184,7 +202,7 @@ export const QuestionContentContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: 12px;
+  padding: 0 6px;
 
   background: rgba(0, 0, 0, 0.01);
   border-radius: 12px;
@@ -197,16 +215,16 @@ export const QuestionContentContainer = styled.div`
 
 export const Answer = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2%;
+  margin-bottom: 4%;
 
   @media (max-width: 700px) {
     width: 100%;
 
-    justify-content: space-around;
+    justify-content: space-between;
 
     font-size: 12px;
   }
@@ -218,7 +236,9 @@ export const FormContent = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 700px) {
+  width: 100%;
+
+  @media (max-width: 930px) {
     flex-direction: column;
   }
 `;
@@ -230,7 +250,9 @@ export const ReportErrorButton = styled.p`
   align-items: center;
 
   text-align: center;
-  margin-right: 4%;
+  margin-right: 2%;
+  margin-left: 2%;
+
   svg {
     color: #eb171e;
     transition: color 0.4s;
@@ -248,14 +270,17 @@ export const ReportErrorButton = styled.p`
   }
 `;
 
-export const AnswerInput = styled(Input)``;
+export const AnswerInput = styled(Input)`
+  width: 400px;
+`;
 
 export const AnswerButton = styled(Button)`
   background: #05a746;
 
   width: 20%;
 
-  margin-left: 6%;
+  margin-left: 2%;
+  margin-right: 3%;
   margin-top: 0;
 
   &:hover {
@@ -266,9 +291,9 @@ export const AnswerButton = styled(Button)`
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 930px) {
     width: 60%;
-    margin: 0;
+    margin-left: 0px;
   }
 `;
 
@@ -282,12 +307,11 @@ export const Hint = styled.p`
     color: #eb171e;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 930px) {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-
+    margin-right: 0;
     text-align: center;
 
     margin: 0;
@@ -382,6 +406,9 @@ export const ChatContainer = styled.div`
 `;
 
 export const StyledTooltip = styled(Tooltip) <TooltipProps>`
+  display: flex;
+  flex-direction: column;
+
   span {
     ${(props) =>
     props.type === 'hint' &&
@@ -389,5 +416,9 @@ export const StyledTooltip = styled(Tooltip) <TooltipProps>`
         background: #0088ff;
         color: #fff;
       `}
+  }
+
+  @media (max-height: 640px) {
+    flex-direction: row;
   }
 `;

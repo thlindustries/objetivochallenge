@@ -21,8 +21,8 @@ export const MessageContainer = styled.div`
   flex-direction: column;
 
   border: solid 1px gray;
-  height: 50%;
-  width: 65%;
+  height: 100%;
+  width: 100%;
 
   border-radius: 6px;
 

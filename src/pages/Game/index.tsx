@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import chicoLogo from '../../assets/img/chicoLogo3.png';
 
 import {
   PageGame,
@@ -17,6 +17,7 @@ import {
   StyledButton,
   PageWrapper,
   FormContainer,
+  ButtonsContainer,
   StyledInput,
 } from './styles';
 
@@ -33,7 +34,6 @@ interface DataFormInfo {
 const Game: React.FC = () => {
   const [card, setCard] = useState('');
   const [change, setChange] = useState(false);
-  const [logging, setLogging] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -55,9 +55,7 @@ const Game: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          teamName: Yup.string()
-            .required('Nome do time obrigatório')
-            .email('Digite um nome de time válido'),
+          teamName: Yup.string().required('Nome do usuário obrigatório'),
           password: Yup.string().required('Senha obrigatória'),
         });
 
@@ -70,7 +68,6 @@ const Game: React.FC = () => {
           password: data.password,
         });
 
-        setLogging(true);
         setIsLogging(false);
         setIsEnabled(true);
 
@@ -78,7 +75,6 @@ const Game: React.FC = () => {
         window.location.href = '/questionary';
       } catch (err) {
         setIsLogging(false);
-        console.log(logging);
         setIsEnabled(true);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -93,8 +89,13 @@ const Game: React.FC = () => {
         });
       }
     },
-    [addToast, logging, signIn],
+    [addToast, signIn],
   );
+
+  const handleSubscribe = useCallback(() => {
+    window.location.href =
+      'https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform';
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -115,21 +116,34 @@ const Game: React.FC = () => {
       <TContainer>
         <PageWrapper>
           {card !== 'login' ? (
-            <CircleContent title="Logo do projeto" load={change}>
+            <CircleContent
+              title="Logo do projeto"
+              load={change}
+              logo={chicoLogo}
+            >
               <Content>
                 Divirta-se junto com sua equipe solucionando o desafio do
                 colégio objetivo
               </Content>
-              <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
+              <ButtonsContainer>
+                <StyledButton onClick={handleSubscribe}>
+                  Inscrever-se
+                </StyledButton>
+                <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
+              </ButtonsContainer>
             </CircleContent>
           ) : (
-              <CircleContent title="Logo do projeto" load={change}>
+              <CircleContent
+                title="Logo do projeto"
+                load={change}
+                logo={chicoLogo}
+              >
                 <FormContainer>
                   <Form ref={formRef} onSubmit={handleSubmit}>
                     <StyledInput
                       name="teamName"
                       icon={FiUser}
-                      placeholder="Usuário"
+                      placeholder="usuário"
                       style={{ width: 300 }}
                     />
                     <StyledInput
@@ -138,10 +152,14 @@ const Game: React.FC = () => {
                       type="password"
                       placeholder="senha"
                     />
-                    <StyledButton enabled={isEnabled} type="submit">
+                    <StyledButton
+                      style={{ width: '100%' }}
+                      enabled={isEnabled}
+                      type="submit"
+                    >
                       {isLogging ? <ReactLoading /> : 'Entrar'}
                     </StyledButton>
-                    <Link to="forgot-password">Esqueci minha senha</Link>
+                    {/* <Link to="forgot-password">Esqueci minha senha</Link> */}
                   </Form>
                 </FormContainer>
               </CircleContent>

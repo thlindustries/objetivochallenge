@@ -1,24 +1,26 @@
 import React, { HTMLAttributes } from 'react';
 
-import { Container, HeaderContainer, Title } from './styles';
+import { Container, HeaderContainer } from './styles';
 
 type CardProps = HTMLAttributes<HTMLDivElement> & {
-  logo?: HTMLImageElement;
+  // logo?: HTMLImageElement;
+  logo?: string;
   title?: string;
 };
 
 const Card: React.FC<CardProps> = ({
   logo,
-  title = 'testeTitle',
+  title = 'logo do Projeto',
   children,
   ...rest
 }) => {
   return (
     <Container {...rest}>
       <HeaderContainer>
-        <Title>{title}</Title>
-        {children}
+        <img src={logo} alt="" />
+        {/* <Title>{title}</Title> */}
       </HeaderContainer>
+      {children}
     </Container>
   );
 };
