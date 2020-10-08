@@ -51,19 +51,21 @@ const Alert: React.FC<AlertProps> = ({
   const { user } = useAuth();
   const { addToast } = useToast();
 
+  const ENDPOINT =
+    user.UserProfile === 'Fundamental'
+      ? (process.env.REACT_APP_FUND_API as string)
+      : (process.env.REACT_APP_PROD_API as string);
+
   const handleSubmit = useCallback(
     (data: DataFormInfo) => {
       if (data.error !== '') {
         setIsSending(true);
-        Axios.post(
-          'https://16hgpfnq69.execute-api.sa-east-1.amazonaws.com/dev/reporterrorquestion',
-          {
-            UserId: user.UserId,
-            TeamId: user.UserTeamId,
-            QuestionId,
-            ReportErrorQuestion: data.error,
-          },
-        ).then((response) => {
+        Axios.post(`${ENDPOINT}/reporterrorquestion`, {
+          UserId: user.UserId,
+          TeamId: user.UserTeamId,
+          QuestionId,
+          ReportErrorQuestion: data.error,
+        }).then((response) => {
           console.log(response.data);
 
           setIsSending(false);
@@ -78,7 +80,7 @@ const Alert: React.FC<AlertProps> = ({
         alert('Preencha o campo com alguma informação');
       }
     },
-    [QuestionId, addToast, errFunc, user.UserId, user.UserTeamId],
+    [ENDPOINT, QuestionId, addToast, errFunc, user.UserId, user.UserTeamId],
   );
 
   return (
