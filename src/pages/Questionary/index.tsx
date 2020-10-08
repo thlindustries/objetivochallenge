@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import { FaLightbulb } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
+import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
@@ -75,6 +76,7 @@ interface DataFormInfo {
 const Questionary: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addMessage, clearMessages } = useChat();
+  const { push } = useHistory();
 
   const [caracterCounter, setCaracterCounter] = useState(999);
   const [rememberAnswer, setRememberAnswer] = useState('');
@@ -174,7 +176,7 @@ const Questionary: React.FC = () => {
       `${ENDPOINT}/getcurrentquestionbyteamid?UserId=${user.UserId}&TeamId=${user.UserTeamId}`,
     ).then((response) => {
       if (response.data.QuestionType === 'end') {
-        window.location.href = '/endgame';
+        push('/endgame');
       }
 
       setQuestion(response.data);
@@ -183,7 +185,7 @@ const Questionary: React.FC = () => {
         parseInt(response.data.QuestionAnswerCharacterCounter, 10),
       );
     });
-  }, [ENDPOINT, user.UserId, user.UserTeamId]);
+  }, [ENDPOINT, push, user.UserId, user.UserTeamId]);
 
   useEffect(() => {
     sWs.current = new WebSocket(ENDPOINT_WS);
@@ -284,26 +286,30 @@ const Questionary: React.FC = () => {
     Axios.get<NextQuestion>(
       `${ENDPOINT}/passquestion?QuestionId=${question.QuestionId}&TeamId=${user.UserTeamId}&UserId=${user.UserId}`,
     ).then((response) => {
-      setCaracterCounter(999);
-      setRememberAnswer('');
-      if (response.data.nextQuestion.QuestionId) {
-        setIsPassing(false);
-        setConfirm(!confirm);
-        setQuestion(response.data.nextQuestion);
-        sWs.current?.send(
-          JSON.stringify({
-            action: 'onMessage',
-            type: 'updatecurrentquestionpassed',
-            userId: user.UserId,
-            teamId: user.UserTeamId,
-          }),
-        );
-        sWs.current?.send(
-          JSON.stringify({
-            action: 'onMessage',
-            type: 'refreshranking',
-          }),
-        );
+      try {
+        setCaracterCounter(999);
+        setRememberAnswer('');
+        if (response.data.nextQuestion.QuestionId) {
+          setIsPassing(false);
+          setConfirm(!confirm);
+          setQuestion(response.data.nextQuestion);
+          sWs.current?.send(
+            JSON.stringify({
+              action: 'onMessage',
+              type: 'updatecurrentquestionpassed',
+              userId: user.UserId,
+              teamId: user.UserTeamId,
+            }),
+          );
+          sWs.current?.send(
+            JSON.stringify({
+              action: 'onMessage',
+              type: 'refreshranking',
+            }),
+          );
+        }
+      } catch {
+        window.location.reload();
       }
     });
   }, [ENDPOINT, confirm, question.QuestionId, user.UserId, user.UserTeamId]);

@@ -68,7 +68,7 @@ export const Body = styled.div`
 
 export const Item = styled.div<ItemProps>`
   width: 100%;
-  height: 15%;
+  height: 12%;
 
   display: flex;
   align-items: center;

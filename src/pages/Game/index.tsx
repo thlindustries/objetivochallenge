@@ -17,6 +17,7 @@ import {
   StyledButton,
   PageWrapper,
   FormContainer,
+  ButtonsContainer,
   StyledInput,
 } from './styles';
 
@@ -33,7 +34,6 @@ interface DataFormInfo {
 const Game: React.FC = () => {
   const [card, setCard] = useState('');
   const [change, setChange] = useState(false);
-  const [logging, setLogging] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -68,7 +68,6 @@ const Game: React.FC = () => {
           password: data.password,
         });
 
-        setLogging(true);
         setIsLogging(false);
         setIsEnabled(true);
 
@@ -92,6 +91,11 @@ const Game: React.FC = () => {
     },
     [addToast, signIn],
   );
+
+  const handleSubscribe = useCallback(() => {
+    window.location.href =
+      'https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform';
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -121,7 +125,12 @@ const Game: React.FC = () => {
                 Divirta-se junto com sua equipe solucionando o desafio do
                 colégio objetivo
               </Content>
-              <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
+              <ButtonsContainer>
+                <StyledButton onClick={handleSubscribe}>
+                  Inscrever-se
+                </StyledButton>
+                <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
+              </ButtonsContainer>
             </CircleContent>
           ) : (
               <CircleContent
@@ -143,7 +152,11 @@ const Game: React.FC = () => {
                       type="password"
                       placeholder="senha"
                     />
-                    <StyledButton enabled={isEnabled} type="submit">
+                    <StyledButton
+                      style={{ width: '100%' }}
+                      enabled={isEnabled}
+                      type="submit"
+                    >
                       {isLogging ? <ReactLoading /> : 'Entrar'}
                     </StyledButton>
                     {/* <Link to="forgot-password">Esqueci minha senha</Link> */}

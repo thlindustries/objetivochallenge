@@ -182,7 +182,7 @@ export const HintButton = styled.div`
 export const PassButton = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2%;
+  margin-left: 4%;
 
   color: #c53030;
 
@@ -250,7 +250,9 @@ export const ReportErrorButton = styled.p`
   align-items: center;
 
   text-align: center;
-  margin-right: 4%;
+  margin-right: 2%;
+  margin-left: 2%;
+
   svg {
     color: #eb171e;
     transition: color 0.4s;
