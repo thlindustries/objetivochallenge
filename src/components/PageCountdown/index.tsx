@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, MutableRefObject } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  MutableRefObject,
+  useCallback,
+} from 'react';
 
 import {
   Container,
@@ -23,6 +29,7 @@ const PageCountdown: React.FC<CountDownProps> = ({
   const [timerHours, setHours] = useState('00');
   const [timerMinutes, setMinutes] = useState('00');
   const [timerSeconds, setSeconds] = useState('00');
+  const [expired, setExpired] = useState(false);
   const [localStorageDate, setLocalStorageDate] = useState(0);
 
   interface UserefProps {
@@ -32,6 +39,10 @@ const PageCountdown: React.FC<CountDownProps> = ({
   }
 
   const interval: UserefProps | MutableRefObject<number | undefined> = useRef();
+
+  const handleRemoveCountDown = useCallback(() => {
+    setExpired(true);
+  }, []);
 
   useEffect(() => {
     setLocalStorageDate(to);
@@ -49,7 +60,11 @@ const PageCountdown: React.FC<CountDownProps> = ({
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      console.log(distance === 0);
 
+      if (distance <= 0) {
+        handleRemoveCountDown();
+      }
       if (distance > 0) {
         setDays(`${days}`);
         setHours(`${hours}`);
@@ -63,10 +78,10 @@ const PageCountdown: React.FC<CountDownProps> = ({
     return () => {
       clearInterval(interval.current);
     };
-  }, [from, localStorageDate, to]);
+  }, [from, handleRemoveCountDown, localStorageDate, to]);
 
   return (
-    <Container>
+    <Container expired={expired}>
       <TimerSection from={from ? true : undefined} background={background}>
         {timerDays !== '00' && (
           <>

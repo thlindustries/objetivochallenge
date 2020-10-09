@@ -5,7 +5,11 @@ interface CountDownProps {
   from?: boolean;
 }
 
-export const Container = styled.div`
+interface ContainerProps {
+  expired?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +21,12 @@ export const Container = styled.div`
     color: #fff;
     font-size: 24px;
   }
+
+  ${(props) =>
+    props.expired &&
+    css`
+      display: none;
+    `}
 
   @media (max-width: 700px) {
   }
