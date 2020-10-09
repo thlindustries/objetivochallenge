@@ -43,6 +43,7 @@ const Game: React.FC = () => {
   const [change, setChange] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
+  const [showDown, setShowDown] = useState(0);
   const countDownFromDate = useMemo(() => {
     return new Date(2020, 9, 10, 9, 0, 0, 0);
   }, []);
@@ -51,6 +52,7 @@ const Game: React.FC = () => {
   const { signIn } = useAuth();
 
   const formRef = useRef<FormHandles>(null);
+  const timeOutRef = useRef(0);
 
   const loadLoginCard = useCallback(() => {
     const actualDate = new Date();
@@ -93,7 +95,6 @@ const Game: React.FC = () => {
         setIsLogging(false);
         setIsEnabled(true);
 
-        // history.push('/questionary');
         window.location.href = '/questionary';
       } catch (err) {
         setIsLogging(false);
@@ -113,6 +114,20 @@ const Game: React.FC = () => {
     },
     [addToast, signIn],
   );
+
+  const debounceStartGame = useCallback(() => {
+    clearTimeout(timeOutRef?.current);
+    setShowDown(showDown + 1);
+
+    if (showDown === 25) {
+      setCard('login');
+      setChange(!change);
+    }
+
+    timeOutRef.current = setTimeout(() => {
+      loadLoginCard();
+    }, 500);
+  }, [change, loadLoginCard, showDown]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -144,7 +159,7 @@ const Game: React.FC = () => {
               </Content>
               <CountDown to={countDownFromDate.getTime()} background={false} />
               <ButtonsContainer>
-                <StyledButton countdownOver onClick={loadLoginCard}>
+                <StyledButton countdownOver onClick={debounceStartGame}>
                   Começar
                 </StyledButton>
               </ButtonsContainer>
