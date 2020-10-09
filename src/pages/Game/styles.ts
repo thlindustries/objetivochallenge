@@ -11,6 +11,10 @@ interface Test {
   load?: boolean;
 }
 
+interface StyledButtonProps {
+  countdownOver?: boolean;
+}
+
 export const PageGame = styled.div`
   width: 100vw;
   height: 100vh;
@@ -103,7 +107,7 @@ export const ButtonsContainer = styled.div`
   }
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(Button) <StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,6 +123,12 @@ export const StyledButton = styled(Button)`
   &:hover {
     background: ${shade(0.4, '#fb7c1f')};
   }
+
+  ${(props) =>
+    props.countdownOver &&
+    css`
+      width: 100%;
+    `}
 `;
 
 export const StyledInput = styled(Input)`

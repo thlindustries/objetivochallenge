@@ -25,12 +25,11 @@ const EndGame: React.FC = () => {
             <h2>
               Parabéns <strong>{user.UserName}</strong>
             </h2>
-
             <span>
               <p>
                 Agradecemos a todos do time <strong>{user.TeamName}</strong> por
-                terem participado deste desafio Fiquem ligados em seus e-mails
-                que em breve o resultado final será divulgado
+                terem participado deste desafio. Fiquem ligados que em breve o
+                resultado final será divulgado!
               </p>
               {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
               <audio style={{ opacity: 0 }} controls autoPlay>

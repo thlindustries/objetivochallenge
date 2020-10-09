@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+} from 'react';
 import { FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
@@ -22,6 +28,7 @@ import {
 } from './styles';
 
 import Header from '../../components/Header';
+import CountDown from '../../components/PageCountdown';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -36,6 +43,9 @@ const Game: React.FC = () => {
   const [change, setChange] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
+  const countDownFromDate = useMemo(() => {
+    return new Date(2020, 9, 10, 9, 0, 0, 0);
+  }, []);
 
   const { addToast } = useToast();
   const { signIn } = useAuth();
@@ -43,9 +53,21 @@ const Game: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const loadLoginCard = useCallback(() => {
-    setCard('login');
-    setChange(!change);
-  }, [change]);
+    const actualDate = new Date();
+    const day = actualDate.getDate();
+    const hour = actualDate.getHours();
+
+    if (day >= 10 && hour >= 9) {
+      setCard('login');
+      setChange(!change);
+    } else {
+      addToast({
+        title: 'Alerta',
+        description: 'Aguarde, o evento ainda não começou',
+        type: 'info',
+      });
+    }
+  }, [addToast, change]);
 
   const handleSubmit = useCallback(
     async (data: DataFormInfo) => {
@@ -92,11 +114,6 @@ const Game: React.FC = () => {
     [addToast, signIn],
   );
 
-  const handleSubscribe = useCallback(() => {
-    window.location.href =
-      'https://docs.google.com/forms/d/e/1FAIpQLSeA_fLgG3Sk9sEHDK6R74i0-ePBeeNk_6y7ZpIxlIwiGaF_bA/viewform';
-  }, []);
-
   useEffect(() => {
     const script = document.createElement('script');
 
@@ -125,11 +142,11 @@ const Game: React.FC = () => {
                 Divirta-se junto com sua equipe solucionando o desafio do
                 colégio objetivo
               </Content>
+              <CountDown to={countDownFromDate.getTime()} background={false} />
               <ButtonsContainer>
-                <StyledButton onClick={handleSubscribe}>
-                  Inscrever-se
+                <StyledButton countdownOver onClick={loadLoginCard}>
+                  Começar
                 </StyledButton>
-                <StyledButton onClick={loadLoginCard}>Começar</StyledButton>
               </ButtonsContainer>
             </CircleContent>
           ) : (

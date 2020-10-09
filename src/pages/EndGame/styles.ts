@@ -72,7 +72,8 @@ export const EndGameMessageContainer = styled.div`
     text-align: center;
     letter-spacing: 2px;
 
-    margin-top: 4%;
+    margin-top: 1%;
+    margin-bottom: 4%;
 
     p {
       font-size: 48px;
@@ -88,6 +89,10 @@ export const EndGameMessageContainer = styled.div`
     h2 {
       font-size: 48px;
     }
+  }
+
+  @media (max-width: 1200px) {
+    height: 80%;
   }
 `;
 
@@ -113,6 +118,25 @@ export const OrangeContainer = styled.div`
       p {
         font-size: 32px;
       }
+    }
+  }
+
+  @media (max-height: 900px) {
+    span {
+      p {
+        font-size: 36px;
+      }
+    }
+    img {
+      width: 24%;
+      margin-top: 8%;
+    }
+  }
+
+  @media (max-width: 1030px) {
+    img {
+      width: 24%;
+      margin-top: 2%;
     }
   }
 `;
