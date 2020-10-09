@@ -125,6 +125,7 @@ const Game: React.FC = () => {
     }
 
     timeOutRef.current = setTimeout(() => {
+      setShowDown(0);
       loadLoginCard();
     }, 500);
   }, [change, loadLoginCard, showDown]);
