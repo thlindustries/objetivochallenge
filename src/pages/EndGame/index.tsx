@@ -32,7 +32,7 @@ const EndGame: React.FC = () => {
       <StyledParticles />
       <Container>
         <h1>
-          Desafio <strong>encerrado</strong>
+          Certificado de <strong>participação</strong>
         </h1>
         <FiPrinter onClick={handlePrint} size={40} color="#0c0c0c" />
         <EndGameMessageContainer ref={certificateRef}>
