@@ -9452,6 +9452,13 @@ react-spring@^8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
+react-to-print@^2.10.3:
+  version "2.10.3"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.10.3.tgz#397276d04baa6cb50b61b1d08a91d3bb318efe58"
+  integrity sha512-kRRWpMz34s4lqulHVGokQBf8jvfgBzBeyE6duoKgyEyPnPPnvb6HY6o1J/SME5nqpE1iBr6JEWTJBQ2dFBxd9w==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-tsparticles@^1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/react-tsparticles/-/react-tsparticles-1.18.0.tgz#375c585d598a06752edf2f3aadd47abff79b99ed"

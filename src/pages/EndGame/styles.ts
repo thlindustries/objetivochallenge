@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Particles from './particles';
+
+interface CertificateProps {
+  print?: boolean;
+}
 
 export const Container = styled.div`
   font-family: 'Pricedown';
@@ -19,6 +23,18 @@ export const Container = styled.div`
 
     strong {
       color: rgb(251, 124, 31);
+    }
+  }
+
+  svg {
+    position: absolute;
+    right: 18%;
+    top: 18%;
+    transition: transform 0.4s;
+
+    &:hover {
+      transform: scaleY(1.1) scaleX(1.1);
+      cursor: pointer;
     }
   }
 
@@ -76,7 +92,7 @@ export const EndGameMessageContainer = styled.div`
     margin-bottom: 4%;
 
     p {
-      font-size: 48px;
+      font-size: 42px;
       color: #666666;
 
       strong {
@@ -96,7 +112,7 @@ export const EndGameMessageContainer = styled.div`
   }
 `;
 
-export const OrangeContainer = styled.div`
+export const OrangeContainer = styled.div<CertificateProps>`
   width: 100%;
   height: 100%;
 
@@ -107,6 +123,10 @@ export const OrangeContainer = styled.div`
 
   background: rgba(255, 255, 255, 1);
   border-radius: 6px;
+
+  h2 {
+    text-align: center;
+  }
 
   img {
     width: 30%;
@@ -135,8 +155,16 @@ export const OrangeContainer = styled.div`
 
   @media (max-width: 1030px) {
     img {
-      width: 24%;
-      margin-top: 2%;
+      ${(props) =>
+    props.print
+      ? css`
+              margin-top: -16%;
+              width: 60%;
+            `
+      : css`
+              margin-top: 2%;
+              width: 24%;
+            `}
     }
   }
 `;
