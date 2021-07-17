@@ -9,6 +9,7 @@ import Input from '../Input';
 
 interface Test {
   load?: boolean;
+  isCreated?: boolean;
 }
 
 interface StyledButtonProps {
@@ -38,8 +39,15 @@ export const TContainer = styled.div`
     text-align: center;
     margin: 0;
   }
-`;
 
+  .PixText {
+    transition: color 0.4s;
+    font-family: 'Poppins';
+    font-size: 12px;
+    margin: 105px 39px 0px -15px;
+    text-align: center;
+  }
+`;
 
 export const PageWrapper = styled.div`
   display: flex;
@@ -63,6 +71,12 @@ export const CircleContent = styled(Card)<Test>`
       : css`
           animation: ${bringFromLeft} 1s;
         `}
+
+  ${(props) =>
+    !props.isCreated &&
+    css`
+      width: 455px;
+    `}
 
   .rccs__card > div {
     margin: 6px 0 0px 9px;
@@ -134,7 +148,6 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 4%; */
   width: 40%;
 
   background: #fb7c1f;

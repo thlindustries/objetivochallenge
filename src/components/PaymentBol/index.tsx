@@ -44,7 +44,7 @@ const PaymentBol: React.FC = () => {
       if (transactionId === '') {
         try {
           await pagarme.client
-            .connect({ api_key: process.env.REACT_APP_PAGARME_API })
+            .connect({ api_key: 'ak_live_zH7x5SHyreYpaA1yAn3UiIFCh7Ig1t' })
             .then(
               (client: {
                 transactions: {
@@ -121,7 +121,7 @@ const PaymentBol: React.FC = () => {
 
   return (
     <TContainer>
-      <CircleContent>
+      <CircleContent isCreated={pixQrCode !== ''}>
         <FormContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <StyledButton
@@ -146,7 +146,10 @@ const PaymentBol: React.FC = () => {
             </p>
           </div>
         ) : (
-          <p></p>
+          <p className="PixText">
+            Clique em Gerar QR Code para depois pagar com a opção pix no
+            aplicativo do seu banco no celular!
+          </p>
         )}
       </div>
     </TContainer>
