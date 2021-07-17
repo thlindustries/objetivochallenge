@@ -33,7 +33,6 @@ export const TContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 
   padding: 18px;
 
@@ -52,35 +51,36 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   justify-content: center;
   position: relative;
   ${(props) =>
-    props.payment === 'card'
-      && css`
-          background-image: url(${cardConsole});
-          width: 797px;
-          height: 539px;
-        `}
+    props.payment === 'card' &&
+    css`
+      background-image: url(${cardConsole});
+      width: 797px;
+      height: 539px;
+    `}
 
   ${(props) =>
-    props.payment === 'pix'
-      && css`
-          background-image: url(${cardConsole});
-          width: 797px;
-          height: 539px;
-        `}
+    props.payment === 'pix' &&
+    css`
+      background-image: url(${cardConsole});
+      width: 797px;
+      height: 539px;
+    `}
 
   ${(props) =>
-    props.payment !== 'card' && props.payment !== 'pix'
-      && css`
-        background-image: url(${paymentConsole});
-        
-        @media (min-width: 1500px) {
-          margin-left: 500px;
-        }
-      `}
+    props.payment !== 'card' &&
+    props.payment !== 'pix' &&
+    css`
+      background-image: url(${paymentConsole});
+
+      @media (min-width: 1500px) {
+        margin-left: 500px;
+      }
+    `}
  
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: center;
-  background-position-y: center;  
+  background-position-y: center;
   padding: 0 38px;
 
   margin-left: 17em;
@@ -117,13 +117,12 @@ export const Content = styled.p`
 
   font-family: 'Poppins';
   font-size: 18px;
-
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
   margin-bottom: 50px;
 
@@ -171,25 +170,22 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 
   font-family: 'Poppins';
   font-size: 14px;
-  
 
   ${(props) =>
-    props.countdownOver ? 
-    css`
-    background: #09537D;
-    &:hover {
-      background: ${shade(0.4, '#09537D')};
-    }
-    ` :
-    css`
-    background: #097D45;
-    &:hover {
-      background: ${shade(0.4, '#097D45')};
-    }
-    `}
+    props.countdownOver
+      ? css`
+          background: #09537d;
+          &:hover {
+            background: ${shade(0.4, '#09537D')};
+          }
+        `
+      : css`
+          background: #097d45;
+          &:hover {
+            background: ${shade(0.4, '#097D45')};
+          }
+        `}
 `;
-
-
 
 export const StyledInput = styled(Input)`
   /* width: 300px; */
