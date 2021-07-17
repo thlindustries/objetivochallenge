@@ -38,8 +38,14 @@ const Main: React.FC = () => {
     marginRight: '10px',
   } as React.CSSProperties;
 
-  const defaultUserProfileImage = useMemo<string>(
+  const defaultTeamProfileImage = useMemo<string>(
     () => 'https://cdn.raceroster.com/assets/images/team-placeholder.png',
+    [],
+  );
+
+  const defaultUserProfileImage = useMemo<string>(
+    () =>
+      'https://nextlevelimagesprofile.s3-sa-east-1.amazonaws.com/defaultUser.png',
     [],
   );
 
@@ -108,7 +114,7 @@ const Main: React.FC = () => {
                           src={
                             team.imageurl && team.imageurl !== ' '
                               ? team.imageurl
-                              : defaultUserProfileImage
+                              : defaultTeamProfileImage
                           }
                           alt="user"
                         />
@@ -149,14 +155,28 @@ const Main: React.FC = () => {
                   </Buttons>
                 </Form>
                 <Users>
-                  <P>Membros do time:</P>
+                  <P>Membros do time</P>
                   <UserContainer>
                     {membros.map((users, index) => (
                       <li key={index} list-style-type="none">
                         <A>
-                          <p>
-                            {JSON.stringify(users.fullname).replace(/"/g, '')}
-                          </p>
+                          <div className="userInfo">
+                            <ImageContainer>
+                              <div className="main-profile-img">
+                                <MainImg
+                                  src={
+                                    users.imageurl && users.imageurl !== ' '
+                                      ? users.imageurl
+                                      : defaultUserProfileImage
+                                  }
+                                  alt="user"
+                                />
+                              </div>
+                            </ImageContainer>
+                            <p>
+                              {JSON.stringify(users.fullname).replace(/"/g, '')}
+                            </p>
+                          </div>
                           <div className="accepted">
                             <FiCheck /> aceito
                           </div>
@@ -167,7 +187,17 @@ const Main: React.FC = () => {
                     {pendentes.map((users, index) => (
                       <li key={index} list-style-type="none">
                         <A>
-                          <p>{JSON.stringify(users).replace(/"/g, '')}</p>
+                          <div className="userInfo">
+                            <ImageContainer>
+                              <div className="main-profile-img">
+                                <MainImg
+                                  src={defaultUserProfileImage}
+                                  alt="user"
+                                />
+                              </div>
+                            </ImageContainer>
+                            <p>{JSON.stringify(users).replace(/"/g, '')}</p>
+                          </div>
                           <div className="pending">
                             <FiX /> pendente
                           </div>

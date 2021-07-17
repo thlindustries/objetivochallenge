@@ -153,7 +153,6 @@ const Invite: React.FC = () => {
                         name="useremail"
                         icon={FiUser}
                         placeholder="Email"
-                        style={{ width: 300 }}
                       />
                       <StyledButton enabled={isEnabled} type="submit">
                         {isLogging ? (

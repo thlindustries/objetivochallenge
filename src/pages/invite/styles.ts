@@ -171,7 +171,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 `;
 
 export const StyledInput = styled(Input)`
-  /* width: 300px; */
+  width: 96%;
 `;
 
 export const Logo = styled.img`

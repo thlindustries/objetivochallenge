@@ -247,6 +247,18 @@ export const UserContainer = styled.div`
       color: ${shade(0.4, '#fff')};
     }
   }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  // li {
+  //   display: flex;
+  // }
+  // li:nth-child(odd) {
+  //   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,205,0.9374124649859944) 50%, rgba(255,255,255,1) 100%);
+  // }
 `;
 
 export const li = styled.div`
@@ -298,10 +310,6 @@ export const UsersContainer = styled.div`
     width: 100%;
     padding: 0 1.5vw;
     background: #ecf2f4;
-  }
-
-  li:nth-child(odd) {
-    background: none;
   }
 
   @media (min-height: 1050px) {
