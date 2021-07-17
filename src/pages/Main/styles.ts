@@ -95,7 +95,7 @@ export const FormContainer = styled.div`
   }
 
   .form {
-    margin: -340px 195px 0 0;
+    margin: -340px 124px 0 0;
   }
 `;
 
@@ -221,6 +221,8 @@ export const LogoOptions = styled.div`
 
 export const Users = styled.div`
   margin-top: -110px;
+  width: 543px;
+  margin-right: -56px;
 `;
 
 export const UserContainer = styled.div`
@@ -253,12 +255,19 @@ export const UserContainer = styled.div`
     align-items: center;
   }
 
-  // li {
-  //   display: flex;
-  // }
-  // li:nth-child(odd) {
-  //   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,205,0.9374124649859944) 50%, rgba(255,255,255,1) 100%);
-  // }
+  li {
+    display: flex;
+    margin-bottom: 0.5em;
+  }
+
+  li:nth-child(odd) {
+    background: linear-gradient(
+      90deg,
+      rgb(247 243 243) 0%,
+      rgb(245 245 245 / 94%) 50%,
+      rgb(249 249 249) 100%
+    );
+  }
 `;
 
 export const li = styled.div`
@@ -274,8 +283,9 @@ export const P = styled.div`
 `;
 
 export const A = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-left: 5px;
 
