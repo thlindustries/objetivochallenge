@@ -11,7 +11,7 @@ import ReactLoading from 'react-loading';
 import Axios from 'axios';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { Select } from '@material-ui/core';
+import { Checkbox, FormControlLabel, Select } from '@material-ui/core';
 import { useAuth } from '../../hooks/auth';
 import { useTeam } from '../../hooks/team';
 
@@ -274,9 +274,20 @@ const Subscribe: React.FC = () => {
                               <option value="Médio">Médio</option>
                             </Select>
                           </SelectC>
-                          <StyledButton enabled={isEnabled} type="submit">
-                            {isLogging ? <ReactLoading /> : 'Cadastar'}
-                          </StyledButton>
+                          <div className="submitButton">
+                            <div className="checkbox">
+                              <input
+                                type="checkbox"
+                                id="vehicle1"
+                                name="vehicle1"
+                                value="Bike"
+                              />
+                              <span> Tenho no mínimo 18 anos.</span>
+                            </div>
+                            <StyledButton enabled={isEnabled} type="submit">
+                              {isLogging ? <ReactLoading /> : 'Cadastar'}
+                            </StyledButton>
+                          </div>
                         </div>
                       </Form>
                     </FormContainer>
