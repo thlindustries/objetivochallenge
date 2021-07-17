@@ -36,6 +36,7 @@ export const TContainer = styled.div`
   background-position-x: center;
   background-position-y: center;
 
+  margin-left: 12em;
 
   animation: ${loadFromTransparent} 1.4s;
 `;
@@ -52,7 +53,7 @@ export const CircleContent = styled(Card)<Test>`
   justify-content: center;
   position: relative;
 
-  margin-left: 22em;
+  margin-left: 21.5em;
 
   ${(props) =>
     props.load

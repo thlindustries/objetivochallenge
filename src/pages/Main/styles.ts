@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 import { loadFromTransparent, bringFromLeft } from '../invite/animations';
-
+import { glow } from './animations';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -64,7 +64,7 @@ export const CircleContent = styled(Card)<Test>`
   .teamInfo {
     display: flex;
     justify-content: center;
-    margin-top: 14px;
+    margin: 14px 0 1.25em 0;
   }
 
   @media (min-width: 1500px) {
@@ -95,7 +95,7 @@ export const FormContainer = styled.div`
   }
 
   .form {
-    margin: -320px 213px 0 0;
+    margin: -340px 195px 0 0;
   }
 `;
 
@@ -142,8 +142,6 @@ export const BackButton = styled(Button)<StyledButtonProps>`
   font-family: 'Poppins';
   font-size: 18px;
 
-  
-
   ${(props) =>
     props.countdownOver &&
     css`
@@ -153,15 +151,15 @@ export const BackButton = styled(Button)<StyledButtonProps>`
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 160px;
+  width: 207px;
   height: 40px;
 
   font-size: 14px;
   border-radius: 220px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
   font-family: 'Poppins';
@@ -231,7 +229,6 @@ export const UserContainer = styled.div`
   align-items: left;
   justify-content: left;
   list-style-type: none;
-  
 
   width: 100%;
   height: 262px;
@@ -250,6 +247,18 @@ export const UserContainer = styled.div`
       color: ${shade(0.4, '#fff')};
     }
   }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  // li {
+  //   display: flex;
+  // }
+  // li:nth-child(odd) {
+  //   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,205,0.9374124649859944) 50%, rgba(255,255,255,1) 100%);
+  // }
 `;
 
 export const li = styled.div`
@@ -275,13 +284,13 @@ export const A = styled.div`
   .accepted {
     display: flex;
     align-items: center;
-    color: #097D45;
+    color: #097d45;
   }
 
   .pending {
     display: flex;
     align-items: center;
-    color: #CE2121;
+    color: #ce2121;
   }
 `;
 
@@ -291,7 +300,7 @@ export const UsersContainer = styled.div`
   align-content: center;
   align-items: center;
   justify-content: flex-start;
-  width: 565px;;
+  width: 565px;
   height: 220px;
   overflow-y: auto;
   margin-bottom: -116px;
@@ -300,11 +309,7 @@ export const UsersContainer = styled.div`
     list-style-type: none;
     width: 100%;
     padding: 0 1.5vw;
-    background: #ECF2F4;
-  }
-
-  li:nth-child(odd) {
-    background: none;
+    background: #ecf2f4;
   }
 
   @media (min-height: 1050px) {
@@ -344,4 +349,19 @@ export const MainImg = styled.img`
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+`;
+
+export const ChallengeText = styled.p`
+  font-family: 'Rowdies';
+  font-size: 36px;
+
+  text-shadow: 0 0 10px #0031ff75;
+
+  strong {
+    color: #fff;
+
+    text-shadow: 0 0 10px #4c72a1;
+
+    animation: ${glow} 2s infinite alternate;
+  }
 `;
