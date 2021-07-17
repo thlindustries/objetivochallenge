@@ -151,9 +151,9 @@ export const BackButton = styled(Button)<StyledButtonProps>`
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 160px;
+  width: 207px;
   height: 40px;
 
   font-size: 14px;
