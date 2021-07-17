@@ -95,7 +95,7 @@ export const FormContainer = styled.div`
   }
 
   .form {
-    margin: -320px 213px 0 0;
+    margin: -340px 195px 0 0;
   }
 `;
 
