@@ -44,7 +44,7 @@ const PaymentBol: React.FC = () => {
       if (transactionId === '') {
         try {
           await pagarme.client
-            .connect({ api_key: 'ak_live_zH7x5SHyreYpaA1yAn3UiIFCh7Ig1t' })
+            .connect({ api_key: process.env.REACT_APP_PAGARME_API })
             .then(
               (client: {
                 transactions: {
