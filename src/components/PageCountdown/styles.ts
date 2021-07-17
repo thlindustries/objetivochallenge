@@ -24,7 +24,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   justify-content: center;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   span {
     color: #fff;

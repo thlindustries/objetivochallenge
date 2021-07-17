@@ -34,7 +34,7 @@ export const TContainer = styled.div`
 
   .QRText {
     transition: color 0.4s;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 12px;
     text-align: center;
     margin: 0;
@@ -42,7 +42,7 @@ export const TContainer = styled.div`
 
   .PixText {
     transition: color 0.4s;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 12px;
     margin: 105px 39px 0px -15px;
     text-align: center;
@@ -98,7 +98,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -123,7 +123,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -153,7 +153,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #fb7c1f;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 24px;
 
   &:hover {

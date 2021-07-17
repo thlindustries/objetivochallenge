@@ -84,7 +84,7 @@ export const FormContainer = styled.div`
   margin-top: 14em;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -105,7 +105,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -139,7 +139,7 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   ${(props) =>
@@ -162,7 +162,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   &:hover {
     background: ${shade(0.4, '#097D45')};
@@ -209,7 +209,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
@@ -240,7 +240,7 @@ export const UserContainer = styled.div`
   padding-top: 40px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -365,7 +365,7 @@ export const MainImg = styled.img`
 `;
 
 export const ChallengeText = styled.p`
-  font-family: 'Rowdies';
+  font-family: 'Roboto';
   font-size: 36px;
 
   text-shadow: 0 0 10px #0031ff75;

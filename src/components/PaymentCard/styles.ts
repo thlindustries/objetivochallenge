@@ -72,7 +72,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -97,7 +97,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -129,7 +129,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #097D45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 24px;
   align-self: flex-end;
   margin-right: 27px;

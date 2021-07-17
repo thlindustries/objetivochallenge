@@ -73,7 +73,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -98,7 +98,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -132,10 +132,8 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
-
-  
 
   ${(props) =>
     props.countdownOver &&
@@ -154,10 +152,10 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   font-size: 14px;
   border-radius: 220px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   &:hover {
     background: ${shade(0.4, '#097D45')};
@@ -204,7 +202,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
@@ -224,7 +222,6 @@ export const UserContainer = styled.div`
   align-items: left;
   justify-content: left;
   list-style-type: none;
-  
 
   width: 100%;
   height: 262px;
@@ -234,7 +231,7 @@ export const UserContainer = styled.div`
   padding-top: 40px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -273,12 +270,12 @@ export const A = styled.div`
   .accepted {
     display: flex;
     align-items: center;
-    color: #097D45;
+    color: #097d45;
   }
 
   .pending {
     display: flex;
     align-items: center;
-    color: #CE2121;
+    color: #ce2121;
   }
 `;

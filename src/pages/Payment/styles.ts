@@ -98,7 +98,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -115,7 +115,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 `;
 
@@ -148,7 +148,7 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   ${(props) =>
@@ -168,7 +168,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
 
   ${(props) =>
@@ -224,7 +224,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 14px;
   }
 

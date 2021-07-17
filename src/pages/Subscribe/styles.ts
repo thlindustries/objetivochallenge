@@ -26,12 +26,15 @@ export const PageGame = styled.div`
 `;
 
 export const FormHeader = styled.div`
-  padding-left: 3%;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
   text-align: left;
   margin-bottom: 16px;
+
+  @media (max-height: 835px) {
+    padding-left: 3%;
+  }
 `;
 
 export const TContainer = styled.div`
@@ -86,7 +89,7 @@ export const FormContainer = styled.div`
   margin-left: -190px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -184,7 +187,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
 
   margin-bottom: 15px;
@@ -335,7 +338,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
