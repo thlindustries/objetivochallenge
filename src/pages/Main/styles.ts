@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 import { loadFromTransparent, bringFromLeft } from '../invite/animations';
-
+import { glow } from './animations';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -64,7 +64,7 @@ export const CircleContent = styled(Card)<Test>`
   .teamInfo {
     display: flex;
     justify-content: center;
-    margin-top: 14px;
+    margin: 14px 0 1.25em 0;
   }
 
   @media (min-width: 1500px) {
@@ -142,8 +142,6 @@ export const BackButton = styled(Button)<StyledButtonProps>`
   font-family: 'Poppins';
   font-size: 18px;
 
-  
-
   ${(props) =>
     props.countdownOver &&
     css`
@@ -161,7 +159,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   font-size: 14px;
   border-radius: 220px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
   font-family: 'Poppins';
@@ -231,7 +229,6 @@ export const UserContainer = styled.div`
   align-items: left;
   justify-content: left;
   list-style-type: none;
-  
 
   width: 100%;
   height: 262px;
@@ -275,13 +272,13 @@ export const A = styled.div`
   .accepted {
     display: flex;
     align-items: center;
-    color: #097D45;
+    color: #097d45;
   }
 
   .pending {
     display: flex;
     align-items: center;
-    color: #CE2121;
+    color: #ce2121;
   }
 `;
 
@@ -291,7 +288,7 @@ export const UsersContainer = styled.div`
   align-content: center;
   align-items: center;
   justify-content: flex-start;
-  width: 565px;;
+  width: 565px;
   height: 220px;
   overflow-y: auto;
   margin-bottom: -116px;
@@ -300,7 +297,7 @@ export const UsersContainer = styled.div`
     list-style-type: none;
     width: 100%;
     padding: 0 1.5vw;
-    background: #ECF2F4;
+    background: #ecf2f4;
   }
 
   li:nth-child(odd) {
@@ -344,4 +341,19 @@ export const MainImg = styled.img`
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+`;
+
+export const ChallengeText = styled.p`
+  font-family: 'Rowdies';
+  font-size: 36px;
+
+  text-shadow: 0 0 10px #0031ff75;
+
+  strong {
+    color: #fff;
+
+    text-shadow: 0 0 10px #4c72a1;
+
+    animation: ${glow} 2s infinite alternate;
+  }
 `;
