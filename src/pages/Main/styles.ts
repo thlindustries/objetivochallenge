@@ -253,6 +253,7 @@ export const UserContainer = styled.div`
   .userInfo {
     display: flex;
     align-items: center;
+    margin-right: 16%;
   }
 
   li {
@@ -285,11 +286,13 @@ export const P = styled.div`
 export const A = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   margin-left: 5px;
 
   font-size: 18px;
+
+  padding-left: 55px;
 
   .accepted {
     display: flex;
