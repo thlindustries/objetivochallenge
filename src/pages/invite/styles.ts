@@ -255,6 +255,11 @@ export const P = styled.div`
   width: 18em;
 
   font-size: 24px;
+
+  .limit {
+    font-size: 15px;
+    margin-left: 27px;
+  }
 `;
 
 export const A = styled.div`
