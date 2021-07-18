@@ -176,6 +176,8 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
       height: 40px;
       background: #ffffff;
       color: #178feb;
+      margin-left: 1em;
+
       &:hover {
         background: #ffbb38;
       }

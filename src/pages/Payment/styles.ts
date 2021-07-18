@@ -15,6 +15,7 @@ interface Test {
 
 interface StyledButtonProps {
   countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 interface CircleContainerProps {
@@ -185,6 +186,21 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
             background: ${shade(0.4, '#097D45')};
           }
         `}
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 8%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      margin-left: 1em;
+
+      &:hover {
+        background: #ffbb38;
+      }
+    `}
 `;
 
 export const StyledInput = styled(Input)`
