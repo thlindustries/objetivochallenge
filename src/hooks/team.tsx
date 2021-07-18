@@ -7,11 +7,10 @@ interface Team {
   currentquestionid: string;
   imageurl: string;
   category: string;
-  points: string;
+  points: number;
   teamid: string;
   paymentStatus: string;
 }
-
 
 interface TeamContextData {
   team: Team;
@@ -34,10 +33,8 @@ export const TeamProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<TeamLoginData>(() => {
     const token = localStorage.getItem('@Challenge:token');
     const team = localStorage.getItem('@Challenge:team');
-    
 
     if (team) {
-      //Axios.defaults.headers.authorization = `Bearer ${token}`;
       return {
         token,
         team: JSON.parse(team),
@@ -49,12 +46,12 @@ export const TeamProvider: React.FC = ({ children }) => {
 
   const signTeam = useCallback(async (teamid) => {
     const response = await Axios.get(
-      `https://j1hjd787mc.execute-api.sa-east-1.amazonaws.com/prod/team?teamid=${teamid}`
-    )
-    const {team}  = response.data;
-    
-    Object.assign(team)
-    
+      `https://j1hjd787mc.execute-api.sa-east-1.amazonaws.com/prod/team?teamid=${teamid}`,
+    );
+    const { team } = response.data;
+
+    Object.assign(team);
+
     if (team !== undefined) {
       localStorage.setItem('@Challenge:team', JSON.stringify(team));
     }
@@ -72,9 +69,7 @@ export const TeamProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <TeamContext.Provider
-      value={{ team: data.team, signTeam, teamOut }}
-    >
+    <TeamContext.Provider value={{ team: data.team, signTeam, teamOut }}>
       {children}
     </TeamContext.Provider>
   );
