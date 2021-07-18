@@ -17,13 +17,10 @@ import {
   PageWrapper,
   ButtonsContainer,
   LogoOptions,
-  Logo,
   LogoContent,
 } from './styles';
 
 import Header from '../../components/Header';
-
-import seta from '../../assets/img/seta.png';
 
 const Payment: React.FC = () => {
   const [isCard, setIsCard] = useState(false);

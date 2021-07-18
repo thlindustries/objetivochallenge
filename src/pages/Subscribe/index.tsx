@@ -31,13 +31,11 @@ import {
   ImageComponents,
   LogoContent,
   LogoOptions,
-  Logo,
 } from './styles';
 
 import Header from '../../components/Header';
 import { LContainer } from '../Game/styles';
 import ImageUpload from '../../components/ImageUpload';
-import seta from '../../assets/img/setaAzul.png';
 import Input from '../../components/Input';
 
 interface DataFormInfo {

@@ -24,13 +24,10 @@ import {
   A,
   Users,
   LogoOptions,
-  Logo,
   LogoContent,
 } from './styles';
 
 import Header from '../../components/Header';
-
-import seta from '../../assets/img/seta.png';
 
 interface DataFormInfo {
   useremail: string;
