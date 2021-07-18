@@ -14,6 +14,7 @@ interface Test {
 
 interface StyledButtonProps {
   countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 export const PageGame = styled.div`
@@ -165,6 +166,19 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     props.countdownOver &&
     css`
       width: 100%;
+    `}
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 8%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      &:hover {
+        background: #ffbb38;
+      }
     `}
 `;
 
