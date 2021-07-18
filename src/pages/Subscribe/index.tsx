@@ -157,7 +157,8 @@ const Subscribe: React.FC = () => {
       <LogoContent>
         <LogoOptions>
           <StyledButton isBack onClick={logo}>
-            <FiArrowLeft size={32} /> Voltar
+            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-3px' }}>Voltar</span>
           </StyledButton>
           {loading && (
             <LContainer>

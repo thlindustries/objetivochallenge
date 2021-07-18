@@ -130,7 +130,8 @@ const Invite: React.FC = () => {
       <LogoContent>
         <LogoOptions>
           <StyledButton isBack onClick={goBack}>
-            <FiArrowLeft size={32} /> Voltar
+            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-3px' }}>Voltar</span>
           </StyledButton>
           {user && (
             <TContainer>

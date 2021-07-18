@@ -80,8 +80,9 @@ const Payment: React.FC = () => {
       <Header />
       <LogoContent>
         <LogoOptions>
-        <StyledButton isBack onClick={goBack}>
-            <FiArrowLeft size={32} /> Voltar
+          <StyledButton isBack onClick={goBack}>
+            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-3px' }}>Voltar</span>
           </StyledButton>
           <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
           <TContainer>

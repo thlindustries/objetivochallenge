@@ -204,11 +204,16 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     props.isBack &&
     css`
       z-index: 999;
-      width: 8%;
+      width: 6%;
       height: 40px;
       background: #ffffff;
       color: #178feb;
       margin-left: 1em;
+      justify-content: space-between;
+
+      @media (max-width: 1300px) {
+        width: 8%;
+      }
 
       &:hover {
         background: #ffbb38;
