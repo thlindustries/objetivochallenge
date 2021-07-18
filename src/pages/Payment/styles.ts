@@ -84,7 +84,7 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   background-position-y: center;
   padding: 0 38px;
 
-  margin-left: 17em;
+  margin-left: 13em;
   animation: ${bringFromLeft} 1s;
 `;
 
