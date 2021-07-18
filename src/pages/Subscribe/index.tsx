@@ -5,13 +5,13 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import { FiLock, FiUser } from 'react-icons/fi';
+import { FiArrowLeft, FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
 import Axios from 'axios';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { Checkbox, FormControlLabel, Select } from '@material-ui/core';
+import { Select } from '@material-ui/core';
 import { useAuth } from '../../hooks/auth';
 import { useTeam } from '../../hooks/team';
 
@@ -37,7 +37,7 @@ import {
 import Header from '../../components/Header';
 import { LContainer } from '../Game/styles';
 import ImageUpload from '../../components/ImageUpload';
-import seta from '../../assets/img/seta.png';
+import seta from '../../assets/img/setaAzul.png';
 import Input from '../../components/Input';
 
 interface DataFormInfo {
@@ -158,7 +158,9 @@ const Subscribe: React.FC = () => {
       <Header />
       <LogoContent>
         <LogoOptions>
-          <Logo onClick={logo} src={seta} alt="seta" />
+          <StyledButton isBack onClick={logo}>
+            <FiArrowLeft size={32} /> Voltar
+          </StyledButton>
           {loading && (
             <LContainer>
               <ReactLoading

@@ -17,7 +17,7 @@ interface ImgProps {
 }
 
 interface StyledButtonProps {
-  countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 export const PageGame = styled.div`
@@ -199,6 +199,19 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   @media (max-height: 835px) {
     height: 30px;
   }
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 8%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      &:hover {
+        background: #ffbb38;
+      }
+    `}
 `;
 
 export const ImageContainer = styled.div<ImgProps>`
