@@ -6,12 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 
-import {
-  Container,
-  NumberSection,
-  TimerSection,
-  Number,
-} from './styles';
+import { Container, NumberSection, TimerSection, Number } from './styles';
 
 interface CountDownProps {
   to: number;
@@ -83,19 +78,19 @@ const PageCountdown: React.FC<CountDownProps> = ({
       <TimerSection from={from ? true : undefined} background={background}>
         {timerDays !== '00' && (
           <>
-            <NumberSection count={'day'}>
+            <NumberSection count="day">
               <Number>{timerDays}</Number>
             </NumberSection>
 
-            <NumberSection count={'hour'}>
+            <NumberSection count="hour">
               <Number>{timerHours}</Number>
             </NumberSection>
 
-            <NumberSection count={'minute'}>
+            <NumberSection count="minute">
               <Number>{timerMinutes}</Number>
             </NumberSection>
 
-            <NumberSection count={'second'}>
+            <NumberSection count="second">
               <Number>{timerSeconds}</Number>
             </NumberSection>
           </>

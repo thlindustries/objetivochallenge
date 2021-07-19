@@ -15,6 +15,7 @@ interface Test {
 
 interface StyledButtonProps {
   countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 interface CircleContainerProps {
@@ -33,7 +34,6 @@ export const TContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 
   padding: 18px;
 
@@ -52,38 +52,39 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   justify-content: center;
   position: relative;
   ${(props) =>
-    props.payment === 'card'
-      && css`
-          background-image: url(${cardConsole});
-          width: 797px;
-          height: 539px;
-        `}
+    props.payment === 'card' &&
+    css`
+      background-image: url(${cardConsole});
+      width: 797px;
+      height: 539px;
+    `}
 
   ${(props) =>
-    props.payment === 'pix'
-      && css`
-          background-image: url(${cardConsole});
-          width: 797px;
-          height: 539px;
-        `}
+    props.payment === 'pix' &&
+    css`
+      background-image: url(${cardConsole});
+      width: 797px;
+      height: 539px;
+    `}
 
   ${(props) =>
-    props.payment !== 'card' && props.payment !== 'pix'
-      && css`
-        background-image: url(${paymentConsole});
-        
-        @media (min-width: 1500px) {
-          margin-left: 500px;
-        }
-      `}
+    props.payment !== 'card' &&
+    props.payment !== 'pix' &&
+    css`
+      background-image: url(${paymentConsole});
+
+      @media (min-width: 1500px) {
+        margin-left: 500px;
+      }
+    `}
  
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: center;
-  background-position-y: center;  
+  background-position-y: center;
   padding: 0 38px;
 
-  margin-left: 17em;
+  margin-left: 13em;
   animation: ${bringFromLeft} 1s;
 `;
 
@@ -98,7 +99,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -115,15 +116,14 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
-
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
   margin-bottom: 50px;
 
@@ -149,7 +149,7 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   ${(props) =>
@@ -169,27 +169,44 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
-  
 
   ${(props) =>
-    props.countdownOver ? 
+    props.countdownOver
+      ? css`
+          background: #09537d;
+          &:hover {
+            background: ${shade(0.4, '#09537D')};
+          }
+        `
+      : css`
+          background: #097d45;
+          &:hover {
+            background: ${shade(0.4, '#097D45')};
+          }
+        `}
+
+  ${(props) =>
+    props.isBack &&
     css`
-    background: #09537D;
-    &:hover {
-      background: ${shade(0.4, '#09537D')};
-    }
-    ` :
-    css`
-    background: #097D45;
-    &:hover {
-      background: ${shade(0.4, '#097D45')};
-    }
+      z-index: 999;
+      width: 6%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      margin-left: 1em;
+      justify-content: space-between;
+
+      @media (max-width: 1300px) {
+        width: 8%;
+      }
+
+      &:hover {
+        background: #ffbb38;
+      }
     `}
 `;
-
-
 
 export const StyledInput = styled(Input)`
   /* width: 300px; */
@@ -228,7 +245,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 14px;
   }
 

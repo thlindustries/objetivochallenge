@@ -9,6 +9,7 @@ import Input from '../Input';
 
 interface Test {
   load?: boolean;
+  isCreated?: boolean;
 }
 
 interface StyledButtonProps {
@@ -33,13 +34,20 @@ export const TContainer = styled.div`
 
   .QRText {
     transition: color 0.4s;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 12px;
     text-align: center;
     margin: 0;
   }
-`;
 
+  .PixText {
+    transition: color 0.4s;
+    font-family: 'Roboto';
+    font-size: 12px;
+    margin: 105px 39px 0px -15px;
+    text-align: center;
+  }
+`;
 
 export const PageWrapper = styled.div`
   display: flex;
@@ -64,6 +72,12 @@ export const CircleContent = styled(Card)<Test>`
           animation: ${bringFromLeft} 1s;
         `}
 
+  ${(props) =>
+    !props.isCreated &&
+    css`
+      width: 455px;
+    `}
+
   .rccs__card > div {
     margin: 6px 0 0px 9px;
     height: 92%;
@@ -84,7 +98,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -109,7 +123,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -134,13 +148,12 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 4%; */
   width: 40%;
 
   background: #fb7c1f;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 24px;
 
   &:hover {

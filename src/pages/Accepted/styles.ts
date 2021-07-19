@@ -36,6 +36,7 @@ export const TContainer = styled.div`
   background-position-x: center;
   background-position-y: center;
 
+  margin-left: 12em;
 
   animation: ${loadFromTransparent} 1.4s;
 `;
@@ -52,7 +53,7 @@ export const CircleContent = styled(Card)<Test>`
   justify-content: center;
   position: relative;
 
-  margin-left: 22em;
+  margin-left: 21.5em;
 
   ${(props) =>
     props.load
@@ -75,7 +76,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -99,7 +100,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -133,7 +134,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #097D45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   &:hover {
     background: ${shade(0.4, '#097D45')};

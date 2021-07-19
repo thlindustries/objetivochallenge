@@ -14,6 +14,7 @@ interface Test {
 
 interface StyledButtonProps {
   countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 export const PageGame = styled.div`
@@ -51,6 +52,7 @@ export const CircleContent = styled(Card)<Test>`
   flex-direction: row;
   justify-content: center;
   position: relative;
+  margin-top: 8em;
 
   ${(props) =>
     props.load
@@ -73,7 +75,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -98,7 +100,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -132,10 +134,8 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
-
-  
 
   ${(props) =>
     props.countdownOver &&
@@ -154,10 +154,10 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   font-size: 14px;
   border-radius: 220px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   &:hover {
     background: ${shade(0.4, '#097D45')};
@@ -168,10 +168,30 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     css`
       width: 100%;
     `}
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 5%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      margin-left: 1em;
+      justify-content: space-between;
+
+      @media (max-width: 1300px) {
+        width: 8%;
+      }
+
+      &:hover {
+        background: #ffbb38;
+      }
+    `}
 `;
 
 export const StyledInput = styled(Input)`
-  /* width: 300px; */
+  width: 96%;
 `;
 
 export const Logo = styled.img`
@@ -204,7 +224,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
@@ -224,7 +244,6 @@ export const UserContainer = styled.div`
   align-items: left;
   justify-content: left;
   list-style-type: none;
-  
 
   width: 100%;
   height: 262px;
@@ -234,7 +253,7 @@ export const UserContainer = styled.div`
   padding-top: 40px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -255,6 +274,11 @@ export const P = styled.div`
   width: 18em;
 
   font-size: 24px;
+
+  .limit {
+    font-size: 15px;
+    margin-left: 27px;
+  }
 `;
 
 export const A = styled.div`
@@ -268,12 +292,12 @@ export const A = styled.div`
   .accepted {
     display: flex;
     align-items: center;
-    color: #097D45;
+    color: #097d45;
   }
 
   .pending {
     display: flex;
     align-items: center;
-    color: #CE2121;
+    color: #ce2121;
   }
 `;

@@ -44,7 +44,7 @@ export const PageWrapper = styled.div`
   display: flex;
 `;
 
-export const CircleContent = styled(Card) <Test>`
+export const CircleContent = styled(Card)<Test>`
   width: 100vw;
   height: 80vh;
 
@@ -79,7 +79,7 @@ export const FormContainer = styled.div`
   padding: 0px 55px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -97,7 +97,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -137,11 +137,11 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 `;
 
-export const StyledButton = styled(Button) <StyledButtonProps>`
+export const StyledButton = styled(Button)<StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -150,10 +150,10 @@ export const StyledButton = styled(Button) <StyledButtonProps>`
   width: 40%;
   height: 40px;
 
-  background: #006DBC;
+  background: #006dbc;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
 
   &:hover {
@@ -163,11 +163,11 @@ export const StyledButton = styled(Button) <StyledButtonProps>`
   ${(props) =>
     !props.isGreen
       ? css`
-        background: #006DBC;
+          background: #006dbc;
         `
       : css`
-        background: #097D45;
-  `}
+          background: #097d45;
+        `}
 `;
 
 export const StyledInput = styled(Input)`
@@ -209,4 +209,3 @@ export const LContainer = styled.div`
   margin-left: 22em;
   margin-top: 2em;
 `;
-

@@ -8,7 +8,6 @@ import Card from '../../components/Card';
 
 import SubscribeBackground from '../../assets/img/subscribeForm.png';
 
-
 interface Test {
   load?: boolean;
 }
@@ -18,7 +17,7 @@ interface ImgProps {
 }
 
 interface StyledButtonProps {
-  countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 export const PageGame = styled.div`
@@ -27,12 +26,15 @@ export const PageGame = styled.div`
 `;
 
 export const FormHeader = styled.div`
-  padding-left: 3%;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
   text-align: left;
   margin-bottom: 16px;
+
+  @media (max-height: 835px) {
+    padding-left: 3%;
+  }
 `;
 
 export const TContainer = styled.div`
@@ -52,7 +54,7 @@ export const PageWrapper = styled.div`
   display: flex;
 `;
 
-export const CircleContent = styled(Card) <Test>`
+export const CircleContent = styled(Card)<Test>`
   width: 100vw;
   height: 100vh;
 
@@ -87,7 +89,7 @@ export const FormContainer = styled.div`
   margin-left: -190px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
     color: #fff;
 
@@ -117,24 +119,47 @@ export const FormContainer = styled.div`
   .leftForm {
     padding-bottom: 8%;
     margin-left: -65px;
-    
+
     @media (max-height: 835px) {
       padding-bottom: 5%;
-      margin-left: -5px;
+      margin-left: 0px;
+      margin-right: -23px;
     }
   }
 
   .rightForm {
-    display: "flex";
-    flex-direction: "column";
+    display: 'flex';
+    flex-direction: 'column';
 
     @media (max-height: 835px) {
       margin-top: 25px;
+      margin-right: 8px;
     }
   }
 
   .select {
     width: 100%;
+  }
+
+  .submitButton {
+    display: flex;
+    font-size: 10px;
+    width: 260px;
+    margin-left: 20px;
+    justify-content: space-between;
+
+    @media (max-height: 835px) {
+      width: 260px;
+      margin-left: 24px;
+      margin-right: 22px;
+      padding-right: 2em;
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 `;
 
@@ -159,19 +184,41 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   width: 40%;
   height: 40px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
+
+  margin-bottom: 15px;
 
   &:hover {
     background: ${shade(0.4, '#097D45')};
   }
-  
+
   @media (max-height: 835px) {
     height: 30px;
   }
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 6%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      margin-left: 1em;
+      justify-content: space-between;
+
+      @media (max-width: 1300px) {
+        width: 8%;
+      }
+
+      &:hover {
+        background: #ffbb38;
+      }
+    `}
 `;
 
 export const ImageContainer = styled.div<ImgProps>`
@@ -193,20 +240,20 @@ export const ImageContainer = styled.div<ImgProps>`
     }
   }
   @media (max-height: 835px) {
-    margin-left: 120px;
-  
+    margin-left: 150px;
+
     ${(props) =>
-      props.isRight
-        && css`
-        margin-left: 90px;
-    `}
+      props.isRight &&
+      css`
+        margin-left: 115px;
+      `}
   }
 
   ${(props) =>
-    props.isRight
-      && css`
+    props.isRight &&
+    css`
       margin-left: 120px;
-  `}
+    `}
 `;
 
 export const ImageComponents = styled.div`
@@ -272,8 +319,7 @@ export const SelectC = styled.div`
     &::placeholder {
       color: #666360;
     }
-  margin-right: 40px;
-
+    margin-right: 40px;
   }
 
   svg {
@@ -301,7 +347,6 @@ export const LogoOptions = styled.div`
   flex-direction: row;
   z-index: 999;
 
-
   margin-left: auto;
 
   a {
@@ -313,7 +358,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
