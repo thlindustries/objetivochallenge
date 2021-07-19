@@ -64,7 +64,7 @@ export const CircleContent = styled(Card)<Test>`
   .teamInfo {
     display: flex;
     justify-content: center;
-    margin: 14px 0 1.25em 0;
+    margin: 44px 0 1.25em 0;
   }
 
   @media (min-width: 1500px) {
@@ -84,7 +84,7 @@ export const FormContainer = styled.div`
   margin-top: 14em;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -95,7 +95,7 @@ export const FormContainer = styled.div`
   }
 
   .form {
-    margin: -340px 195px 0 0;
+    margin: -340px 124px 0 0;
   }
 `;
 
@@ -105,7 +105,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   color: #fff;
@@ -139,7 +139,7 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   ${(props) =>
@@ -162,7 +162,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   &:hover {
     background: ${shade(0.4, '#097D45')};
@@ -209,7 +209,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 18px;
 
     &:hover {
@@ -221,6 +221,8 @@ export const LogoOptions = styled.div`
 
 export const Users = styled.div`
   margin-top: -110px;
+  width: 543px;
+  margin-right: -56px;
 `;
 
 export const UserContainer = styled.div`
@@ -238,7 +240,7 @@ export const UserContainer = styled.div`
   padding-top: 40px;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -251,14 +253,22 @@ export const UserContainer = styled.div`
   .userInfo {
     display: flex;
     align-items: center;
+    margin-right: 16%;
   }
 
-  // li {
-  //   display: flex;
-  // }
-  // li:nth-child(odd) {
-  //   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,205,0.9374124649859944) 50%, rgba(255,255,255,1) 100%);
-  // }
+  li {
+    display: flex;
+    margin-bottom: 0.5em;
+  }
+
+  li:nth-child(odd) {
+    background: linear-gradient(
+      90deg,
+      rgb(247 243 243) 0%,
+      rgb(245 245 245 / 94%) 50%,
+      rgb(249 249 249) 100%
+    );
+  }
 `;
 
 export const li = styled.div`
@@ -274,12 +284,15 @@ export const P = styled.div`
 `;
 
 export const A = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-left: 5px;
 
   font-size: 18px;
+
+  padding-left: 55px;
 
   .accepted {
     display: flex;
@@ -352,7 +365,7 @@ export const MainImg = styled.img`
 `;
 
 export const ChallengeText = styled.p`
-  font-family: 'Rowdies';
+  font-family: 'Roboto';
   font-size: 36px;
 
   text-shadow: 0 0 10px #0031ff75;

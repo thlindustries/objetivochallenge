@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import { FiLock, FiUser } from 'react-icons/fi';
+import { FiArrowLeft, FiLock, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
 import Axios from 'axios';
@@ -31,13 +31,11 @@ import {
   ImageComponents,
   LogoContent,
   LogoOptions,
-  Logo,
 } from './styles';
 
 import Header from '../../components/Header';
 import { LContainer } from '../Game/styles';
 import ImageUpload from '../../components/ImageUpload';
-import seta from '../../assets/img/seta.png';
 import Input from '../../components/Input';
 
 interface DataFormInfo {
@@ -158,7 +156,10 @@ const Subscribe: React.FC = () => {
       <Header />
       <LogoContent>
         <LogoOptions>
-          <Logo onClick={logo} src={seta} alt="seta" />
+          <StyledButton isBack onClick={logo}>
+            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-3px' }}>Voltar</span>
+          </StyledButton>
           {loading && (
             <LContainer>
               <ReactLoading
@@ -274,9 +275,20 @@ const Subscribe: React.FC = () => {
                               <option value="Médio">Médio</option>
                             </Select>
                           </SelectC>
-                          <StyledButton enabled={isEnabled} type="submit">
-                            {isLogging ? <ReactLoading /> : 'Cadastar'}
-                          </StyledButton>
+                          <div className="submitButton">
+                            <div className="checkbox">
+                              <input
+                                type="checkbox"
+                                id="vehicle1"
+                                name="vehicle1"
+                                value="Bike"
+                              />
+                              <span> Tenho no mínimo 18 anos.</span>
+                            </div>
+                            <StyledButton enabled={isEnabled} type="submit">
+                              {isLogging ? <ReactLoading /> : 'Cadastar'}
+                            </StyledButton>
+                          </div>
                         </div>
                       </Form>
                     </FormContainer>

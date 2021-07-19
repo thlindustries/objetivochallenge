@@ -15,6 +15,7 @@ interface Test {
 
 interface StyledButtonProps {
   countdownOver?: boolean;
+  isBack?: boolean;
 }
 
 interface CircleContainerProps {
@@ -83,7 +84,7 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   background-position-y: center;
   padding: 0 38px;
 
-  margin-left: 17em;
+  margin-left: 13em;
   animation: ${bringFromLeft} 1s;
 `;
 
@@ -98,7 +99,7 @@ export const FormContainer = styled.div`
   text-align: center;
 
   a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     text-decoration: none;
 
     transition: color 0.3s;
@@ -115,7 +116,7 @@ export const Content = styled.p`
   text-align: center;
   margin-top: 2em;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 `;
 
@@ -148,7 +149,7 @@ export const BackButton = styled(Button)<StyledButtonProps>`
     background: ${shade(0.4, '#fb7c1f')};
   }
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 18px;
 
   ${(props) =>
@@ -168,7 +169,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
 
   ${(props) =>
@@ -185,6 +186,26 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
             background: ${shade(0.4, '#097D45')};
           }
         `}
+
+  ${(props) =>
+    props.isBack &&
+    css`
+      z-index: 999;
+      width: 6%;
+      height: 40px;
+      background: #ffffff;
+      color: #178feb;
+      margin-left: 1em;
+      justify-content: space-between;
+
+      @media (max-width: 1300px) {
+        width: 8%;
+      }
+
+      &:hover {
+        background: #ffbb38;
+      }
+    `}
 `;
 
 export const StyledInput = styled(Input)`
@@ -224,7 +245,7 @@ export const LogoOptions = styled.div`
 
     transition: color 0.4s;
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-size: 14px;
   }
 

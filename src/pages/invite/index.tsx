@@ -1,6 +1,6 @@
 /* eslint-disable no-return-assign */
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { FiCheck, FiUser, FiUserPlus, FiX } from 'react-icons/fi';
+import { FiArrowLeft, FiCheck, FiUser, FiUserPlus, FiX } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
 import { Form } from '@unform/web';
@@ -24,13 +24,10 @@ import {
   A,
   Users,
   LogoOptions,
-  Logo,
   LogoContent,
 } from './styles';
 
 import Header from '../../components/Header';
-
-import seta from '../../assets/img/seta.png';
 
 interface DataFormInfo {
   useremail: string;
@@ -132,7 +129,10 @@ const Invite: React.FC = () => {
       <script src="//code.jivosite.com/widget/AIh2Mhazzn" async />
       <LogoContent>
         <LogoOptions>
-          <Logo onClick={goBack} src={seta} alt="seta" />
+          <StyledButton isBack onClick={goBack}>
+            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-3px' }}>Voltar</span>
+          </StyledButton>
           {user && (
             <TContainer>
               <PageWrapper>

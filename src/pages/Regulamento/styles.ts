@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 import { loadFromLeft } from './animations';
 import Button from '../../components/Button';
-import { shade } from 'polished';
 
 import RulesBackground from '../../assets/img/rulesConsole.png';
-
 
 interface StyledButtonProps {
   countdownOver?: boolean;
@@ -31,7 +30,7 @@ export const RulesContainer = styled.div`
   background-position-x: center;
   background-position-y: center;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
 
   @media (min-width: 1500px) {
     margin-left: 200px;
@@ -54,12 +53,12 @@ export const Rules = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1E70C3; 
+    background: #1e70c3;
     border-radius: 100px;
   }
 
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 9px #D1DBE5;
+    box-shadow: inset 0 0 9px #d1dbe5;
     border-radius: 100px;
   }
 `;
@@ -118,10 +117,10 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
   width: 100%;
   height: 35px;
 
-  background: #097D45;
+  background: #097d45;
   color: #fff;
 
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
 
   &:hover {
