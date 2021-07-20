@@ -73,10 +73,6 @@ export const CircleContent = styled(Card)<Test>`
     margin-left: -10px;
   }
 
-  @media (min-width: 1500px) {
-    margin-left: 200px;
-  }
-
   .title {
     width: 18em;
     font-size: 24px;
