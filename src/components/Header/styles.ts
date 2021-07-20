@@ -42,7 +42,7 @@ export const LogoOptions = styled.div`
   align-items: center;
 
   width: 569px;
-  height: 50px;
+  height: 55px;
 
   margin-left: -10px;
   display: flex;
