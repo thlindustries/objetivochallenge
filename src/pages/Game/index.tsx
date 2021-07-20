@@ -61,7 +61,7 @@ const Game: React.FC = () => {
       setIsEnabled(false);
 
       try {
-        await signOut();
+        signOut();
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -137,8 +137,8 @@ const Game: React.FC = () => {
           <ReactLoading
             type="spin"
             color="orange"
-            height={100}
-            width={190}
+            height={80}
+            width={80}
             className="loading"
           />
         </LContainer>

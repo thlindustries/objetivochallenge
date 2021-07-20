@@ -198,7 +198,7 @@ export const LogoOptions = styled.div`
 `;
 
 export const LContainer = styled.div`
-  width: 100vw;
+  width: 20vw;
   height: 100vh;
   position: absolute;
   align-itens: center;
