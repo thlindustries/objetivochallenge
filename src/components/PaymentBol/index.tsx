@@ -125,7 +125,7 @@ const PaymentBol: React.FC = () => {
         <FormContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <StyledButton
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '6px' }}
               enabled={isEnabled}
               type="submit"
             >
