@@ -84,8 +84,6 @@ const Game: React.FC = () => {
 
         setIsLogging(false);
         setIsEnabled(true);
-
-        // window.location.href = '/main';
       } catch (err) {
         setIsLogging(false);
         setIsEnabled(true);
@@ -109,12 +107,12 @@ const Game: React.FC = () => {
     [addToast, signIn, signOut, signTeam],
   );
 
-  const handleSignInClick = () => {
+  const handleSignInClick = (): void => {
     teamOut();
     history.push('/subscribe');
   };
 
-  const logo = () => {
+  const logo = (): void => {
     window.location.href = '/main';
   };
 
