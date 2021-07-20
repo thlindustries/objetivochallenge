@@ -51,12 +51,15 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   display: flex;
   justify-content: center;
   position: relative;
+  margin-left: 16em;
+
   ${(props) =>
     props.payment === 'card' &&
     css`
       background-image: url(${cardConsole});
       width: 797px;
       height: 539px;
+      margin-left: 16em;
     `}
 
   ${(props) =>
@@ -65,6 +68,7 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
       background-image: url(${cardConsole});
       width: 797px;
       height: 539px;
+      margin-left: 16em;
     `}
 
   ${(props) =>
@@ -84,7 +88,6 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   background-position-y: center;
   padding: 0 38px;
 
-  margin-left: 13em;
   animation: ${bringFromLeft} 1s;
 `;
 
