@@ -290,13 +290,14 @@ export const P = styled.div`
 export const A = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-left: 5px;
 
   font-size: 18px;
 
   padding-left: 55px;
+  padding-right: 55px;
 
   .accepted {
     display: flex;
