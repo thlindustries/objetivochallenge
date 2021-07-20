@@ -5,7 +5,8 @@ interface ContainerProps {
   isFocused: boolean;
   hasValue: boolean;
   hasError: boolean;
-  isSubscribe? : boolean; 
+  isSubscribe?: boolean;
+  isLogin?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -58,9 +59,7 @@ export const Container = styled.div<ContainerProps>`
       color: #666360;
     }
 
-  /* border: solid 1px #000; */
-  margin-right: 40px;
-
+    margin-right: 40px;
   }
 
   svg {
@@ -76,7 +75,13 @@ export const Container = styled.div<ContainerProps>`
         width: 85%;
         height: 32px;
       }
-  `}
+    `}
+
+  ${(props) =>
+    props.isLogin &&
+    css`
+      width: 99%;
+    `}
 `;
 
 export const Error = styled(Tooltip)`

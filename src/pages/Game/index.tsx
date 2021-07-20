@@ -148,7 +148,11 @@ const Game: React.FC = () => {
             <PageWrapper>
               <CircleContent>
                 <FormContainer>
-                  <Form ref={formRef} onSubmit={handleSubmit}>
+                  <Form
+                    ref={formRef}
+                    onSubmit={handleSubmit}
+                    style={{ marginLeft: '11px' }}
+                  >
                     <FormHeader>
                       Divirta-se junto com sua equipe solucionando o desafio do
                       colégio objetivo
@@ -157,13 +161,14 @@ const Game: React.FC = () => {
                       name="teamName"
                       icon={FiUser}
                       placeholder="Usuário"
-                      style={{ width: 300 }}
+                      isLogin
                     />
                     <StyledInput
                       name="password"
                       icon={FiLock}
                       type="password"
                       placeholder="Senha"
+                      isLogin
                     />
                     <ButtonsContainer>
                       <StyledButton
