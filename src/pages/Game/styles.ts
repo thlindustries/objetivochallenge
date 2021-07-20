@@ -115,8 +115,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const FormHeader = styled.div`
-  width: 85%;
-  padding-left: 3%;
+  width: 100%;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
@@ -171,7 +170,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 `;
 
 export const StyledInput = styled(Input)`
-  /* width: 300px; */
+  width: 99% !important;
 `;
 
 export const Logo = styled.img`
@@ -199,7 +198,7 @@ export const LogoOptions = styled.div`
 `;
 
 export const LContainer = styled.div`
-  width: 100vw;
+  width: 20vw;
   height: 100vh;
   position: absolute;
   align-itens: center;

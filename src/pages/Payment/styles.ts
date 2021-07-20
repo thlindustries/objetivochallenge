@@ -51,12 +51,15 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   display: flex;
   justify-content: center;
   position: relative;
+  margin-left: 16em;
+
   ${(props) =>
     props.payment === 'card' &&
     css`
       background-image: url(${cardConsole});
       width: 797px;
       height: 539px;
+      margin-left: 16em;
     `}
 
   ${(props) =>
@@ -65,6 +68,7 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
       background-image: url(${cardConsole});
       width: 797px;
       height: 539px;
+      margin-left: 16em;
     `}
 
   ${(props) =>
@@ -84,7 +88,6 @@ export const CircleContent = styled(Card)<CircleContainerProps>`
   background-position-y: center;
   padding: 0 38px;
 
-  margin-left: 13em;
   animation: ${bringFromLeft} 1s;
 `;
 
@@ -191,16 +194,12 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     props.isBack &&
     css`
       z-index: 999;
-      width: 6%;
+      width: 90px;
       height: 40px;
       background: #ffffff;
       color: #178feb;
       margin-left: 1em;
       justify-content: space-between;
-
-      @media (max-width: 1300px) {
-        width: 8%;
-      }
 
       &:hover {
         background: #ffbb38;
@@ -239,18 +238,28 @@ export const LogoOptions = styled.div`
   }
 
   p {
-    margin-right: -40px;
-    margin-top: -55px;
-    margin-left: -66px;
-
     transition: color 0.4s;
 
     font-family: 'Roboto';
     font-size: 14px;
   }
 
+  .container {
+    margin-top: -110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title {
+    margin-bottom: 35px;
+    text-align: center;
+    width: 18em;
+    font-size: 24px;
+    font-weight: bold;
+  }
   .amount {
     width: 150%;
+    margin-bottom: 35px;
     text-align: center;
   }
 `;
