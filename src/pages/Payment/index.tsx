@@ -84,11 +84,12 @@ const Payment: React.FC = () => {
             <PageWrapper>
               <CircleContent payment={returnPayment()}>
                 {!isCard && !isBol && (
-                  <div>
-                    <p>Selecione uma das formas de pagamento</p>
+                  <div className="container">
+                    <p className="title">Pagar inscrição</p>
                     <p className="amount">
                       Valor da Inscrição do time: <strong>R$80</strong>
                     </p>
+                    <p>Selecione uma das formas de pagamento</p>
                   </div>
                 )}
                 {pay !== 'login' ? (

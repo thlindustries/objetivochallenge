@@ -239,18 +239,28 @@ export const LogoOptions = styled.div`
   }
 
   p {
-    margin-right: -40px;
-    margin-top: -55px;
-    margin-left: -66px;
-
     transition: color 0.4s;
 
     font-family: 'Roboto';
     font-size: 14px;
   }
 
+  .container {
+    margin-top: -110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title {
+    margin-bottom: 35px;
+    text-align: center;
+    width: 18em;
+    font-size: 24px;
+    font-weight: bold;
+  }
   .amount {
     width: 150%;
+    margin-bottom: 35px;
     text-align: center;
   }
 `;
