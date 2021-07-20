@@ -60,6 +60,7 @@ export const LogoOptions = styled.div`
 
     font-family: 'Roboto';
     font-size: 12px;
+    font-weight: bold;
 
     &:hover {
       cursor: pointer;
@@ -77,7 +78,12 @@ export const HomeOption = styled.p<HeaderProps>`
 `;
 
 export const RegulationOption = styled.p<HeaderProps>`
-transform: skew(-20deg);
+  display: flex;
+  justify-content: center;
+
+  width: 100px;
+
+  transform: skew(-20deg);
   ${(props) =>
     props.tab === 'regulamento' &&
     css`

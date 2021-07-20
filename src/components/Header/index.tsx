@@ -10,14 +10,14 @@ import {
   RegulationOption,
   ImageContainer,
   MainImg,
+  UserContainer,
 } from './styles';
-
-import {UserContainer} from './styles'
 
 import { useAuth } from '../../hooks/auth';
 import { useTeam } from '../../hooks/team';
 
 import chicoLogo from '../../assets/img/containerLogo.png';
+import { FiArchive, FiFileText, FiHome } from 'react-icons/fi';
 
 interface HeaderProps {
   selectedTab?: string;
@@ -39,32 +39,40 @@ const Header: React.FC<HeaderProps> = ({
   );
 
   const logoClick = () => {
-    if (user && team)
-      window.location.href = '/main'
-    else
-      window.location.href = '/'
-  }
+    if (user && team) window.location.href = '/main';
+    else window.location.href = '/';
+  };
 
   return (
     <Container>
       <LogoContent>
         <LogoOptions>
-          {user && team && <div> 
-          <UserContainer>
-           <ImageContainer>
-              <div className="main-profile-img">
-                <MainImg
-                  src={user.imageurl && user.imageurl !== ' '? user.imageurl : defaultUserProfileImage}
-                  alt="user"
-                />
-              </div>
-            </ImageContainer>
-            <div className="user-data-container">
-              <h3>{user.nickname}</h3>
+          {user && team && (
+            <div>
+              <UserContainer>
+                <ImageContainer>
+                  <div className="main-profile-img">
+                    <MainImg
+                      src={
+                        user.imageurl && user.imageurl !== ' '
+                          ? user.imageurl
+                          : defaultUserProfileImage
+                      }
+                      alt="user"
+                    />
+                  </div>
+                </ImageContainer>
+                <div className="user-data-container">
+                  <h3>{user.nickname}</h3>
+                </div>
+                <Link to="/">
+                  <HomeOption tab={selectedTab} onClick={signOut}>
+                    Sair
+                  </HomeOption>
+                </Link>
+              </UserContainer>
             </div>
-          <Link to = "/"><HomeOption tab={selectedTab} onClick = {signOut}>Sair</HomeOption></Link>
-          </UserContainer>
-          </div>}
+          )}
           {!user && (
             <>
               <Link
@@ -74,6 +82,7 @@ const Header: React.FC<HeaderProps> = ({
                 to="/"
               >
                 <RegulationOption tab={selectedTab}>
+                  <FiHome style={{ marginRight: '4px' }} />
                   Home
                 </RegulationOption>
               </Link>
@@ -84,6 +93,7 @@ const Header: React.FC<HeaderProps> = ({
                 to="/regulamento"
               >
                 <RegulationOption tab={selectedTab}>
+                  <FiFileText style={{ marginRight: '5px' }} />
                   Regulamento
                 </RegulationOption>
               </Link>
@@ -92,7 +102,12 @@ const Header: React.FC<HeaderProps> = ({
           {children}
         </LogoOptions>
       </LogoContent>
-      <Logo src={chicoLogo} alt="chicologo" onClick={logoClick} style={{zIndex: 100}}></Logo>
+      <Logo
+        src={chicoLogo}
+        alt="chicologo"
+        onClick={logoClick}
+        style={{ zIndex: 100 }}
+      ></Logo>
     </Container>
   );
 };
