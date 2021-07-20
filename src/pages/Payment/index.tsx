@@ -1,9 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react/jsx-tag-spacing */
-/* eslint-disable react/jsx-equals-spacing */
-/* eslint-disable react/jsx-indent */
 import React, { useEffect, useState } from 'react';
 import { FiArrowLeft, FiCreditCard, FiDollarSign } from 'react-icons/fi';
 import PaymentCard from '../../components/PaymentCard';
@@ -32,17 +26,17 @@ const Payment: React.FC = () => {
     marginRight: '10px',
   } as React.CSSProperties;
 
-  const PayCard = () => {
+  const PayCard = (): void => {
     setPay('login');
     setIsCard(true);
   };
 
-  const PayBol = () => {
+  const PayBol = (): void => {
     setPay('login');
     setIsBol(true);
   };
 
-  const goBack = () => {
+  const goBack = (): void => {
     if (!isCard && !isBol) window.history.back();
     else if (isCard && !isBol) {
       setPay('false');
@@ -53,7 +47,7 @@ const Payment: React.FC = () => {
     }
   };
 
-  const returnPayment = () => {
+  const returnPayment = (): string => {
     if (isCard) {
       return 'card';
     }
