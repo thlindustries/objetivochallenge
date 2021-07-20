@@ -76,6 +76,19 @@ export const CircleContent = styled(Card)<Test>`
   @media (min-width: 1500px) {
     margin-left: 200px;
   }
+
+  .title {
+    width: 18em;
+    font-size: 24px;
+    font-weight: bold;
+
+    margin-top: -15px;
+    margin-bottom: 5px;
+  }
+
+  .actions {
+    margin-top: 50px;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -232,7 +245,7 @@ export const LogoOptions = styled.div`
   }
 
   p {
-    margin-right: 48px;
+    margin-right: 20px;
 
     transition: color 0.4s;
 

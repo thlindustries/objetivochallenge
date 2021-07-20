@@ -1,5 +1,11 @@
 /* eslint-disable no-return-assign */
-import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+} from 'react';
 import { FiArrowLeft, FiCheck, FiUser, FiUserPlus, FiX } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
@@ -152,26 +158,31 @@ const Invite: React.FC = () => {
                       className="form"
                     >
                       <P style={emailStyle}>
-                        Digite o e-mail de quem quer convidar
+                        <p className="title">
+                          Digite o e-mail de quem quer convidar
+                        </p>
                         <p className="limit">
                           Seu time pode ter no máximo 5 pessoas!
                         </p>
                       </P>
-                      <StyledInput
-                        name="useremail"
-                        icon={FiUser}
-                        placeholder="Email"
-                      />
-                      <StyledButton enabled={isEnabled} type="submit">
-                        {isLogging ? (
-                          <ReactLoading />
-                        ) : (
-                          <>
-                            <FiUserPlus style={iconStyle} />
-                            Convidar
-                          </>
-                        )}
-                      </StyledButton>
+                      <div className="actions">
+                        <StyledInput
+                          name="useremail"
+                          icon={FiUser}
+                          placeholder="Email"
+                          isLogin
+                        />
+                        <StyledButton enabled={isEnabled} type="submit">
+                          {isLogging ? (
+                            <ReactLoading />
+                          ) : (
+                            <>
+                              <FiUserPlus style={iconStyle} />
+                              Convidar
+                            </>
+                          )}
+                        </StyledButton>
+                      </div>
                     </Form>
                     <Users>
                       <P>Membros do time</P>
