@@ -17,7 +17,7 @@ import {
 } from './styles';
 import Header from '../../components/Header';
 import Json from './regulamento.json';
-import {useAuth} from '../../hooks/auth'
+import { useAuth } from '../../hooks/auth';
 
 interface SubItem {
   text: string;
@@ -25,7 +25,7 @@ interface SubItem {
 }
 
 const Regulamento: React.FC = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -40,40 +40,40 @@ const Regulamento: React.FC = () => {
   }, []);
 
   return (
-    <PageRegulamento  style={{bottom: 300}}>
-      <Header/>
-        <RulesContainer>
-          <Content>
-            <p>Regulamento</p>
-            <Rules>
-              {Json.regulamento.map((item) => {
-                return (
-                  <Card key={item.title}>
-                    <Title>{item.title}</Title>
-                    <CardContent>{item.content}</CardContent>
-                    <SubContent>
-                      {item.subcontents.map(({ id, text }: SubItem) => {
-                        return <SubContentItem key={id}>{text}</SubContentItem>;
-                      })}
-                    </SubContent>
-                  </Card>
-                );
-              })}
-              <ButtonsContainer>
-              {user &&
-                <Link to="/main" style={{textDecoration:" none"}}>
-                <StyledButton>Concordo</StyledButton>
+    <PageRegulamento style={{ bottom: 300 }}>
+      <Header />
+      <RulesContainer>
+        <Content>
+          <Title style={{ marginBottom: '10px' }}>Regulamento</Title>
+          <Rules>
+            {Json.regulamento.map((item) => {
+              return (
+                <Card key={item.title}>
+                  <Title>{item.title}</Title>
+                  <CardContent>{item.content}</CardContent>
+                  <SubContent>
+                    {item.subcontents.map(({ id, text }: SubItem) => {
+                      return <SubContentItem key={id}>{text}</SubContentItem>;
+                    })}
+                  </SubContent>
+                </Card>
+              );
+            })}
+            <ButtonsContainer>
+              {user && (
+                <Link to="/main" style={{ textDecoration: ' none' }}>
+                  <StyledButton>Concordo</StyledButton>
                 </Link>
-              }
-              {!user &&
-                <Link to="/" style={{textDecoration:" none"}}>
-                <StyledButton>Participe já</StyledButton>
+              )}
+              {!user && (
+                <Link to="/" style={{ textDecoration: ' none' }}>
+                  <StyledButton>Participe já</StyledButton>
                 </Link>
-              }
+              )}
             </ButtonsContainer>
-            </Rules>
-          </Content>
-        </RulesContainer>
+          </Rules>
+        </Content>
+      </RulesContainer>
     </PageRegulamento>
   );
 };

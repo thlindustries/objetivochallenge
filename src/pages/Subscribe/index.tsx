@@ -283,7 +283,10 @@ const Subscribe: React.FC = () => {
                                 name="vehicle1"
                                 value="Bike"
                               />
-                              <span> Tenho no mínimo 18 anos.</span>
+                              <span>
+                                {' '}
+                                Sou maior de 18 anos e sou responsável pelo time{' '}
+                              </span>
                             </div>
                             <StyledButton enabled={isEnabled} type="submit">
                               {isLogging ? <ReactLoading /> : 'Cadastar'}
