@@ -49,7 +49,7 @@ interface DataFormInfo {
 
 const Subscribe: React.FC = () => {
   const [isLogging, setIsLogging] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const { user, signIn, signOut } = useAuth();
   const { team, signTeam } = useTeam();
   const loading = false;
@@ -73,7 +73,6 @@ const Subscribe: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: DataFormInfo) => {
       setIsLogging(true);
-      setIsEnabled(false);
 
       try {
         formRef.current?.setErrors({});
@@ -114,12 +113,10 @@ const Subscribe: React.FC = () => {
         );
 
         setIsLogging(false);
-        setIsEnabled(true);
 
         window.location.href = '/regulamento';
       } catch (err) {
         setIsLogging(false);
-        setIsEnabled(true);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
@@ -130,12 +127,16 @@ const Subscribe: React.FC = () => {
     [teamImgUrl, userImgUrl, signTeam, signIn, category],
   );
 
-  const logo = () => {
+  const logo = (): void => {
     window.location.href = '/';
   };
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: any): void => {
     setCategory(event.target.value);
+  };
+
+  const changeCheck = (): void => {
+    setIsChecked(!isChecked);
   };
 
   useEffect(() => {
@@ -282,13 +283,17 @@ const Subscribe: React.FC = () => {
                                 id="vehicle1"
                                 name="vehicle1"
                                 value="Bike"
+                                onChange={changeCheck}
                               />
                               <span>
                                 {' '}
                                 Sou maior de 18 anos e sou responsável pelo time{' '}
                               </span>
                             </div>
-                            <StyledButton enabled={isEnabled} type="submit">
+                            <StyledButton
+                              enabled={category !== '' && isChecked}
+                              type="submit"
+                            >
                               {isLogging ? <ReactLoading /> : 'Cadastar'}
                             </StyledButton>
                           </div>
