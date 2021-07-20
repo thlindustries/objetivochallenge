@@ -213,7 +213,6 @@ const Main: React.FC = () => {
           </PageWrapper>
         </TContainer>
       )}
-      {!user && team && <TContainer>{(window.location.href = '/')}</TContainer>}
     </PageGame>
   );
 };

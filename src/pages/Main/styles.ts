@@ -64,7 +64,11 @@ export const CircleContent = styled(Card)<Test>`
   .teamInfo {
     display: flex;
     justify-content: center;
-    margin: 44px 0 1.25em 0;
+    margin: 44px 0 1.25em -10px;
+  }
+
+  .nameCategory {
+    margin-left: -10px;
   }
 
   @media (min-width: 1500px) {
