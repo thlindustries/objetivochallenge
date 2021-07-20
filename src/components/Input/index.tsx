@@ -16,7 +16,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
   containerStyle?: object;
   callback?(inputRef: HTMLInputElement): void;
-  isSubscribe?: boolean
+  isSubscribe?: boolean;
+  isLogin?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -25,6 +26,7 @@ const Input: React.FC<InputProps> = ({
   icon: Icon,
   callback,
   isSubscribe,
+  isLogin,
   ...rest
 }) => {
   const inputReference = useRef<HTMLInputElement>(null);
@@ -79,6 +81,7 @@ const Input: React.FC<InputProps> = ({
       hasValue={hasValue}
       data-testid="input-container"
       isSubscribe={isSubscribe}
+      isLogin={isLogin}
     >
       {Icon && <Icon size={20} />}
       <input

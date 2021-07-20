@@ -91,7 +91,6 @@ export const Content = styled.p`
 export const CardContent = styled.p`
   margin-top: 8px;
 
-  font-weight: bold;
 `;
 
 export const SubContent = styled.div`
@@ -100,8 +99,6 @@ export const SubContent = styled.div`
 
 export const SubContentItem = styled.p`
   margin-top: 8px;
-
-  font-weight: bold;
 
   & + p {
     margin-top: 20px;

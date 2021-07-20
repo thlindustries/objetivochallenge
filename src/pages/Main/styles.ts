@@ -64,7 +64,11 @@ export const CircleContent = styled(Card)<Test>`
   .teamInfo {
     display: flex;
     justify-content: center;
-    margin: 44px 0 1.25em 0;
+    margin: 44px 0 1.25em -10px;
+  }
+
+  .nameCategory {
+    margin-left: -10px;
   }
 
   @media (min-width: 1500px) {
@@ -286,13 +290,14 @@ export const P = styled.div`
 export const A = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-left: 5px;
 
   font-size: 18px;
 
   padding-left: 55px;
+  padding-right: 55px;
 
   .accepted {
     display: flex;
@@ -304,29 +309,6 @@ export const A = styled.div`
     display: flex;
     align-items: center;
     color: #ce2121;
-  }
-`;
-
-export const UsersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
-  width: 565px;
-  height: 220px;
-  overflow-y: auto;
-  margin-bottom: -116px;
-
-  li {
-    list-style-type: none;
-    width: 100%;
-    padding: 0 1.5vw;
-    background: #ecf2f4;
-  }
-
-  @media (min-height: 1050px) {
-    width: 648px;
   }
 `;
 

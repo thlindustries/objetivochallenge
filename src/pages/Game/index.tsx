@@ -61,7 +61,7 @@ const Game: React.FC = () => {
       setIsEnabled(false);
 
       try {
-        await signOut();
+        signOut();
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -84,8 +84,6 @@ const Game: React.FC = () => {
 
         setIsLogging(false);
         setIsEnabled(true);
-
-        // window.location.href = '/main';
       } catch (err) {
         setIsLogging(false);
         setIsEnabled(true);
@@ -100,17 +98,21 @@ const Game: React.FC = () => {
           title: 'Erro na autenticação',
           description: 'Ocorreu um erro ao fazer login, cheque as crendeciais.',
         });
+
+        setIsLogging(false);
+        setLoading(false);
+        setIsEnabled(true);
       }
     },
     [addToast, signIn, signOut, signTeam],
   );
 
-  const handleSignInClick = () => {
+  const handleSignInClick = (): void => {
     teamOut();
     history.push('/subscribe');
   };
 
-  const logo = () => {
+  const logo = (): void => {
     window.location.href = '/main';
   };
 
@@ -135,8 +137,8 @@ const Game: React.FC = () => {
           <ReactLoading
             type="spin"
             color="orange"
-            height={100}
-            width={190}
+            height={80}
+            width={80}
             className="loading"
           />
         </LContainer>
@@ -148,7 +150,11 @@ const Game: React.FC = () => {
             <PageWrapper>
               <CircleContent>
                 <FormContainer>
-                  <Form ref={formRef} onSubmit={handleSubmit}>
+                  <Form
+                    ref={formRef}
+                    onSubmit={handleSubmit}
+                    style={{ marginLeft: '11px' }}
+                  >
                     <FormHeader>
                       Divirta-se junto com sua equipe solucionando o desafio do
                       colégio objetivo
@@ -157,13 +163,14 @@ const Game: React.FC = () => {
                       name="teamName"
                       icon={FiUser}
                       placeholder="Usuário"
-                      style={{ width: 300 }}
+                      isLogin
                     />
                     <StyledInput
                       name="password"
                       icon={FiLock}
                       type="password"
                       placeholder="Senha"
+                      isLogin
                     />
                     <ButtonsContainer>
                       <StyledButton

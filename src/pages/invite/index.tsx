@@ -1,5 +1,11 @@
 /* eslint-disable no-return-assign */
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+} from 'react';
 import { FiArrowLeft, FiCheck, FiUser, FiUserPlus, FiX } from 'react-icons/fi';
 import * as Yup from 'yup';
 import ReactLoading from 'react-loading';
@@ -25,6 +31,8 @@ import {
   Users,
   LogoOptions,
   LogoContent,
+  ImageContainer,
+  MainImg,
 } from './styles';
 
 import Header from '../../components/Header';
@@ -47,6 +55,12 @@ const Invite: React.FC = () => {
     marginRight: '10px',
   } as React.CSSProperties;
   const emailStyle = { marginBottom: '20px' } as React.CSSProperties;
+
+  const defaultUserProfileImage = useMemo<string>(
+    () =>
+      'https://nextlevelimagesprofile.s3-sa-east-1.amazonaws.com/defaultUser.png',
+    [],
+  );
 
   const carrega = useCallback(async () => {
     await Axios.get(
@@ -144,39 +158,58 @@ const Invite: React.FC = () => {
                       className="form"
                     >
                       <P style={emailStyle}>
-                        Digite o e-mail de quem quer convidar
+                        <p className="title">
+                          Digite o e-mail de quem quer convidar
+                        </p>
                         <p className="limit">
                           Seu time pode ter no máximo 5 pessoas!
                         </p>
                       </P>
-                      <StyledInput
-                        name="useremail"
-                        icon={FiUser}
-                        placeholder="Email"
-                      />
-                      <StyledButton enabled={isEnabled} type="submit">
-                        {isLogging ? (
-                          <ReactLoading />
-                        ) : (
-                          <>
-                            <FiUserPlus style={iconStyle} />
-                            Convidar
-                          </>
-                        )}
-                      </StyledButton>
+                      <div className="actions">
+                        <StyledInput
+                          name="useremail"
+                          icon={FiUser}
+                          placeholder="Email"
+                          isLogin
+                        />
+                        <StyledButton enabled={isEnabled} type="submit">
+                          {isLogging ? (
+                            <ReactLoading />
+                          ) : (
+                            <>
+                              <FiUserPlus style={iconStyle} />
+                              Convidar
+                            </>
+                          )}
+                        </StyledButton>
+                      </div>
                     </Form>
                     <Users>
-                      <P>Membros do time:</P>
+                      <P>Membros do time</P>
                       <UserContainer>
                         {membros.map((users, index) => (
                           <li key={index} list-style-type="none">
                             <A>
-                              <p>
-                                {JSON.stringify(users.fullname).replace(
-                                  /"/g,
-                                  '',
-                                )}
-                              </p>
+                              <div className="userInfo">
+                                <ImageContainer>
+                                  <div className="main-profile-img">
+                                    <MainImg
+                                      src={
+                                        users.imageurl && users.imageurl !== ' '
+                                          ? users.imageurl
+                                          : defaultUserProfileImage
+                                      }
+                                      alt="user"
+                                    />
+                                  </div>
+                                </ImageContainer>
+                                <p>
+                                  {JSON.stringify(users.fullname).replace(
+                                    /"/g,
+                                    '',
+                                  )}
+                                </p>
+                              </div>
                               <div className="accepted">
                                 <FiCheck /> aceito
                               </div>
@@ -187,7 +220,17 @@ const Invite: React.FC = () => {
                         {pendentes.map((users, index) => (
                           <li key={index} list-style-type="none">
                             <A>
-                              <p>{JSON.stringify(users).replace(/"/g, '')}</p>
+                              <div className="userInfo">
+                                <ImageContainer>
+                                  <div className="main-profile-img">
+                                    <MainImg
+                                      src={defaultUserProfileImage}
+                                      alt="user"
+                                    />
+                                  </div>
+                                </ImageContainer>
+                                <p>{JSON.stringify(users).replace(/"/g, '')}</p>
+                              </div>
                               <div className="pending">
                                 <FiX /> pendente
                               </div>
