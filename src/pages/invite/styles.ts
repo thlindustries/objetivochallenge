@@ -17,6 +17,7 @@ interface StyledButtonProps {
   isBack?: boolean;
 }
 
+
 export const PageGame = styled.div`
   width: 100vw;
   height: 100vh;
@@ -52,7 +53,6 @@ export const CircleContent = styled(Card)<Test>`
   flex-direction: row;
   justify-content: center;
   position: relative;
-  margin-top: 8em;
 
   ${(props) =>
     props.load
@@ -62,6 +62,20 @@ export const CircleContent = styled(Card)<Test>`
       : css`
           animation: ${bringFromLeft} 1s;
         `}
+
+  .teamInfo {
+    display: flex;
+    justify-content: center;
+    margin: 44px 0 1.25em -10px;
+  }
+
+  .nameCategory {
+    margin-left: -10px;
+  }
+
+  @media (min-width: 1500px) {
+    margin-left: 200px;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -73,6 +87,7 @@ export const FormContainer = styled.div`
   margin-top: 8%;
 
   text-align: center;
+  margin-top: 14em;
 
   a {
     font-family: 'Roboto';
@@ -86,11 +101,7 @@ export const FormContainer = styled.div`
   }
 
   .form {
-    margin: -320px 213px 0 0;
-  }
-
-  @media (min-width: 1500px) {
-    margin-left: 200px;
+    margin: -340px 124px 0 0;
   }
 `;
 
@@ -190,8 +201,9 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     `}
 `;
 
+
 export const StyledInput = styled(Input)`
-  width: 96%;
+  /* width: 300px; */
 `;
 
 export const Logo = styled.img`
@@ -236,6 +248,8 @@ export const LogoOptions = styled.div`
 
 export const Users = styled.div`
   margin-top: -110px;
+  width: 540px;
+  margin-right: -56px;
 `;
 
 export const UserContainer = styled.div`
@@ -262,6 +276,26 @@ export const UserContainer = styled.div`
       color: ${shade(0.4, '#fff')};
     }
   }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    margin-right: 16%;
+  }
+
+  li {
+    display: flex;
+    margin-bottom: 0.5em;
+  }
+
+  li:nth-child(odd) {
+    background: linear-gradient(
+      90deg,
+      rgb(247 243 243) 0%,
+      rgb(245 245 245 / 94%) 50%,
+      rgb(249 249 249) 100%
+    );
+  }
 `;
 
 export const li = styled.div`
@@ -274,20 +308,19 @@ export const P = styled.div`
   width: 18em;
 
   font-size: 24px;
-
-  .limit {
-    font-size: 15px;
-    margin-left: 27px;
-  }
 `;
 
 export const A = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-left: 5px;
 
   font-size: 18px;
+
+  padding-left: 30px;
+  padding-right: 25px;
 
   .accepted {
     display: flex;
@@ -301,3 +334,38 @@ export const A = styled.div`
     color: #ce2121;
   }
 `;
+
+export const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  display: flex;
+
+  flex-shrink: 0;
+  margin-right: 10px;
+
+  .main-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: 0.4s;
+    border: solid 2px #dbdbdb;
+  }
+`;
+
+export const MainImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+`;
+ 

@@ -312,29 +312,6 @@ export const A = styled.div`
   }
 `;
 
-export const UsersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
-  width: 565px;
-  height: 220px;
-  overflow-y: auto;
-  margin-bottom: -116px;
-
-  li {
-    list-style-type: none;
-    width: 100%;
-    padding: 0 1.5vw;
-    background: #ecf2f4;
-  }
-
-  @media (min-height: 1050px) {
-    width: 648px;
-  }
-`;
-
 export const Buttons = styled.div`
   display: flex;
   align-items: center;
