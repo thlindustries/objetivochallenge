@@ -100,6 +100,10 @@ const Game: React.FC = () => {
           title: 'Erro na autenticação',
           description: 'Ocorreu um erro ao fazer login, cheque as crendeciais.',
         });
+
+        setIsLogging(false);
+        setLoading(false);
+        setIsEnabled(true);
       }
     },
     [addToast, signIn, signOut, signTeam],

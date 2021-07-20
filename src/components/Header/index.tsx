@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { Link } from 'react-router-dom';
+import { FiFileText, FiHome } from 'react-icons/fi';
 import {
   Container,
   Logo,
@@ -17,7 +18,6 @@ import { useAuth } from '../../hooks/auth';
 import { useTeam } from '../../hooks/team';
 
 import chicoLogo from '../../assets/img/containerLogo.png';
-import { FiArchive, FiFileText, FiHome } from 'react-icons/fi';
 
 interface HeaderProps {
   selectedTab?: string;
