@@ -16,7 +16,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: 'Archivo';
+    font-family: 'Roboto';
 
     display:flex;
     justify-content: center;
