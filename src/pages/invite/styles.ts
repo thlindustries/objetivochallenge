@@ -17,7 +17,6 @@ interface StyledButtonProps {
   isBack?: boolean;
 }
 
-
 export const PageGame = styled.div`
   width: 100vw;
   height: 100vh;
@@ -206,7 +205,6 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
     `}
 `;
 
-
 export const StyledInput = styled(Input)`
   /* width: 300px; */
 `;
@@ -243,11 +241,6 @@ export const LogoOptions = styled.div`
 
     font-family: 'Roboto';
     font-size: 18px;
-
-    &:hover {
-      cursor: pointer;
-      color: ${shade(0.4, '#bdbdbd')};
-    }
   }
 `;
 
@@ -373,4 +366,3 @@ export const MainImg = styled.img`
   object-fit: cover;
   flex-shrink: 0;
 `;
- 
