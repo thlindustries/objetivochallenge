@@ -106,7 +106,9 @@ const Main: React.FC = () => {
                   }}
                   className="form"
                 >
-                  <P style={{ marginTop: '-15px' }}>Gerencie o seu time</P>
+                  <P style={{ marginTop: '-15px', fontWeight: 'bold' }}>
+                    Gerencie o seu time
+                  </P>
                   <div className="teamInfo">
                     <ImageContainer>
                       <div className="main-profile-img">
@@ -155,7 +157,7 @@ const Main: React.FC = () => {
                   </Buttons>
                 </Form>
                 <Users>
-                  <P>Membros do time</P>
+                  <P style={{ fontWeight: 'bold' }}>Membros do time</P>
                   <UserContainer>
                     {membros.map((users, index) => (
                       <li key={index} list-style-type="none">

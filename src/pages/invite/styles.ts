@@ -77,7 +77,7 @@ export const CircleContent = styled(Card)<Test>`
     font-size: 24px;
     font-weight: bold;
 
-    margin-top: -15px;
+    margin-top: 10px;
     margin-bottom: 5px;
   }
 
