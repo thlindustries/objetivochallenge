@@ -23,7 +23,7 @@ export const PageGame = styled.div`
 `;
 
 export const TContainer = styled.div`
-  width: 100vw;
+  width: 90vw;
   height: 580px;
 
   display: flex;
@@ -40,8 +40,8 @@ export const PageWrapper = styled.div`
 `;
 
 export const CircleContent = styled(Card)<Test>`
-  width: 1200px;
-  height: 1200px;
+  width: 1135px;
+  height: 610px;
   background-image: url(${inviteConsole});
   background-repeat: no-repeat;
   background-size: contain;
@@ -246,8 +246,8 @@ export const LogoOptions = styled.div`
 
 export const Users = styled.div`
   margin-top: -110px;
-  width: 540px;
-  margin-right: -56px;
+  width: 513px;
+  margin-right: -23px;
 `;
 
 export const UserContainer = styled.div`
