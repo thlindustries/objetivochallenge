@@ -295,7 +295,7 @@ const Subscribe: React.FC = () => {
                               enabled={category !== '' && isChecked}
                               type="submit"
                             >
-                              {isLogging ? <ReactLoading /> : 'Cadastar'}
+                              {isLogging ? <ReactLoading /> : 'Cadastrar'}
                             </StyledButton>
                           </div>
                         </div>
