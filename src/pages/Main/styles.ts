@@ -326,7 +326,7 @@ export const Buttons = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   flex-shrink: 0;
   margin-right: 10px;
