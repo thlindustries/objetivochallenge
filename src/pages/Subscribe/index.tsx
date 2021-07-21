@@ -273,19 +273,30 @@ const Subscribe: React.FC = () => {
                               onChange={handleChange}
                               disableUnderline
                             >
-                              <option value="Fundamental">Fundamental</option>
-                              <option value="Médio">Médio</option>
+                              <option
+                                value="Fundamental"
+                                style={{
+                                  marginLeft: '10px',
+                                  marginTop: '5px',
+                                  marginBottom: '10px',
+                                }}
+                              >
+                                Fundamental
+                              </option>
+                              <option
+                                value="Médio"
+                                className="category"
+                                style={{
+                                  marginLeft: '10px',
+                                }}
+                              >
+                                Médio
+                              </option>
                             </Select>
                           </SelectC>
                           <div className="submitButton">
                             <div className="checkbox">
-                              <input
-                                type="checkbox"
-                                id="vehicle1"
-                                name="vehicle1"
-                                value="Bike"
-                                onChange={changeCheck}
-                              />
+                              <input type="checkbox" onChange={changeCheck} />
                               <span>
                                 {' '}
                                 Sou maior de 18 anos e sou responsável pelo time{' '}
