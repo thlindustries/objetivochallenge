@@ -316,6 +316,7 @@ export const Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 45px;
 
   a {
     text-decoration: none;

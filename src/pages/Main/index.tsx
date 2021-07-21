@@ -106,7 +106,7 @@ const Main: React.FC = () => {
                   }}
                   className="form"
                 >
-                  <P style={{ marginTop: '-35px' }}>Gerencie o seu time</P>
+                  <P style={{ marginTop: '-15px' }}>Gerencie o seu time</P>
                   <div className="teamInfo">
                     <ImageContainer>
                       <div className="main-profile-img">
