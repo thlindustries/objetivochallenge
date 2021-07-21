@@ -271,6 +271,7 @@ const Subscribe: React.FC = () => {
                               placeholder="Categoria"
                               id="category"
                               onChange={handleChange}
+                              disableUnderline
                             >
                               <option value="Fundamental">Fundamental</option>
                               <option value="Médio">Médio</option>
