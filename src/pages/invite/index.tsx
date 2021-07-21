@@ -144,8 +144,8 @@ const Invite: React.FC = () => {
       <LogoContent>
         <LogoOptions>
           <StyledButton isBack onClick={goBack}>
-            <FiArrowLeft size={32} style={{ marginLeft: '-10px' }} />
-            <span style={{ marginRight: '-3px' }}>Voltar</span>
+            <FiArrowLeft size={24} style={{ marginLeft: '-10px' }} />
+            <span style={{ marginRight: '-1px' }}>Voltar</span>
           </StyledButton>
           {user && (
             <TContainer>
@@ -185,7 +185,7 @@ const Invite: React.FC = () => {
                       </div>
                     </Form>
                     <Users>
-                      <P>Membros do time</P>
+                      <P style={{ marginTop: '20px' }}>Membros do time</P>
                       <UserContainer>
                         {membros.map((users, index) => (
                           <li key={index} list-style-type="none">

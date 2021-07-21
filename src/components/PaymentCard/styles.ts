@@ -56,7 +56,7 @@ export const CircleContent = styled(Card)<Test>`
         `}
 
   .rccs__card > div {
-    margin: 6px 0 0px 9px;
+    margin: 7px 0 0px -7px;
     height: 92%;
     width: 95%;
   }

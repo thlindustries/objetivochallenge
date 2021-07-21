@@ -83,7 +83,6 @@ const Input: React.FC<InputProps> = ({
       isSubscribe={isSubscribe}
       isLogin={isLogin}
     >
-      {Icon && <Icon size={20} />}
       <input
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}

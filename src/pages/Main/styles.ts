@@ -316,6 +316,7 @@ export const Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 45px;
 
   a {
     text-decoration: none;
@@ -325,6 +326,7 @@ export const Buttons = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   display: flex;
+  align-items: flex-start;
 
   flex-shrink: 0;
   margin-right: 10px;
@@ -349,6 +351,7 @@ export const MainImg = styled.img`
 export const ChallengeText = styled.p`
   font-family: 'Roboto';
   font-size: 36px;
+  text-align: initial;
 
   text-shadow: 0 0 10px #0031ff75;
 
