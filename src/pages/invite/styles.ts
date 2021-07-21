@@ -279,6 +279,10 @@ export const UserContainer = styled.div`
     display: flex;
     align-items: center;
     margin-right: 16%;
+
+    p {
+      font-weight: bold;
+    }
   }
 
   li {
